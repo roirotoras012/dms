@@ -1,99 +1,177 @@
-<head>
-  <title>ADMIN</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,500i,700,800i" rel="stylesheet">
-</head>
-  <body>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      ion-col
+    </ion-col>
+    <ion-col>
+      ion-col
+    </ion-col>
+    <ion-col>
+      ion-col
+    </ion-col>
+    <ion-col>
+      ion-col
+    </ion-col>
+  </ion-row>
 
-    <nav class="navbar navbar-expand-sm   navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+  <ion-row>
+    <ion-col size="6">
+      ion-col [size="6"]
+    </ion-col>
+    <ion-col>
+      ion-col
+    </ion-col>
+    <ion-col>
+      ion-col
+    </ion-col>
+  </ion-row>
 
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">News</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Events</a>
-              </li>
-            <li class="nav-item dropdown dmenu">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              Departments
-            </a>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Documents</a>
-              </li>
-              <div class="dropdown-menu sm-menu">
-                <a class="dropdown-item" href="#">service2</a>
-                <a class="dropdown-item" href="#">service 2</a>
-                <a class="dropdown-item" href="#">service 3</a>
-              </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Employees</a>
-          </li>
-          
-           <!-- <li class="nav-item dropdown dmenu">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              Dropdown link
-            </a>
-            <div class="dropdown-menu sm-menu">
-              <a class="dropdown-item" href="#">Link 1</a>
-              <a class="dropdown-item" href="#">Link 2</a>
-              <a class="dropdown-item" href="#">Link 3</a>
-              <a class="dropdown-item" href="#">Link 4</a>
-              <a class="dropdown-item" href="#">Link 5</a>
-              <a class="dropdown-item" href="#">Link 6</a>
-            </div>
-          </li> -->
-          </ul>
-          
-          <div class="social-part">
-            <input type="text" placeholder="Search..">
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-            <i class="fa fa-twitter" aria-hidden="true"></i>
-            <i class="fa fa-instagram" aria-hidden="true"></i>
-          </div>
-        </div>
-      </nav>
+  <ion-row>
+    <ion-col size="3">
+      ion-col [size="3"]
+    </ion-col>
+    <ion-col>
+      ion-col
+    </ion-col>
+    <ion-col size="3">
+      ion-col [size="3"]
+    </ion-col>
+  </ion-row>
 
-      <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-          <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
-            <th mat-header-cell *matHeaderCellDef>
-              <div style="display: flex; align-items: center;">
-                <span mat-sort-header>{{column}}</span>
-               
-              </div>
-            </th>
-            <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
-          </ng-container>
-          <ng-container [matColumnDef]="'actions'">
-            <th mat-header-cell *matHeaderCellDef> actions </th>
-            <td mat-cell *matCellDef="let element">
-              <button mat-icon-button (click)="edit(element)">
-                <mat-icon mat-icon-button color='primary'>edit</mat-icon>
-              </button>
-              <button mat-icon-button (click)="delete(element['id'])">
-                <mat-icon mat-icon-button color="warn">delete</mat-icon>
-              </button>
-            </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-          <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-        </table>
-      
-        <mat-paginator [pageSize]="5" 
-        [pageSizeOptions]="[5, 10, 50]" showFirstLastButtons></mat-paginator>
-      
-      </div>
+  <ion-row>
+    <ion-col size="3">
+      ion-col [size="3"]
+    </ion-col>
+    <ion-col size="3" offset="3">
+      ion-col [size="3"] [offset="3"]
+    </ion-col>
+  </ion-row>
 
-</body>
+  <ion-row>
+    <ion-col>
+      ion-col
+    </ion-col>
+    <ion-col>
+      ion-col
+      <br>#
+    </ion-col>
+    <ion-col>
+      ion-col
+      <br>#
+      <br>#
+    </ion-col>
+    <ion-col>
+      ion-col
+      <br>#
+      <br>#
+      <br>#
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col class="ion-align-self-start">
+      ion-col [start]
+    </ion-col>
+    <ion-col class="ion-align-self-center">
+      ion-col [center]
+    </ion-col>
+    <ion-col class="ion-align-self-end">
+      ion-col [end]
+    </ion-col>
+    <ion-col>
+      ion-col
+      <br>#
+      <br>#
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-align-items-start">
+    <ion-col>
+      [start] ion-col
+    </ion-col>
+    <ion-col>
+      [start] ion-col
+    </ion-col>
+    <ion-col class="ion-align-self-end">
+      [start] ion-col [end]
+    </ion-col>
+    <ion-col>
+      ion-col
+      <br>#
+      <br>#
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-align-items-center">
+    <ion-col>
+      [center] ion-col
+    </ion-col>
+    <ion-col>
+      [center] ion-col
+    </ion-col>
+    <ion-col>
+      [center] ion-col
+    </ion-col>
+    <ion-col>
+      ion-col
+      <br>#
+      <br>#
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-align-items-end">
+    <ion-col>
+      [end] ion-col
+    </ion-col>
+    <ion-col class="ion-align-self-start">
+      [end] ion-col [start]
+    </ion-col>
+    <ion-col>
+      [end] ion-col
+    </ion-col>
+    <ion-col>
+      ion-col
+      <br>#
+      <br>#
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="12" size-sm>
+      ion-col [size="12"] [size-sm]
+    </ion-col>
+    <ion-col size="12" size-sm>
+      ion-col [size="12"] [size-sm]
+    </ion-col>
+    <ion-col size="12" size-sm>
+      ion-col [size="12"] [size-sm]
+    </ion-col>
+    <ion-col size="12" size-sm>
+      ion-col [size="12"] [size-sm]
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="12" size-md>
+      ion-col [size="12"] [size-md]
+    </ion-col>
+    <ion-col size="12" size-md>
+      ion-col [size="12"] [size-md]
+    </ion-col>
+    <ion-col size="12" size-md>
+      ion-col [size="12"] [size-md]
+    </ion-col>
+    <ion-col size="12" size-md>
+      ion-col [size="12"] [size-md]
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="6" size-lg offset="3">
+      ion-col [size="6"] [size-lg] [offset="3"]
+    </ion-col>
+    <ion-col size="3" size-lg>
+      ion-col [size="3"] [size-lg]
+    </ion-col>
+  </ion-row>
+</ion-grid>
