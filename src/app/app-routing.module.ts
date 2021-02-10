@@ -18,7 +18,15 @@ const routes: Routes = [
   {
     path: 'manage-users',
     loadChildren: () => import('./manage-users/manage-users.module').then( m => m.ManageUsersPageModule)
+  },  {
+    path: 'department',
+    loadChildren: () => import('./department/department.module').then( m => m.DepartmentPageModule)
   },
+  {
+    path: 'auditor',
+    loadChildren: () => import('./auditor/auditor.module').then( m => m.AuditorPageModule)
+  },
+
 
 
 ];
