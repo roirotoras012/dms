@@ -27,22 +27,7 @@ export class ApiServiceService {
   }
 
 
-  sendPostRequest(): Observable<any> {
-    let postData = {
-      "username": "Customer004",
-      "password": "customer004@email.com",
-      "name": "asdasd"
-}
-    return this.http.post("https://localhost/dms/admin/api",postData 
-   
-   
-    
-    
-);
-    
-   
-    
-  }
+  
 
  
 

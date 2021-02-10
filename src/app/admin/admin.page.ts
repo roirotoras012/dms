@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+  
+declare var myFunction;
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.page.html',
@@ -10,6 +11,8 @@ export class AdminPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
+    
   }
 
 }

@@ -15,12 +15,17 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
   },
+  {
+    path: 'manage-users',
+    loadChildren: () => import('./manage-users/manage-users.module').then( m => m.ManageUsersPageModule)
+  },
+
 
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, onSameUrlNavigation: 'reload' } )
   ],
   exports: [RouterModule]
 })
