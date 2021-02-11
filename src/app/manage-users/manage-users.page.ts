@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import { Router } from '@angular/router';
 import { EditModalComponent } from '../edit-modal/edit-modal.component';
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
+import { Delete1ModalComponent } from '../delete1-modal/delete1-modal.component';
 
 @Component({
   selector: 'app-manage-users',
@@ -15,7 +16,7 @@ export class ManageUsersPage implements OnInit {
   datauser: any = [];
   isIndeterminate:boolean;
   masterCheck:boolean;
-  
+  checkedUsers: any = [];
   constructor(private modalCtrl: ModalController, private http: HttpClient, private router: Router) { 
 
     
@@ -41,27 +42,70 @@ export class ManageUsersPage implements OnInit {
       
     }
 
-    async openedit(){
+    async openedit(data){
       const modal1 = await this.modalCtrl.create({
         component: EditModalComponent,
-       
+        componentProps: {
+          data : data
+          
+
+
+        }
       
 
       });
       
       await modal1.present();
-         
+       
     }
     
     async opendelete(){
+      this.checkedUsers = []
+      this.datauser.map(obj => {
+        if (obj.isChecked) {
+          this.checkedUsers.push(obj);
+          
+        };
+      });
+      
       const modal2 = await this.modalCtrl.create({
         component: DeleteModalComponent,
+        cssClass: "my-modal",
+        componentProps: {
+          checked_users: this.checkedUsers
+
+
+        }
+        
        
       
 
       });
       
       await modal2.present();
+         
+    }
+
+    async opendelete1(x){
+      
+      
+      const modal3 = await this.modalCtrl.create({
+        component: Delete1ModalComponent,
+        
+        componentProps: {
+          tobedeleted : x
+          
+
+
+        }
+        
+       
+      
+
+      });
+     
+      
+      await modal3.present();
          
     }
 
@@ -77,7 +121,7 @@ export class ManageUsersPage implements OnInit {
 
   async getUsers() {
  
-    this.http.get("https://localhost/dms/admin/test") 
+    this.http.get("https://localhost/dms/admin/getuser") 
       .subscribe(res => {
         console.log(res);
         this.datauser = res;
@@ -91,6 +135,9 @@ export class ManageUsersPage implements OnInit {
       });
 
 
+  
+
+
      
 
 
@@ -98,7 +145,7 @@ export class ManageUsersPage implements OnInit {
 
 
 
-
+  
 
 
 
@@ -121,7 +168,10 @@ export class ManageUsersPage implements OnInit {
     const totalItems = this.datauser.length;
     let checked = 0;
     this.datauser.map(obj => {
-      if (obj.isChecked) checked++;
+      if (obj.isChecked) {checked++
+        
+      
+      };
     });
     if (checked > 0 && checked < totalItems) {
       //If even one item is checked but not all
@@ -131,6 +181,7 @@ export class ManageUsersPage implements OnInit {
       //If all are checked
       this.masterCheck = true;
       this.isIndeterminate = false;
+      
     } else {
       //If none is checked
       this.isIndeterminate = false;

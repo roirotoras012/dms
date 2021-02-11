@@ -9,24 +9,24 @@
         <div class="modal-body">					
           <div class="form-group">
             <label>Username</label>
-            <input type="text" class="form-control" (input)="username = $event.target.value;" value={{usertobeedited.username}} required>
+            <input type="text" class="form-control" [(ngModel)]="username"   required>
           </div>
           <div class="form-group">
             <label>Password</label>
-            <input type="password" class="form-control" (input)="password = $event.target.value;"  required>
+            <input type="password" class="form-control"[(ngModel)]="password" required>
           </div>
           <div class="form-group">
             <label>Full Name</label>
-            <textarea class="form-control"(input)="name = $event.target.value;" value={{usertobeedited.name}} required></textarea>
+            <textarea class="form-control"[(ngModel)]="name"  required></textarea>
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input type="email" class="form-control" (input)="email = $event.target.value;" value={{usertobeedited.email}} required>
+            <input type="email" class="form-control"[(ngModel)]="email"required>
           </div>
           <div class="form-group">
             <label for="usertype" >Usertype:</label>
   
-            <select name="usertype"  id= "usertype" (input)="usertype = $event.target.value;" class="form-control" >
+            <select name="usertype"  id= "usertype" [(ngModel)]="usertype" class="form-control" >
               <option></option>
               <option value="auditor">Auditor</option>
               <option value="department">Department</option>
@@ -37,7 +37,7 @@
           <div class="form-group">
             <label for="department" >Department:</label>
   
-            <select name="department" id="department" (input)="department = $event.target.value;" class="form-control">
+            <select name="department" id="department" [(ngModel)]="department" class="form-control">
               <option></option>
               <option value="CEA">CEA</option>
               <option value="COT">COT</option>
@@ -51,7 +51,9 @@
         
         <div class="modal-footer">
           <input type="button" class="btn btn-default" (click)="dismissModal()"  value="Cancel">
-          <input type="submit" class="btn btn-success" (click)="edit_account()" value="Add">
+          <input type="button" class="btn btn-default" (click)="edit_account()"  value="Cancel">
+          
+
         </div>
       
    
