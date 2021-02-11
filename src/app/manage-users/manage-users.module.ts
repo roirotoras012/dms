@@ -8,13 +8,14 @@ import { ManageUsersPageRoutingModule } from './manage-users-routing.module';
 
 import { ManageUsersPage } from './manage-users.page';
 import { AddModalComponent } from '../add-modal/add-modal.component';
-
+import { JwPaginationModule } from 'jw-angular-pagination';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ManageUsersPageRoutingModule
+    ManageUsersPageRoutingModule,
+    JwPaginationModule
   ],
   declarations: [ManageUsersPage, AddModalComponent],
   entryComponents: [AddModalComponent]

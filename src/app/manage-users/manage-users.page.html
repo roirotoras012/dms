@@ -69,15 +69,22 @@
           <div class="col-xs-6">
             <h2>Manage <b>Users</b></h2>
           </div>
-
+         
           <div class="col-xs-6">
             <a (click)="openadd()" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
             <a (click)="opendelete()" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
           </div>
         </div>
+        
+        
       </div>
-      
-      <table class="table table-striped table-hover">
+      <div class="row">
+
+        <div class="col-xs-12">
+          <input autocomplete="off" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search" title="Type">
+        </div>
+      </div>
+      <table class="table table-striped table-hover" id="myTable">
         <thead>
           <tr>
             <th>
@@ -86,13 +93,13 @@
               [indeterminate]="isIndeterminate"
                 (click)="checkMaster($event)"></ion-checkbox>
             </th>
-            <th>Name</th>
-            <th>User ID</th>
-            <th>Username</th>
+            <th (click)="sortBy('name')">Name</th>
+            <th (click)="sortBy('user_id')">User ID</th>
+            <th (click)="sortBy('username')">Username</th>
            
-            <th>Department</th>
-            <th>Usertype</th>
-            <th>Action</th>
+            <th (click)="sortBy('department_name')">Department</th>
+            <th (click)="sortBy('usertype')">Usertype</th>
+            <th >Action</th>
           </tr>
         </thead>
         <tbody>
@@ -120,18 +127,7 @@
           
         </tbody>
       </table>
-      <div class="clearfix">
-        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-        <ul class="pagination">
-          <li class="page-item disabled"><a href="#">Previous</a></li>
-          <li class="page-item"><a href="#" class="page-link">1</a></li>
-          <li class="page-item"><a href="#" class="page-link">2</a></li>
-          <li class="page-item active"><a href="#" class="page-link">3</a></li>
-          <li class="page-item"><a href="#" class="page-link">4</a></li>
-          <li class="page-item"><a href="#" class="page-link">5</a></li>
-          <li class="page-item"><a href="#" class="page-link">Next</a></li>
-        </ul>
-      </div>
+      
     </div>
   </div>        
   </div>

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { EditModalComponent } from '../edit-modal/edit-modal.component';
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 import { Delete1ModalComponent } from '../delete1-modal/delete1-modal.component';
+declare var myFunction;
 
 @Component({
   selector: 'app-manage-users',
@@ -17,6 +18,8 @@ export class ManageUsersPage implements OnInit {
   isIndeterminate:boolean;
   masterCheck:boolean;
   checkedUsers: any = [];
+  sortDirection = 0 
+  sortKey = null
   constructor(private modalCtrl: ModalController, private http: HttpClient, private router: Router) { 
 
     
@@ -26,7 +29,34 @@ export class ManageUsersPage implements OnInit {
     
     
   }
-  
+  sortBy(key){
+    this.sortKey = key;
+    this.sortDirection++;
+    this.sort();
+
+  }
+  sort(){
+    if(this.sortDirection == 1){
+        this.datauser = this.datauser.sort((a, b  )=>{
+          const valA = a[this.sortKey];
+          const valB = b[this.sortKey];
+          return valA.localeCompare(valB);
+
+        });
+    }else if(this.sortDirection==2){
+      this.datauser = this.datauser.sort((a, b  )=>{
+        const valA = a[this.sortKey];
+        const valB = b[this.sortKey];
+        return valB.localeCompare(valA);
+
+      });
+
+    }else{
+      this.sortDirection = 0 ;
+      this.sortKey = null;
+    }
+
+  }
 
 
     async openadd(){

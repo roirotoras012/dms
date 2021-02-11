@@ -23,6 +23,7 @@
     "@ionic/angular": "^5.5.2",
     "bootstrap": "^4.6.0",
     "jquery": "^3.5.1",
+    "jw-angular-pagination": "^1.2.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
