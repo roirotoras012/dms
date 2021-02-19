@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ManageUsersPageRoutingModule } from './manage-users-routing.module';
 
 import { ManageUsersPage } from './manage-users.page';
-import { AddModalComponent } from '../add-modal/add-modal.component';
+import { AddModalComponent } from './add-modal/add-modal.component';
 import { JwPaginationModule } from 'jw-angular-pagination';
 @NgModule({
   imports: [

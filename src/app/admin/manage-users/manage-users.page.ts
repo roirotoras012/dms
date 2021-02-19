@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { AddModalComponent } from '../add-modal/add-modal.component';
+import { AddModalComponent } from './add-modal/add-modal.component';
 import { HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import { Router } from '@angular/router';
-import { EditModalComponent } from '../edit-modal/edit-modal.component';
-import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
-import { Delete1ModalComponent } from '../delete1-modal/delete1-modal.component';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
+import { Delete1ModalComponent } from './delete1-modal/delete1-modal.component';
+import { PopoverController } from '@ionic/angular';
+import { PopoverComponent } from '../../components/popover/popover.component';
+import { AccPopoverComponent } from '../../components/acc-popover/acc-popover.component';
+
 declare var myFunction;
 
 @Component({
@@ -20,7 +24,7 @@ export class ManageUsersPage implements OnInit {
   checkedUsers: any = [];
   sortDirection = 0 
   sortKey = null
-  constructor(private modalCtrl: ModalController, private http: HttpClient, private router: Router) { 
+  constructor(private modalCtrl: ModalController, private http: HttpClient, private router: Router, private popover: PopoverController) { 
 
     
 
@@ -28,6 +32,22 @@ export class ManageUsersPage implements OnInit {
 
     
     
+  }
+
+  async _popOver(ev:any){
+    const popover = await this.popover.create({
+      component: PopoverComponent,
+      event: ev
+    })
+    return await popover.present()
+  }
+
+  async acc_popover(ev:any){
+    const popover = await this.popover.create({
+      component: AccPopoverComponent,
+      event: ev
+    })
+    return await popover.present()
   }
   sortBy(key){
     this.sortKey = key;

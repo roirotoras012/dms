@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: AdminPage
+  },  {
+    path: 'schedules',
+    loadChildren: () => import('./schedules/schedules.module').then( m => m.SchedulesPageModule)
   }
+
 ];
 
 @NgModule({

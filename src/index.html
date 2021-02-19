@@ -45,34 +45,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!--=CRUD BOOSTRAP=-->
-<script>
-  $(document).ready(function(){
-    // Activate tooltip
-    $('[data-toggle="tooltip"]').tooltip();
-    
-    // Select/Deselect checkboxes
-    var checkbox = $('table tbody input[type="checkbox"]');
-    $("#selectAll").click(function(){
-      if(this.checked){
-        checkbox.each(function(){
-          this.checked = true;                        
-        });
-      } else{
-        checkbox.each(function(){
-          this.checked = false;                        
-        });
-      } 
-    });
-    checkbox.click(function(){
-      if(!this.checked){
-        $("#selectAll").prop("checked", false);
-      }
-    });
-  });
-  </script>
 
-<!--=CRUD BOOSTRAP=-->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -80,7 +53,7 @@
 
 
 
-  <!--=NAV BAR BOOSTRAP=-->
+ 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merienda+One">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">

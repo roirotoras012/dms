@@ -17,13 +17,16 @@ const routes: Routes = [
   },
   {
     path: 'manage-users',
-    loadChildren: () => import('./manage-users/manage-users.module').then( m => m.ManageUsersPageModule)
+    loadChildren: () => import('./admin/manage-users/manage-users.module').then( m => m.ManageUsersPageModule)
   },
   {
     path: 'documents',
-    loadChildren: () => import('./documents/documents.module').then( m => m.DocumentsPageModule)
+    loadChildren: () => import('./admin/documents/documents.module').then( m => m.DocumentsPageModule)
   },
-
+  {
+    path: 'schedules',
+    loadChildren: () => import('./admin/schedules/schedules.module').then( m => m.SchedulesPageModule)
+  },
 
 
 ];
