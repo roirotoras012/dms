@@ -9,6 +9,7 @@ import { AccPopoverComponent } from '../../components/acc-popover/acc-popover.co
 })
 export class DocumentsPage implements OnInit {
  username: string;
+ 
   constructor(private popover: PopoverController) { }
 
   ngOnInit() {
