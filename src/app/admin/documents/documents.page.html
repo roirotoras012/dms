@@ -1,3 +1,13 @@
+
+
+
+
+
+
+
+
+
+
 <ion-header>
   <title>ADMIN</title>
   <meta charset="utf-8">
@@ -68,8 +78,8 @@
 
      <div class="buttons">
      <button class="button button2">New Document +</button>
-  
-     <button class="button button3">Upload Document <i class="fas fa-file-upload"></i></button>
+     <input [(ngModel)]="fileinput" (change)="selectedFile($event)" type="file" name="file" size="4" style="background-color:#fff; margin-left: 50px; margin-top: 10px; margin-bottom: 10px;" required="required" />
+     <button (click)="onClick()" class="button button3">Upload Document <i class="fas fa-file-upload"></i></button>
    
    </div> 
   </div>
@@ -106,26 +116,3 @@
  
   
 </ion-content>
-
-    <!-- <ion-col size="12">
-    <div class="qwer">
-       Home > Documents
-      </div>
-
-      <div class="hr">
-        <hr>
-       </div>
-  
- 
-      <div class="buttons">
-      <button class="button button2">New Document +</button>
-   
-      <button class="button button2">Upload Document <i class="fas fa-file-upload"></i></button>
-    
-    </div>
-    
-
-
-  </ion-col> -->
-  
-

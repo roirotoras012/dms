@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~11.0.5",
     "@angular/platform-browser-dynamic": "~11.0.5",
     "@angular/router": "~11.0.5",
+    "@angular/service-worker": "~11.0.5",
     "@ionic-native/core": "^5.0.0-beta.14",
     "@ionic-native/file-opener": "^5.31.1",
     "@ionic-native/http": "^5.31.1",

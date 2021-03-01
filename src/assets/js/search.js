@@ -46,4 +46,14 @@ function myFunction() {
     
   }
 
+  function SubForm (){
+    $.ajax({
+        url: '/Person/Edit/@Model.Id/',
+        type: 'post',
+        data: $('#myForm').serialize(),
+        success: function(){
+            alert("worked");
+        }
+    });
+}
   
