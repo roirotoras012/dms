@@ -16,7 +16,7 @@ import { environment } from '../environments/environment';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-  PreviewAnyFile,{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  PreviewAnyFile],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
