@@ -33,7 +33,7 @@ export class ManageUsersPage implements OnInit {
     
     
   }
-
+  
   async _popOver(ev:any){
     const popover = await this.popover.create({
       component: PopoverComponent,

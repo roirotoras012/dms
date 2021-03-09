@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../../components/popover/popover.component';
+import { DocpopoverComponent } from '../../components/docpopover/docpopover.component';
 import { AccPopoverComponent } from '../../components/acc-popover/acc-popover.component';
 import { HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import { ToastController, NavParams } from '@ionic/angular';
-declare var myFunction;
+import { Router } from '@angular/router';
+declare var myFunction1;
 
 @Component({
   selector: 'app-documents',
@@ -15,9 +17,14 @@ export class DocumentsPage implements OnInit {
  username: string;
  file_upload: File;
  fileinput: any;
-  constructor(private popover: PopoverController, private http: HttpClient,public toastController: ToastController) { }
+ datauser: any = [];
+  constructor(private popover: PopoverController, private http: HttpClient,public toastController: ToastController, private router: Router) { }
 
   ngOnInit() {
+  }
+  ionViewWillEnter(){
+    this.getdoc();
+
   }
   selectedFile(event){
     this.file_upload = event.target.files[0];
@@ -36,13 +43,40 @@ export class DocumentsPage implements OnInit {
     this.http.post("https://localhost/dms/upload_controller/do_upload",formData).subscribe((response: any) => {
       console.log(response  );
       toast.present();
+      
       this.fileinput = null
+      this.router.navigateByUrl('admin', {skipLocationChange: true}).then(()=>
+       
+       
+          this.router.navigate(['../documents'])
+      
+       
+  
+  
+  
+  
+  );
     }
     )
     
-
+   
   }
+  async doc_popover(x, ev){
 
+    
+    const popover = await this.popover.create({
+      component: DocpopoverComponent,
+      componentProps: {
+        document : x
+        
+
+
+      },
+      event: ev
+    })
+  
+    return await popover.present()
+  }
 
 
   async _popOver(ev:any){
@@ -60,4 +94,32 @@ export class DocumentsPage implements OnInit {
     })
     return await popover.present()
   }
+
+
+  async getdoc() {
+ 
+    this.http.get("https://localhost/dms/admin/get_doc") 
+      .subscribe(res => {
+        console.log(res);
+        this.datauser = res;
+    console.log(this.datauser);
+ 
+    
+        }
+      
+      , err => {
+        console.log(err);
+      });
+
+
+  
+
+
+     
+
+
+  }
+
+
+
 }

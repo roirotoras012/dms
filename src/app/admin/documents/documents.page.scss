@@ -451,7 +451,7 @@ hr {
 .doc {
     text-align: left;
     margin-left: 190px;
-
+    margin-bottom: 200px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -635,8 +635,8 @@ table.table .avatar {
     vertical-align: middle;
     margin-right: 10px;
 }
-  .filter{
-    margin-top: 19px;
+.filter{
+    margin-top: 26px;
     background-color: #008CBA; 
     border: none;
     color: white;
@@ -664,4 +664,39 @@ table.table .avatar {
 
     width: 400px;
     height: 50px;
+}
+
+.w3-container1
+{
+    margin-top: 100px;
+    margin-left: auto;
+margin-right: auto;
+width: 80%;
+font-size: 16px; 
+margin-bottom: 100px;
+}
+
+.tname {
+    width: 600px;
+
+
+}
+.test:after {
+    content: '\2807';
+    
+    } 
+
+.w3-table th{
+    
+   
+    border-bottom: solid 1px;
+
+
+} 
+.qweqwe {
+    font-size: 16px; 
+}
+.dot {
+
+    vertical-align: middle;
 }
