@@ -20,4 +20,4 @@ import { environment } from '../environments/environment';
   PreviewAnyFile],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {} 
