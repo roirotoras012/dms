@@ -1,48 +1,48 @@
-<ion-header>
-  <title>ADMIN</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <navbar class="navbar navbar-expand-xl navbar-light bg-light">
-          <a routerLink='/admin' class="navbar-brand"><i class='fa fa-file'></i>USTED<b>  System</b></a>
-          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <!-- Collection of nav links, forms, and other content for toggling -->
-          <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
-            <div class="navbar-nav">
-              <a routerLink='/admin' class="nav-item nav-link active">Home</a>
-              <a routerLink='/schedules' class="nav-item nav-link">Schedules</a>
-              <div class="nav-item dropdown">
-                <a (click)="_popOver($event)" class="nav-link dropdown-toggle"><button>Departments</button></a>
-               
-              </div>
-              <a routerLink='/documents' class="nav-item nav-link">Documents</a>
-              <a routerLink='/manage-users' class="nav-item nav-link">Manage Users</a>
-            </div>
-            <form class="navbar-form form-inline">
-              <div class="input-group search-box">								
-                <input type="text" id="search" class="form-control" placeholder="Search">
+  <ion-header>
+    <title>ADMIN</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <navbar class="navbar navbar-expand-xl navbar-light bg-light">
+            <a routerLink='/admin' class="navbar-brand"><i class='fa fa-file'></i>USTED<b>  System</b></a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Collection of nav links, forms, and other content for toggling -->
+            <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+              <div class="navbar-nav">
+                <a routerLink='/admin' class="nav-item nav-link active">Home</a>
+                <a routerLink='/schedules' class="nav-item nav-link">Schedules</a>
+                <div class="nav-item dropdown">
+                  <a (click)="_popOver($event)" class="nav-link dropdown-toggle"><button>Departments</button></a>
                 
+                </div>
+                <a routerLink='/documents' class="nav-item nav-link">Documents</a>
+                <a routerLink='/manage-users' class="nav-item nav-link">Manage Users</a>
               </div>
-            </form>
-            <div class="navbar-nav ml-auto">
-              <a href="#" class="nav-item nav-link notifications"><i class="fa fa-bell-o"></i><span class="badge">1</span></a>
-              <a href="#" class="nav-item nav-link messages"><i class="fa fa-envelope-o"></i><span class="badge">10</span></a>
-              <div class="nav-item dropdown">
-                <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action"><button><img src="./assets/images/cdustp.jpg" class="avatar" alt="Avatar"> Clint Cardenas</button></a>
-                
+              <form class="navbar-form form-inline">
+                <div class="input-group search-box">								
+                  <input type="text" id="search" class="form-control" placeholder="Search">
+                  
+                </div>
+              </form>
+              <div class="navbar-nav ml-auto">
+                <a href="#" class="nav-item nav-link notifications"><i class="fa fa-bell-o"></i><span class="badge">1</span></a>
+                <a href="#" class="nav-item nav-link messages"><i class="fa fa-envelope-o"></i><span class="badge">10</span></a>
+                <div class="nav-item dropdown">
+                  <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action"><button><img src="./assets/images/cdustp.jpg" class="avatar" alt="Avatar"> Clint Cardenas</button></a>
+                    
+                </div>
               </div>
             </div>
-          </div>
-        </navbar>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-header>
+          </navbar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-header>
 
 
 <ion-content>
