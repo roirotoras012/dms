@@ -1,5 +1,5 @@
 <ion-header>
-  <title>ADMIN</title>
+  <title>Schedule</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -7,21 +7,21 @@
     <ion-row>
       <ion-col>
         <navbar class="navbar navbar-expand-xl navbar-light bg-light">
-          <a routerLink='/admin' class="navbar-brand"><i class='fa fa-file'></i>USTED<b>  System</b></a>
+          <a routerLink='/auditor' class="navbar-brand"><i class='fa fa-file'></i>USTED<b>  System</b></a>
           <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
           </button>
           <!-- Collection of nav links, forms, and other content for toggling -->
           <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
             <div class="navbar-nav">
-              <a routerLink='/admin' class="nav-item nav-link active">Home</a>
-              <a routerLink='/admin/schedules' class="nav-item nav-link">Schedules</a>
+              <a routerLink='/auditor' class="nav-item nav-link active">Home</a>
+              <a routerLink='/auditor/schedules' class="nav-item nav-link">Schedules</a>
               <div class="nav-item dropdown">
                 <a (click)="_popOver($event)" class="nav-link dropdown-toggle"><button>Departments</button></a>
-               
+              
               </div>
-              <a routerLink='/admin/documents' class="nav-item nav-link">Documents</a>
-              <a routerLink='/admin/manage-users' class="nav-item nav-link">Manage Users</a>
+              <a routerLink='/auditor/documents' class="nav-item nav-link">Documents</a>
+              
             </div>
             <form class="navbar-form form-inline">
               <div class="input-group search-box">								
@@ -34,7 +34,7 @@
               <a href="#" class="nav-item nav-link messages"><i class="fa fa-envelope-o"></i><span class="badge">10</span></a>
               <div class="nav-item dropdown">
                 <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action"><button><img src="./assets/images/cdustp.jpg" class="avatar" alt="Avatar"> Clint Cardenas</button></a>
-                
+                  
               </div>
             </div>
           </div>
@@ -43,3 +43,16 @@
     </ion-row>
   </ion-grid>
 </ion-header>
+
+
+<ion-content>
+<div class= "ion-padding">
+
+
+  <div [froalaEditor] class="editor" id="froala-editor"></div>
+</div>
+
+
+</ion-content>
+
+

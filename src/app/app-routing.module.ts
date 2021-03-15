@@ -16,17 +16,36 @@ const routes: Routes = [
     loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
   },
   {
-    path: 'manage-users',
+    path: 'admin/manage-users',
     loadChildren: () => import('./admin/manage-users/manage-users.module').then( m => m.ManageUsersPageModule)
   },
   {
-    path: 'documents',
+    path: 'admin/documents',
     loadChildren: () => import('./admin/documents/documents.module').then( m => m.DocumentsPageModule)
   },
   {
-    path: 'schedules',
+    path: 'admin/schedules',
     loadChildren: () => import('./admin/schedules/schedules.module').then( m => m.SchedulesPageModule)
   },
+  {
+    path: 'auditor',
+    loadChildren: () => import('./auditor/auditor.module').then( m => m.AuditorPageModule)
+  },
+  {
+    path: 'auditor/documents',
+    loadChildren: () => import('./auditor/documents/documents.module').then( m => m.DocumentsPageModule)
+  },
+  {
+    path: 'auditor/schedule',
+    loadChildren: () => import('./auditor/schedule/schedule.module').then( m => m.SchedulePageModule)
+  },
+  {
+    path: 'auditor/audit',
+    loadChildren: () => import('./auditor/audit/audit.module').then( m => m.AuditPageModule)
+  },
+ 
+  
+
 
 
 ];
