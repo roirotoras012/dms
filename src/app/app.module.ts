@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { HttpClient, HttpClientModule, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { AppComponent } from './app.component';

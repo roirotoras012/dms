@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
-import WebViewer from '@pdftron/webviewer';
+
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../components/popover/popover.component';
 import { AccPopoverComponent } from '../components/acc-popover/acc-popover.component';
@@ -14,16 +14,12 @@ declare var myFunction1;
 })
 export class AdminPage implements OnInit {
  @ViewChild('viewer') viewerRef: ElementRef;
-  constructor(public previewAnyFile: PreviewAnyFile, private popover: PopoverController) { }
+  constructor(public previewAnyFile: PreviewAnyFile, private popover: PopoverController) { 
+    
+  }
 
   ngAfterViewInit(){
-    WebViewer({
-      path: '../assets/lib',
-      initialDoc: 'https://pdftron.s3.amazonaws.com/downloads/pl/webviewer-demo.pdf'
-
-    }, this.viewerRef.nativeElement).then(instance=> {
-
-    });
+    
 
   }
 

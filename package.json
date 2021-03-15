@@ -26,6 +26,7 @@
     "@ionic-native/preview-any-file": "^5.31.1",
     "@ionic/angular": "^5.5.2",
     "@pdftron/webviewer": "^7.2.0",
+    "angular-froala-wysiwyg": "^3.2.6-1",
     "bootstrap": "^4.6.0",
     "jquery": "^3.5.1",
     "jw-angular-pagination": "^1.2.0",
@@ -83,5 +84,7 @@
     "platforms": [
       "browser"
     ]
+    
   }
+  
 }
