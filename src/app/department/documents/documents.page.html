@@ -1,0 +1,169 @@
+
+<ion-header>
+  <title>ADMIN</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+ 
+        <navbar class="navbar navbar-expand-xl navbar-light bg-light">
+          <a routerLink='/department' class="navbar-brand"><i class='fa fa-file'></i>USTED<b>  System</b></a>
+          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <!-- Collection of nav links, forms, and other content for toggling -->
+          <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+            <div class="navbar-nav">
+              <a routerLink='/department' class="nav-item nav-link active">Home</a>
+              <a routerLink='/department/schedule' class="nav-item nav-link">Schedules</a>
+              <div class="nav-item dropdown">
+                <a (click)="_popOver($event)" class="nav-link dropdown-toggle"><button>Departments</button></a>
+               
+              </div>
+              <a routerLink='/department/documents' class="nav-item nav-link">Documents</a>
+              <a routerLink='/department/audit' class="nav-item nav-link">Audit</a>
+            </div>
+            <form class="navbar-form form-inline">
+              <div class="input-group search-box">								
+                <input type="text" id="search" class="form-control" placeholder="Search">
+                
+              </div>
+            </form>
+            <div class="navbar-nav ml-auto">
+              <a href="#" class="nav-item nav-link notifications"><i class="fa fa-bell-o"></i><span class="badge">1</span></a>
+              <a href="#" class="nav-item nav-link messages"><i class="fa fa-envelope-o"></i><span class="badge">10</span></a>
+              <div class="nav-item dropdown">
+                <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action"><button><img src="./assets/images/cdustp.jpg" class="avatar" alt="Avatar"> Clint Cardenas</button></a>
+                
+              </div>
+            </div>
+          </div>
+        </navbar>
+     
+</ion-header>
+<ion-content>
+
+ 
+  
+  
+ 
+  
+
+  
+  <div class="w3-container">
+  
+  
+  
+  
+  
+ 
+  <div style="margin-bottom: 100px;" class="w3-center">
+    <div class="zxczxczxc"> 
+    <div class="qwer">
+      <h6>Home > Documents</h6>
+     </div>
+
+     <div class="hr">
+       <hr>
+      </div>
+ 
+
+     <div class="buttons">
+     <button class="button button2">New Document +</button>
+     <input [(ngModel)]="fileinput" (change)="selectedFile($event)" type="file" name="file" size="4" style="background-color:#fff; margin-left: 50px; margin-top: 10px; margin-bottom: 10px;" required="required" />
+     <button (click)="onClick()" class="button button3">Upload Document <i class="fas fa-file-upload"></i></button>
+   
+   </div> 
+  </div>
+
+  <div class="doc">
+    <h1>Document Directory</h1>
+    <div>
+    <div class="qweqwe" style="float:left;">
+      <label style="display: block;" for="fname">Keywords</label>
+      
+      <input class="keyword" style="border: 1px solid #ccc;box-sizing: border-box; font-size: 16px;font-family:Arial, FontAwesome" type="text" id="fname" name="firstname"  placeholder="   &#xF002;" >
+    </div>
+   
+    <div class="qweqwe" style="float:left">
+      <label style="display: block;" for="fname">Type</label>
+      <select class="filtercss" id="country" name="country">
+        <option value="australia">Australia</option>
+        <option value="canada">Canada</option>
+        <option value="usa">USA</option>
+      </select>
+    </div>
+    <div class="qweqwe" style="float:left">
+      <label style="display: block;" for="fname">Department</label>
+      <select class="filtercss" id="country" name="country">
+        <option value="australia">Australia</option>
+        <option value="canada">Canada</option>
+        <option value="usa">USA</option>
+      </select>
+    </div>
+    <div class="qweqwe" style="float:left">
+      <label style="display: block;" for="fname">Date Range</label>
+      <select class="filtercss" id="country" name="country">
+        <option value="australia">Australia</option>
+        <option value="canada">Canada</option>
+        <option value="usa">USA</option>
+      </select>
+      
+    </div>
+
+    <div class="qweqwe" style="float:left">
+      <button class="filter">Filter <i class="fas fa-search"></i></button>
+     </div>
+    </div>
+    
+  </div>  
+  
+  </div>
+ 
+  
+  <hr >
+ 
+  
+
+  
+
+       
+  <div class="w3-center">
+    <div class="w3-container1" style="overflow-x:auto;">
+      
+    
+      <table class="w3-table w3-bordered">
+        <tr>
+          <th class="tname">Name</th>
+          <th>Type</th>
+          <th>Department</th>
+          <th>Last Modified</th>
+          <th><i class="fas fa-comment-alt"></i></th>
+          <th><i class="fas fa-eye"></i></th>
+        </tr>
+        <tr *ngFor="let data of datauser">
+          <td>{{data.filename}}</td>
+          <td>{{data.file_type}}</td>
+          <td></td>
+          <td>{{data.date_uploaded}}</td>
+          <td></td>
+          <td></td>
+          <td class="dot1"><button (click)="doc_popover(data.doc_id,$event )"><i class="fas fa-ellipsis-v"></i></button></td>
+        </tr>
+       
+      </table>
+    </div>  
+  </div>   
+  
+  
+
+ 
+    
+  
+
+  </div>
+ 
+  
+  
+ 
+  
+</ion-content>

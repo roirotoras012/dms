@@ -43,6 +43,22 @@ const routes: Routes = [
     path: 'auditor/audit',
     loadChildren: () => import('./auditor/audit/audit.module').then( m => m.AuditPageModule)
   },
+  {
+    path: 'department',
+    loadChildren: () => import('./department/department.module').then( m => m.DepartmentPageModule)
+  },
+  {
+    path: 'department/audit',
+    loadChildren: () => import('./department/audit/audit.module').then( m => m.AuditPageModule)
+  },
+  {
+    path: 'department/schedule',
+    loadChildren: () => import('./department/schedule/schedule.module').then( m => m.SchedulePageModule)
+  },
+  {
+    path: 'department/documents',
+    loadChildren: () => import('./department/documents/documents.module').then( m => m.DocumentsPageModule)
+  },
  
   
 
