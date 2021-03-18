@@ -28,20 +28,16 @@
 						<span class="focus-input100-2"></span>
 					</div>
 					<br>
-					<div class="dropdown">
-						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						  login as
-						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						  <a class="dropdown-item" href="#">AUDITOR</a>
-						  <a class="dropdown-item" href="#">DEPARTMENT</a>
-						  <a class="dropdown-item" href="#">ADMIN</a>
-						</div>
-					  </div>
+					<label >Login as</label>
+      <ion-select style="width: 100px; background: gray;" name="usertype" [(ngModel)]="usertype">
+        <ion-select-option value="admin">Admin</ion-select-option>
+        <ion-select-option value="auditor">Auditor</ion-select-option>
+        <ion-select-option value="departmental">Departmental</ion-select-option>
+      </ion-select>
 
 
 					<div class="container-login100-form-btn m-t-20">
-						<button (click)="login_acc()" class="login100-form-btn" >
+						<button  (click)="login_acc()" class="login100-form-btn" >
 							Sign in
 						</button>
 					</div>

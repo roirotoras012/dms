@@ -41,11 +41,21 @@ export class AddModalComponent implements OnInit {
   }
 
   async add_account() {
+    if(this.usertype == "admin"){
 
+     
+    }
     
     if(this.username && this.password && this.name &&  this.email &&  this.usertype &&  this.department != null){
-
-      console.log(this.department)
+      
+      const formData: FormData = new FormData();
+      formData.append('username', this.username)
+      formData.append('password', this.password)
+      formData.append('usertype', this.usertype)
+      formData.append('email', this.email)
+      
+      formData.append('department', this.department)
+      formData.append('name', this.name)
       let postData = {
         username: this.username,
         password: this.password,
@@ -56,7 +66,7 @@ export class AddModalComponent implements OnInit {
         
         
   }
-      this.http.post("https://localhost/dms/admin/add_account", JSON.stringify(postData)) 
+      this.http.post("https://localhost/dms/admin/add_account", formData) 
         .subscribe(res => {
          
           console.log(res);
@@ -67,7 +77,7 @@ export class AddModalComponent implements OnInit {
            this.router.navigateByUrl('admin', {skipLocationChange: true}).then(()=>
        
        
-          this.router.navigate(['../manage-users'])
+          this.router.navigate(['../admin/manage-users'])
       
        
   

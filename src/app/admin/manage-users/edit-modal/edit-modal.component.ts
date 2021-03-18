@@ -64,7 +64,15 @@ export class EditModalComponent implements OnInit {
  
     
     if(this.username && this.password && this.name &&  this.email &&  this.usertype &&  this.department != null){
-
+      const formData: FormData = new FormData();
+      formData.append('username', this.username)
+      formData.append('password', this.password)
+      formData.append('usertype', this.usertype)
+      formData.append('email', this.email)
+      
+      formData.append('department', this.department)
+      formData.append('name', this.name)
+      formData.append('user_id', this.usertobeedited.user_id)
       
       let postData = {
         username: this.username,
@@ -77,7 +85,7 @@ export class EditModalComponent implements OnInit {
         
         
   }
-      this.http.post("https://localhost/dms/admin/edit_user", JSON.stringify(postData)) 
+      this.http.post("https://localhost/dms/admin/edit_user", formData) 
         .subscribe(res => {
          
           console.log(res);
@@ -88,7 +96,7 @@ export class EditModalComponent implements OnInit {
            this.router.navigateByUrl('admin', {skipLocationChange: true}).then(()=>
        
        
-          this.router.navigate(['../manage-users'])
+          this.router.navigate(['../admin/manage-users'])
       
        
   

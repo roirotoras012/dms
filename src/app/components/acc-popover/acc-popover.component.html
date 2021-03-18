@@ -1,5 +1,16 @@
-<a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
-<a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> Calendar</a>
-<a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
+<button (click)="logout()" class="dropdown-item">
+    <i class="fa fa-user-o" style="vertical-align: middle;"></i> Profile
+</button>
+<button (click)="logout()" class="dropdown-item">
+    <i class="fa fa-calendar-o" style="vertical-align: middle;"></i> Calendar
+</button>
+<button (click)="logout()" class="dropdown-item">
+    <i class="fa fa-sliders" style="vertical-align: middle;"></i> Settings
+</button>
+
+
 <div class="dropdown-divider"></div>
-<a href="#" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
+
+<button (click)="logout()" class="dropdown-item">
+    <i class="material-icons" style="vertical-align: middle;">&#xE8AC;</i> Logout
+</button>
