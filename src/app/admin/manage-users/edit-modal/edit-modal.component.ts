@@ -85,25 +85,36 @@ export class EditModalComponent implements OnInit {
         
         
   }
+  const usernametaken = await this.toastController.create({
+    message: 'Username is already taken',
+    duration: 2000
+  });
       this.http.post("https://localhost/dms/admin/edit_user", formData) 
         .subscribe(res => {
          
           console.log(res);
-          this.modalCtrl.dismiss();
+          if(res == "username is already taken"){
+           
+            usernametaken.present()
+          }else{
+            this.modalCtrl.dismiss();
           
-           this.presentToast();
-         
-           this.router.navigateByUrl('admin', {skipLocationChange: true}).then(()=>
+            this.presentToast();
+          
+            this.router.navigateByUrl('admin', {skipLocationChange: true}).then(()=>
+        
+        
+           this.router.navigate(['../admin/manage-users'])
        
-       
-          this.router.navigate(['../admin/manage-users'])
-      
-       
-  
-  
-  
-  
-  );
+        
+   
+   
+   
+   
+   );
+
+          }
+          
         
     }, err => {
       console.log(err);

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AdminGuardGuard } from './services/admin-guard.guard';
-import { AuditorGuardGuard } from './services/audtior-guard.guard';
+import { AudtiorGuardGuard } from './services/audtior-guard.guard';
 import { AuthGuardService } from './services/auth-guard.service';
 import { DepartmentalGuardGuard } from './services/departmental-guard.guard';
 import { LoginGuardGuard } from './services/login-guard.guard';
@@ -28,9 +28,14 @@ const routes: Routes = [
   },
   {
     path: '',
-    canActivate: [AuditorGuardGuard,AuthGuardService],
+    canActivate: [AudtiorGuardGuard,AuthGuardService],
     loadChildren: () => import('./members/auditor-routing.module').then( m => m.AuditorRoutingModule)
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+
   
   
   

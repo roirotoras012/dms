@@ -6,6 +6,9 @@ import { AccPopoverComponent } from '../../components/acc-popover/acc-popover.co
 import { HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import { ToastController, NavParams } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { UserServiceService } from '../../services/user-service.service';
+import { AppComponent } from '../../app.component';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 declare var myFunction1;
 
 @Component({
@@ -18,12 +21,20 @@ export class DocumentsPage implements OnInit {
  file_upload: File;
  fileinput: any;
  datauser: any = [];
-  constructor(private popover: PopoverController, private http: HttpClient,public toastController: ToastController, private router: Router) { }
+ currentuser: any = [];
+  constructor(private component: AppComponent,private popover: PopoverController, private http: HttpClient,public toastController: ToastController, private router: Router, private userservice: UserServiceService) {
+    this.getuserinfo();
+    
+   }
 
   ngOnInit() {
+   
   }
   ionViewWillEnter(){
     this.getdoc();
+    
+   
+    
 
   }
   selectedFile(event){
@@ -121,5 +132,31 @@ export class DocumentsPage implements OnInit {
   }
 
 
+  getuserinfo(){
+  
+    this.userservice.userinfo().then((data)=>{
+      this.http.get("https://localhost/dms/admin/account_info?user_id="+data.user_id)
+      .subscribe(data2 => {
+        
+      this.currentuser = data2[0]
+   
+       
+      
+  
+    
+        }
+      
+      , err => {
+        console.log(err);
+      });
+      
+    })
+
+
+
+  
+    
+
+  }
 
 }

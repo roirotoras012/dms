@@ -5,6 +5,8 @@ import { AuthenticationService } from './services/authentication.service';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx'
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/Storage'
+import { HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
+
 const TOKEN_KEY = 'auth-token'
 @Component({
   selector: 'app-root',
@@ -13,7 +15,7 @@ const TOKEN_KEY = 'auth-token'
   providers: [StatusBar, SplashScreen]  
 })
 export class AppComponent {
-  
+   user: any
   constructor(
     private authService: AuthenticationService,
     private platform: Platform,
@@ -33,6 +35,8 @@ export class AppComponent {
     //   }
 
     // })
+
+   
   }
 
   initializeApp(){
@@ -42,4 +46,6 @@ export class AppComponent {
    })
 
   }
+
+  
 }

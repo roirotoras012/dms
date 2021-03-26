@@ -9,7 +9,7 @@ import { Delete1ModalComponent } from './delete1-modal/delete1-modal.component';
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../../components/popover/popover.component';
 import { AccPopoverComponent } from '../../components/acc-popover/acc-popover.component';
-
+import { UserServiceService } from '../../services/user-service.service';
 declare var myFunction;
 
 @Component({
@@ -18,16 +18,17 @@ declare var myFunction;
   styleUrls: ['./manage-users.page.scss'],
 })
 export class ManageUsersPage implements OnInit {
+  currentuser: any = [];
   datauser: any = [];
   isIndeterminate:boolean;
   masterCheck:boolean;
   checkedUsers: any = [];
   sortDirection = 0 
   sortKey = null
-  constructor(private modalCtrl: ModalController, private http: HttpClient, private router: Router, private popover: PopoverController) { 
+  constructor(private userservice: UserServiceService,private modalCtrl: ModalController, private http: HttpClient, private router: Router, private popover: PopoverController) { 
 
     
-
+    this.getuserinfo();
 
 
     
@@ -237,5 +238,34 @@ export class ManageUsersPage implements OnInit {
       this.isIndeterminate = false;
       this.masterCheck = false;
     }
+  }
+
+
+
+  getuserinfo(){
+  
+    this.userservice.userinfo().then((data)=>{
+      this.http.get("https://localhost/dms/admin/account_info?user_id="+data.user_id)
+      .subscribe(data2 => {
+        
+      this.currentuser = data2[0]
+   
+       
+      
+  
+    
+        }
+      
+      , err => {
+        console.log(err);
+      });
+      
+    })
+
+
+
+  
+    
+
   }
 }

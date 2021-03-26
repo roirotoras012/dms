@@ -66,11 +66,22 @@ export class AddModalComponent implements OnInit {
         
         
   }
+
+  const usernametaken = await this.toastController.create({
+    message: 'Username is already taken',
+    duration: 2000
+  });
       this.http.post("https://localhost/dms/admin/add_account", formData) 
         .subscribe(res => {
          
           console.log(res);
-          this.modalCtrl.dismiss();
+
+          if(res == "username is already taken"){
+           
+            usernametaken.present()
+          }else{
+
+            this.modalCtrl.dismiss();
           
            this.presentToast();
          
@@ -85,6 +96,8 @@ export class AddModalComponent implements OnInit {
   
   
   );
+          }
+          
         
     }, err => {
       console.log(err);

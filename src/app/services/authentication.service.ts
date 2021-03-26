@@ -30,7 +30,7 @@ export class AuthenticationService {
             
             this.AdminState.next(true);
           }
-          if(data.usertype == "departmental"){
+          if(data.usertype == "department"){
             
             this.DepartmentalState.next(true);
           }
@@ -97,7 +97,7 @@ export class AuthenticationService {
             
               this.AdminState.next(true);
             }
-            if(res.usertype == "departmental"){
+            if(res.usertype == "department"){
               
               this.DepartmentalState.next(true);
             }

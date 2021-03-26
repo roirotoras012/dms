@@ -39,4 +39,9 @@ export class AccPopoverComponent implements OnInit {
   
     await this.popover.dismiss();
   }
+  async profile() {
+    
+    this.router.navigate(['/profile']);
+    await this.popover.dismiss();
+  }
 }
