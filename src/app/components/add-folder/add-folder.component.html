@@ -1,0 +1,15 @@
+<div class="modal-header">						
+  <h4 class="modal-title">Add Folder</h4>
+  <button type="button" class="close" (click)="dismissModal()" aria-hidden="true">&times;</button>
+</div>
+<div class="modal-body">					
+  <div class="form-group">
+    <label>Folder Name:</label>
+    <input type="text" class="form-control" (input)="foldername = $event.target.value;" required>
+  </div>
+  
+
+<div class="modal-footer" style="margin-top: 450px;">
+  <input type="button" class="btn btn-default" (click)="dismissModal()"  value="Cancel">
+  <input type="submit" class="btn btn-success" (click)="add_folder()" value="Add Folder">
+</div>

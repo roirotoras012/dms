@@ -75,6 +75,63 @@
    </div> 
   </div>
 
+  <div class="w3-center">
+    <div class="w3-container1" style="overflow-x:auto;" style="border: solid black; border-radius: 5px;">
+     
+      <div *ngIf="chosen">
+        <div>
+        <button (click)="back()">back</button>
+        </div>
+        <h4 style="display: inline;" ><button (click)="doc()">Documents</button></h4>
+        <h4 style="display: inline;" ><button (click)="direct()">>{{chosen}}</button></h4>
+        <div *ngFor="let data of folder_layer" style="display: inline;">
+          <button (click)="direct(data)"><h4>>{{data}}</h4></button>
+
+        </div>
+        <!-- <h1><button (click)="back()">Documents</button> > {{chosen}}</h1> -->
+        <div>
+        <button (click)="add_folder()" class="button button2">Add Folder</button>
+        <button (click)="upload()" class="button button3">Upload Document <i class="fas fa-file-upload"></i></button>
+      </div>
+      </div>
+      <ul class="">
+   
+        
+        <div *ngIf="chosen == null"><h1>Documents</h1></div>
+        <li  *ngFor="let data of departments" class="dep">
+          <!-- <button><i class="far fa-folder fa-5x"></i>{{data.department_name}}</button> -->
+          <button *ngIf="chosen == null" (click)="chosen1(data.department_name)" >
+            
+            <!-- (contextmenu)="onRightClick($event, data.department_name)" -->
+            <span class="fa-stack fa-4x">
+              <i class="far fa-folder fa-stack-2x"></i>
+              <strong style="font-size: 40px;">{{data.department_name}}</strong>
+              
+            </span>
+          </button>
+          
+          
+          
+        </li>
+        
+      </ul>
+      
+      <div *ngIf="chosen">
+        <li  *ngFor="let data of folders" class="dep" >
+        <button (click)="choice(data)" >
+            
+         
+         
+            <i class="far fa-folder fa-5x"></i>
+            <strong style="font-size: 20px; display: block;">{{data}}</strong>
+         
+          
+        </button>
+        </li>
+      </div>
+ 
+    </div>  
+  </div>  
   <div class="doc">
     <h1>Document Directory</h1>
     <div>
