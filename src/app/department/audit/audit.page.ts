@@ -3,7 +3,7 @@ import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../../components/popover/popover.component';
 import Peer from 'peerjs'
 import { AccPopoverComponent } from '../../components/acc-popover/acc-popover.component';
-import { concatAll } from 'rxjs/operators';
+
 @Component({
   selector: 'app-audit',
   templateUrl: './audit.page.html',
