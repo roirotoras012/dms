@@ -674,13 +674,12 @@ table.table .avatar {
 
 .w3-container1
 {
-    margin-top: 100px;
     margin-left: auto;
-margin-right: auto;
-width: 80%;
-font-size: 16px; 
-margin-bottom: 100px;
-padding: 50px;
+    margin-right: auto;
+    width: 100%;
+    font-size: 16px; 
+    margin-bottom: 100px;
+    padding: 0px;
 }
 
 .tname {
@@ -711,7 +710,7 @@ padding: 50px;
 
 .dep {
     display: inline-block;
-    margin: 30px;
+    margin: 7px;
     
 
 
@@ -739,4 +738,75 @@ padding: 50px;
         line-height: (8em / 14);
         text-align: center;
     }
+
+   
 }
+
+.contents{
+    border: solid black;
+    border-width: 1px;
+    border-radius: 7px;
+    width: 200px;
+    height: 55px;
+    color: #555;
+    border-color:#a0a5b1;
+    white-space: nowrap;
+    text-align: left;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    padding: 10px;
+    
+    
+ }
+ .direction {
+    color: #555;
+    
+    padding: 5px;
+    border-bottom: solid black;
+    border-width: 1px;
+    border-color:  #555;
+
+
+ }
+ .hove {
+    border-radius: 7px;
+    height: 30px;
+    padding-left: 6px;
+    padding-right: 6px;
+    font-size: 20px;
+ }
+
+ .hove:hover{
+    background-color: #e7e7e7;
+
+
+
+ }
+ .newbut{
+    font-size: 20px;
+    
+   
+
+
+
+ }
+ .newbut1{
+    font-size: 20px;
+    border: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: #555;
+    padding: 10px;
+    width: 150px;
+    text-align: justify;
+    
+
+
+
+ }
+ .directory {
+    
+    color: #555;
+   
+
+ }

@@ -24,20 +24,23 @@ export class AddFolderComponent implements OnInit {
 
 
  async add_folder(){
+  this.fol = this.navParams.get('data');
   const formData: FormData = new FormData();
   formData.append('foldername', this.foldername)
   formData.append('user_id', this.fol.user_id)
   formData.append('currfolder', this.fol.currfolder)
   formData.append('department', this.fol.department)
+  formData.append('parent_folder', this.fol.parent_folder)
+  formData.append('parent_path', this.fol.parent_path)
 
   
  
-  
-  this.fol = this.navParams.get('data');
-  
+    
+ 
   
   this.http.post("https://localhost/dms/admin/addfolder", formData) 
   .subscribe(res => {
+    console.log(res)
    if(res == "success"){
 
     this.modalCtrl.dismiss({

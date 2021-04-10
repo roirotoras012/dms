@@ -11,8 +11,7 @@ import { DocumentsPipe } from './documents.pipe';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
-import { environment } from '../environments/environment';
-import { from } from 'rxjs';
+
 @NgModule({ 
   declarations: [AppComponent, DocumentsPipe],
   entryComponents: [],
