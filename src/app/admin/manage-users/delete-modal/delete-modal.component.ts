@@ -53,18 +53,7 @@ export class DeleteModalComponent implements OnInit {
           this.modalCtrl.dismiss();
           
           
-         
-           this.router.navigateByUrl('admin', {skipLocationChange: true}).then(()=>
-       
-       
-          this.router.navigate(['../admin/manage-users'])
-      
-       
-  
-  
-  
-  
-      );
+        
         
     }, err => {
       console.log(err);

@@ -15,10 +15,7 @@
             <div class="navbar-nav">
               <a routerLink='/department' class="nav-item nav-link active">Home</a>
               <a routerLink='/department/schedule' class="nav-item nav-link">Schedules</a>
-              <div class="nav-item dropdown">
-                <a (click)="_popOver($event)" class="nav-link dropdown-toggle"><button>Departments</button></a>
-               
-              </div>
+             
               <a routerLink='/department/documents' class="nav-item nav-link">Documents</a>
               <a routerLink='/department/audit' class="nav-item nav-link">Audit</a>
             </div>
@@ -40,7 +37,7 @@
         </nav>
      
 
-<ion-content>
+<ion-content >
 
  
 
@@ -49,85 +46,37 @@
   
 
   
-  <div class="w3-container">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="1.5">
-          <div class="w3-container" style="margin-top: 10px; ">
-            
-            <button (click)="newclicked()" class="newbut"><i class="fas fa-plus"></i> New</button>
-            <div *ngIf="new">
-            <button  (click)="add_folder()" style="display: block; margin-top: 10px;" class="newbut1"><i class="fas fa-plus" ></i> Folder</button>
-            <button   style="display: block; margin-top: 10px;" class="newbut1"><i class="fas fa-plus"></i> File Upload</button>
-          </div>
-
-          <div class="directory">
-            <ul>
-              <li><i *ngIf="!dirdoc" (click)="docdir()" class="fas fa-caret-right fa-2x" style="vertical-align: middle; padding: 5px;"></i>
-                <i *ngIf="dirdoc" (click)="docdir()" class="fas fa-caret-down  fa-2x" style="vertical-align: middle; padding: 5px;"></i>
-                
-                
-                
-                <button (click)="doc()"><i class="far  fa-folder fa-3x" style="vertical-align: middle;" ></i><strong style="font-size: 15px; vertical-align: middle; padding: 5px;">Documents</strong></button></li>
-            
-              <li style="color: #555;" *ngFor="let data of departments">
-                <!-- <button><i class="far fa-folder fa-5x"></i>{{data.department_name}}</button> -->
-                <div *ngIf="dirdoc">
-                <i (click)="sidedir(data.folder_id)" class="fas fa-caret-right fa-2x" style="vertical-align: middle; padding: 5px;"></i>
-                <button lines="none"  (click)="subfolder(data.foldername)">
-                
-                  <!-- (contextmenu)="onRightClick($event, data.department_name)" -->
-                  
-                  <i style="vertical-align: middle;" class="fas fa-folder fa-2x"></i>
-                  <strong style="font-size: 15px;  vertical-align: middle;">&nbsp;&nbsp;{{data.foldername}}</strong>
-                  
-                    
-                
-                </button>
-              </div>
-              
-
-
-
-
-            </ul>
-
-
-
-
-
-
-          </div>
-
-
-
-
-
-
-
-
-
-          </div>
-
-
-         </ion-col>
+  <div class="w3-container" style="padding-left: 170px; padding-right: 100px;">
+    
+      
+        
   
   
   
   
  
   
-   <ion-col size="10.5">
+ 
   <div class="w3-center">
+
+    <div style="float: right;"  *ngIf="folder_layer.length > 0">
+    <button  (click)="newclicked()" class="newbut"><i class="fas fa-plus"></i> New</button>
+    <div *ngIf="new">
+    <button  (click)="add_folder()" style="display: block; margin-top: 10px;" class="newbut1"><i class="fas fa-plus" ></i> Folder</button>
+    <input [(ngModel)]="fileinput" (change)="selectedFile($event)" type="file" name="file" size="4" style="background-color:#fff; margin-left: 50px; margin-top: 10px; margin-bottom: 10px;" required="required" />
+    <button    (click)="add_doc()" style="display: block; margin-top: 10px;" class="newbut1 btn-success"><i class="fas fa-plus"></i> File Upload</button>
+  </div>
+
+</div>
     <div class="w3-container1" style="overflow-x:auto; text-align: left;">
      
-      <div  class="direction" *ngIf="chosen"  >
+      <div  class="direction" *ngIf="folder_layer.length > 0">
         <div>
         <!-- <button (click)="back()">back</button> -->
         </div>
         
-        <div  style="display: inline;" ><button class="hove" (click)="doc()">Documents</button></div>
-        <div  style="display: inline;" ><i class="fas fa-chevron-right" style="padding-left: 10px;padding-right: 10px;color:#a0a5b1;"></i><button class="hove" (click)="direct()">{{chosen}}</button></div>
+        <div  style="display: inline;" ><button class="hove" (click)="root()">{{currentuser.usertype_title}}</button></div>
+     
       
      
         <div  *ngFor="let data of folder_layer" style="display: inline;">
@@ -143,18 +92,18 @@
       <ul class="">
    
         
-        <div class="direction" *ngIf="chosen == null" style="font-size: 20px;">Documents</div>
+        <div class="direction" *ngIf="folder_layer.length == 0" style="font-size: 20px;">{{currentuser.usertype_title}}</div>
         <div><h5>Folders</h5></div>
-        <li style="color: #555;" *ngFor="let data of departments" class="dep">
+        <li style="color: #555;" *ngFor="let data of dpm" class="dep">
           <!-- <button><i class="far fa-folder fa-5x"></i>{{data.department_name}}</button> -->
 
      
-          <button lines="none" class="contents" *ngIf="chosen == null" (click)="once1(data.foldername)"  style="margin-top: 35px;"  >
+          <button lines="none" class="contents" *ngIf="folder_layer.length == 0" (click)="folderclicked(data.dpm_title)"  style="margin-top: 35px;"  >
           
             <!-- (contextmenu)="onRightClick($event, data.department_name)" -->
             
             <i style="vertical-align: middle;" class="fas fa-folder fa-2x"></i>
-              <strong style="font-size: 15px;  vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data.foldername}}</strong>
+              <strong style="font-size: 15px;  vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data.dpm_title}}</strong>
               
           
           </button>
@@ -167,9 +116,20 @@
         
       </ul>
       
-      <div *ngIf="chosen">
+      <div *ngIf="folder_layer.length > 0">
+
+        <div class="covid-switch">
+          <ion-segment [(ngModel)]="status">
+              <ion-segment-button class="sss" value="dpm">
+                  <ion-label>DPM</ion-label>
+              </ion-segment-button>
+              <ion-segment-button class="sss" value="evidence">
+                  <ion-label>Evidences</ion-label>
+              </ion-segment-button>
+          </ion-segment>
+      </div>
         <li *ngFor="let data of folders" class="dep" >
-        <button lines="none" class="contents" (click)="once(data)"  >
+        <button lines="none" class="contents" (click)="folderclicked(data)"  >
             
          
          
@@ -179,13 +139,55 @@
           
         </button>
         </li>
+
+
+        <div [hidden]="status != 'dpm'">
+
+          <li *ngFor="let data of main" class="dep"  style="display: block;">
+            <button lines="none" class="contents1" (click)="doc_popover(data.doc_id,$event )"  >
+                
+             
+             
+              <i style="vertical-align: middle;"  class="fas fa-file-alt fa-2x"></i>
+                <strong style="font-size: 15px; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data.filename}}</strong>
+             
+              
+            </button>
+            </li>
+
+
+        
+
+
+
+
+
+
+
+
+        </div>
+
+        <div [hidden]="status != 'evidence'">
+
+          <li *ngFor="let data of evidences" class="dep"  style="display: block;" >
+            <button lines="none" class="contents1" (click)="doc_popover(data.doc_id,$event )"  >
+                
+             
+             
+              <i style="vertical-align: middle;"  class="fas fa-file-alt fa-2x"></i>
+                <strong style="font-size: 15px; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data.filename}}</strong>
+             
+              
+            </button>
+            </li>
+        </div>
       </div>
  
     </div>  
   </div>  
-</ion-col>
 
-</ion-row>
+
+
   <!-- <div class="doc">
     <h1>Document Directory</h1>
     <div>
@@ -227,7 +229,7 @@
     </div>
     
   </div>   -->
-</ion-grid>
+
   </div>
  
   

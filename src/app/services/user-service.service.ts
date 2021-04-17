@@ -34,6 +34,16 @@ userinfo() {
 
 }
 
+get(server){
+  return this.http.get(server)
+
+
+}
+post(server,data){
+  return this.http.get(server,data)
+
+
+}
 
 
 }

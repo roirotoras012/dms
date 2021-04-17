@@ -8,10 +8,11 @@ import { UserServiceService } from '../../../services/user-service.service'
  
 @Component({
   selector: 'app-edit-modal',
-  templateUrl: './edit-modal.component.html',
-  styleUrls: ['./edit-modal.component.scss'],
+  templateUrl: './edit-modal.page.html',
+  styleUrls: ['./edit-modal.page.scss'],
 })
-export class EditModalComponent implements OnInit {
+export class EditModalPage implements OnInit {
+
   datauser: any = [];
   usertobeedited: any = []
   username: string;
@@ -85,29 +86,28 @@ this.getusertype()
 
   async edit_account() {
  
-    
-    if(this.username && this.password && this.name &&  this.email &&  this.usertype &&  this.department != null){
+    if(this.user_level == null){
+
+      this.user_level = ''
+    }
+
+    if(this.usertype1 != 'auditee'){
+
+        this.usertype = this.usertype1
+
+    }
+    if(this.username && this.password && this.name &&  this.email &&  this.usertype != null){
       const formData: FormData = new FormData();
       formData.append('username', this.username)
       formData.append('password', this.password)
       formData.append('usertype', this.usertype)
       formData.append('email', this.email)
       
-      formData.append('department', this.department)
+      formData.append('user_level', this.user_level)
       formData.append('name', this.name)
       formData.append('user_id', this.usertobeedited.user_id)
       
-      let postData = {
-        username: this.username,
-        password: this.password,
-        name: this.name,
-        email: this.email,
-        usertype: this.usertype,
-        department_id: this.department,
-        user_id: this.usertobeedited.user_id
-        
-        
-  }
+    
   const usernametaken = await this.toastController.create({
     message: 'Username is already taken',
     duration: 2000
@@ -124,18 +124,7 @@ this.getusertype()
           
             this.presentToast();
           
-            this.router.navigateByUrl('admin', {skipLocationChange: true}).then(()=>
-        
-        
-           this.router.navigate(['../admin/manage-users'])
-       
-        
-   
-   
-   
-   
-   );
-
+            
           }
           
         
@@ -158,6 +147,5 @@ this.getusertype()
 
 
   }
-  
 
 }

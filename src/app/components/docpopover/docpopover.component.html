@@ -4,10 +4,11 @@
  
   
   <input  type="hidden" id="doc_id" name="doc_id" value="{{doc}}">
-  <button class="dropdown-item" type="submit" value="Submit">Download</button>
+  <button class="dropdown-item" type="submit" value="Submit">Export</button>
 </form>
 <div>
  
-  <button class="dropdown-item">Edit</button>
-   <button class="dropdown-item">View</button>
+  <button (click)="addbranch()" class="dropdown-item">View Versions</button>
+  
+  
 </div>

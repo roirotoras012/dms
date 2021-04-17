@@ -21,52 +21,33 @@ export class LoginPage implements OnInit {
  
   constructor(private toastController: ToastController,private platform: Platform,private router: Router,public api: ApiServiceService, private http: HttpClient,private storage: Storage,private authService: AuthenticationService) { 
 
-      // console.log(authService.isnotAuthenticated())
-      // this.storage.get(TOKEN_KEY).then((res)=>{
-      //   if(res){
+      console.log(authService.isnotAuthenticated())
+      this.storage.get(TOKEN_KEY).then((res)=>{
+        if(res){
           
-      //   if(res.usertype == "admin"){
-      //     this.router.navigate(['','admin'])
+        if(res.usertype == "admin"){
+          this.router.navigate(['','admin'])
 
-      //   }
-      //   if(res.usertype == "auditor"){
-      //     this.router.navigate(['','auditor'])
+        }
+        else if(res.usertype == "auditor"){
+          this.router.navigate(['','auditor'])
 
-      //   }
-      //   if(res.usertype == "department"){
-      //     this.router.navigate(['','department'])
+        }
+       else{
+          this.router.navigate(['','department'])
 
-      //   }
+        }
   
-      //   }
+        }
   
-      // })
+      })
     
     
   }
   ionViewWillEnter(){
     
 
-    
-    this.storage.get(TOKEN_KEY).then((res)=>{
-      if(res){
-        
-      if(res.usertype == "admin"){
-        this.router.navigate(['','admin'])
 
-      }
-      if(res.usertype == "auditor"){
-        this.router.navigate(['','auditor'])
-
-      }
-      if(res.usertype == "department"){
-        this.router.navigate(['','department'])
-
-      }
-
-      }
-
-    })
   }
   ngOnInit() {
   }
@@ -87,18 +68,18 @@ export class LoginPage implements OnInit {
     const formData: FormData = new FormData();
     formData.append('username', this.username)
     formData.append('password', this.password)
-    formData.append('usertype', this.usertype)
+ 
     
     this.http.post("https://localhost/dms/admin/login",formData).subscribe((response: any) => {
-      
+      console.log(response[0].usertype)
       if(response == "error"){
         toast.present();
       }
       else{
         let data = {
           user_id: response[0].user_id,
-          usertype: this.usertype,
-          department: response[0].department_id
+          usertype: response[0].usertype_title,
+          user_level: response[0].user_level,
         };
       
       
@@ -115,11 +96,11 @@ export class LoginPage implements OnInit {
                     this.router.navigate(['','admin'])
 
                   }
-                  if(res.usertype == "auditor"){
+                  else if(res.usertype == "auditor"){
                     this.router.navigate(['','auditor'])
 
                   }
-                  if(res.usertype == "department"){
+                  else{
                     
                     this.router.navigate(['','department'])
 

@@ -1,0 +1,42 @@
+
+ 
+  <div class="body" style="margin: 10px;">
+      
+      <div class="modal-header">						
+        <h4 class="modal-title">Versions</h4>
+        <button type="button" class="close" (click)="dismissModal()" aria-hidden="true">&times;</button>
+      </div>
+     
+      <li *ngFor="let data of branches" class="dep"  style="display: block; border: solid black; border-width: 1px; margin-bottom: 5px; padding-bottom: 5px;" >
+        <input (change)="selectedFile1($event)" type="file" name="file"  style="background-color:#fff; margin-left: 50px; margin-top: 10px; margin-bottom: 10px;" required="required" />
+        <input type="submit" class="btn btn-success" (click)="update(data)" value="Update" style="margin-left: 50px;">
+        
+        <input type="submit" class="btn btn-success" (click)="alert1(data)" value="Make as main" style="margin-left: 5px;">
+        <button lines="none" class="contents1"  >
+            
+         
+         
+          <i style="vertical-align: middle;"  class="fas fa-file-alt fa-2x"></i>
+            <strong style="font-size: 15px; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data.branch_document_filename}}</strong>
+         
+            <form ngNoForm action="https://localhost/dms/admin/download_docB" method="get">
+ 
+  
+              <input  type="hidden" id="doc_id" name="doc_id" value="{{data.branch_document_id}}">
+              <button class="dropdown-item" type="submit" value="Submit" style="width: 100px; text-align: center;">Download</button>
+            </form>
+        </button>
+        
+        
+        </li>
+
+    </div>
+      
+      <div class="modal-footer">
+        <input  (change)="selectedFile($event)" type="file" name="file" size="4" style="background-color:#fff; margin-left: 50px; margin-top: 10px; margin-bottom: 10px;" required="required" />
+        <input type="button" class="btn btn-default" (click)="dismissModal()"  value="Cancel">
+        <input type="submit" class="btn btn-success" (click)="onClick()" value="Add">
+      </div>
+      
+ 
+

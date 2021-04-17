@@ -50,18 +50,19 @@ export class ProfilePage implements OnInit {
         this.department = false
 
       }
-      if(res.usertype == "department"){
-        this.department = true
-        this.admin = false
-        this.auditor = false
-      
-      }
-      if(res.usertype == "auditor"){
+   
+      else if(res.usertype == "auditor"){
         this.auditor = true
         this.department = false
         this.admin = false
         
 
+      }
+      else{
+        this.department = true
+        this.admin = false
+        this.auditor = false
+      
       }
       
     })
@@ -77,15 +78,15 @@ export class ProfilePage implements OnInit {
 
 
       }
-      if(res.usertype == "department"){
-     
-        this.router.navigate(['/department/documents'])
-        
-      }
-      if(res.usertype == "auditor"){
+    
+      else if(res.usertype == "auditor"){
         
         this.router.navigate(['/auditor/documents'])
 
+      } else{
+     
+        this.router.navigate(['/department/documents'])
+        
       }
       
     })
@@ -101,15 +102,15 @@ export class ProfilePage implements OnInit {
 
 
       }
-      if(res.usertype == "department"){
      
-        this.router.navigate(['/department'])
-        
-      }
-      if(res.usertype == "auditor"){
+      else if(res.usertype == "auditor"){
         
         this.router.navigate(['/auditor'])
 
+      } else{
+     
+        this.router.navigate(['/department'])
+        
       }
       
     })
@@ -125,15 +126,15 @@ export class ProfilePage implements OnInit {
 
 
       }
-      if(res.usertype == "department"){
-     
-        this.router.navigate(['/department/schedule'])
-        
-      }
-      if(res.usertype == "auditor"){
+   
+      else if(res.usertype == "auditor"){
         
         this.router.navigate(['/auditor/schedule'])
 
+      }else{
+     
+        this.router.navigate(['/department/documents'])
+        
       }
       
     })

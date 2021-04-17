@@ -1,6 +1,6 @@
 
  
-    
+    <ion_content>
       
         <div class="modal-header">						
           <h4 class="modal-title">Add User</h4>
@@ -17,7 +17,7 @@
           </div>
           <div class="form-group">
             <label>Full Name</label>
-            <textarea class="form-control"[(ngModel)]="name" required></textarea>
+            <input class="form-control"[(ngModel)]="name" required>
           </div>
           <div class="form-group">
             <label>Email</label>
@@ -26,26 +26,41 @@
           <div class="form-group">
             <label for="usertype" >Usertype:</label>
   
-            <select name="usertype"  id= "usertype" [(ngModel)]="usertype" class="form-control">
-              <option value="auditor">Auditor</option>
-              <option value="department">Department</option>
+            <select style="font-size: 15px;" name="usertype1"  id= "usertype1" [(ngModel)]="usertype1" class="form-control">
+              <option  value="auditor">Auditor</option>
+              <option value="auditee">Auditee</option>
               <option value="admin">Admin</option>
               
             </select>
           </div>		
-          <div class="form-group">
-            <label for="department" >Department:</label>
-  
-            <select name="department" id="department" [(ngModel)]="department" class="form-control">
-              <option value="CEA">CEA</option>
-              <option value="COT">COT</option>
-              <option value="CITC">CITC</option>
-              <option value="CSM">CSM</option>
-              <option value="CSTE">CSTE</option>
+          <div  class="form-group">
+           
+          <div *ngIf="usertype1 =='auditee'">
+            
+            <select style="font-size: 15px;" name="usertype" id="usertype" [(ngModel)]="usertype" class="form-control">
+              <option></option>
+              <option *ngFor="let data of usertypes" value="{{data.usertype_id}}">{{data.usertype_title}}</option>
+             
               
             </select>
+
+            <label for="userlevel" >User Level:</label>
+            <select  name="userlevel" id="userlevel" [(ngModel)]="user_level" class="form-control">
+              <option></option>
+              <option value="head">Head</option>
+              <option value="co">Co-head</option>
+             
+              
+            </select>
+
+
+
+
+          </div>
           </div>			
         </div>
+
+      </ion_content>
         
         <div class="modal-footer">
           <input type="button" class="btn btn-default" (click)="dismissModal()"  value="Cancel">

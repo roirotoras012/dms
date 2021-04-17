@@ -7,18 +7,15 @@
  
         <navbar class="navbar navbar-expand-xl navbar-light bg-light">
           <a (click)="gotohome()" class="navbar-brand"><i class='fa fa-file'></i>USTED<b>  System</b></a>
-          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse" >
             <span class="navbar-toggler-icon"></span>
           </button>
           <!-- Collection of nav links, forms, and other content for toggling -->
-          <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+          <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start" style="margin-left: 50px;">
             <div class="navbar-nav">
               <a (click)="gotohome()" class="nav-item nav-link active"><button>Home</button></a>
               <a (click)="gotoschedules()" class="nav-item nav-link"><button>Schedules</button></a>
-              <div class="nav-item dropdown">
-                <a (click)="_popOver($event)" class="nav-link dropdown-toggle"><button>Departments</button></a>
-               
-              </div>
+             
               <a (click)="gotodocuments()" class="nav-item nav-link"><button>Documents</button></a>
               <a *ngIf="admin" routerLink='/admin/manage-users' class="nav-item nav-link">Manage Users</a>
               <a *ngIf="department" routerLink='/department/audit' class="nav-item nav-link">Audit</a>

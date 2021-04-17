@@ -699,6 +699,19 @@ table.table .avatar {
 
 
 } 
+.covid-switch {
+    height: 50px;
+    width: 500px;
+    border-radius: 10px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    background-color: #c2c2c2;  
+    
+    color: black;
+    font-weight: bold;
+    font-family: Lato, sans-serif;
+}
 .qweqwe {
     font-size: 16px; 
 }
@@ -746,8 +759,54 @@ table.table .avatar {
     border: solid black;
     border-width: 1px;
     border-radius: 7px;
-    width: 200px;
-    height: 55px;
+    width: 240px;
+    height: 90px;
+    color: #555;
+    border-color:#a0a5b1;
+    white-space: nowrap;
+    text-align: left;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    padding: 10px;
+    
+    
+ }
+ .navbar-nav .nav-item::after{
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: rgba(17, 112, 190, 0.932);
+    transition: width .5s;
+
+}
+.navbar-nav .nav-item:hover::after {
+    width: 100%;
+    //transition: width .3s;
+}
+.navbar-nav .nav-item::after{
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: rgba(17, 112, 190, 0.932);
+    transition: width .5s;
+
+}
+.navbar-nav .nav-item:hover::after {
+    width: 100%;
+    //transition: width .3s;
+}
+
+
+
+ .contents1{
+     margin-left: 10px;
+    border: solid black;
+    border-width: 1px;
+    border-radius: 7px;
+    width: 500px;
+    height: 50px;
     color: #555;
     border-color:#a0a5b1;
     white-space: nowrap;

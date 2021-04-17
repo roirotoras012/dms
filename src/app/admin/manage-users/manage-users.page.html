@@ -14,10 +14,7 @@
             <div class="navbar-nav">
               <a routerLink='/admin' class="nav-item nav-link active">Home</a>
               <a routerLink='/admin/schedules' class="nav-item nav-link">Schedules</a>
-              <div class="nav-item dropdown">
-                <a (click)="_popOver($event)" class="nav-link dropdown-toggle"><button>Departments</button></a>
-               
-              </div>
+             
               <a routerLink='/admin/documents' class="nav-item nav-link">Documents</a>
               <a routerLink='/admin/manage-users' class="nav-item nav-link">Manage Users</a>
             </div>
@@ -78,7 +75,7 @@
             <th (click)="sortBy('user_id')">User ID</th>
             <th (click)="sortBy('username')">Username</th>
            
-            <th (click)="sortBy('department_name')">Department</th>
+            <th (click)="sortBy('department_name')">User Level</th>
             <th (click)="sortBy('usertype')">Usertype</th>
             <th >Action</th>
           </tr>
@@ -94,8 +91,8 @@
             <td>{{data.user_id}}</td>
             <td>{{data.username}}</td>
             
-            <td>{{data.department_name}}</td>
-            <td>{{data.usertype}}</td>
+            <td>{{data.user_level}}</td>
+            <td>{{data.usertype_title}}</td>
             
             <td>
               <a (click)="openedit(data)" class="edit" data-toggle="modal"><button class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</button></a>

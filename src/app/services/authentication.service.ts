@@ -30,13 +30,14 @@ export class AuthenticationService {
             
             this.AdminState.next(true);
           }
-          if(data.usertype == "department"){
-            
-            this.DepartmentalState.next(true);
-          }
-          if(data.usertype == "auditor"){
+        
+         else if(data.usertype == "auditor"){
             
             this.AuditorState.next(true);
+          }
+          else{
+            
+            this.DepartmentalState.next(true);
           }
       this.storage.get(TOKEN_KEY).then((res)=>{
         if(res){
@@ -97,13 +98,14 @@ export class AuthenticationService {
             
               this.AdminState.next(true);
             }
-            if(res.usertype == "department"){
-              
-              this.DepartmentalState.next(true);
-            }
-            if(res.usertype == "auditor"){
+           
+            else if(res.usertype == "auditor"){
               
               this.AuditorState.next(true);
+            } 
+            else{
+              
+              this.DepartmentalState.next(true);
             }
     
           }

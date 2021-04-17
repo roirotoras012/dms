@@ -34,7 +34,15 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },  {
+    path: 'add-branch',
+    loadChildren: () => import('./components/add-branch/add-branch.module').then( m => m.AddBranchPageModule)
   },
+  {
+    path: 'view-branch',
+    loadChildren: () => import('./components/view-branch/view-branch.module').then( m => m.ViewBranchPageModule)
+  },
+
 
   
   

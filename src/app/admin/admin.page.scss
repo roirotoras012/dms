@@ -121,6 +121,19 @@
 
 
 
+.navbar-nav .nav-item::after{
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: rgba(17, 112, 190, 0.932);
+    transition: width .5s;
+
+}
+.navbar-nav .nav-item:hover::after {
+    width: 100%;
+    //transition: width .3s;
+}
 
 
 
