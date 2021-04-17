@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { AddModalComponent } from './add-modal/add-modal.component';
 import { HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import { Router } from '@angular/router';
-import { EditModalComponent } from './edit-modal/edit-modal.component';
+import { EditModalPage } from './edit-modal/edit-modal.page';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { Delete1ModalComponent } from './delete1-modal/delete1-modal.component';
 import { PopoverController } from '@ionic/angular';
@@ -89,13 +89,15 @@ export class ManageUsersPage implements OnInit {
       });
       
       await modal.present();
+      await modal.onDidDismiss();
+      this.getUsers()
          
       
     }
 
     async openedit(data){
       const modal1 = await this.modalCtrl.create({
-        component: EditModalComponent,
+        component: EditModalPage,
         componentProps: {
           data : data
           
@@ -107,7 +109,9 @@ export class ManageUsersPage implements OnInit {
       });
       
       await modal1.present();
-       
+      await modal1.onDidDismiss();
+      this.getUsers()
+         
     }
     
     async opendelete(){
@@ -134,7 +138,8 @@ export class ManageUsersPage implements OnInit {
       });
       
       await modal2.present();
-         
+      await modal2.onDidDismiss();
+      this.getUsers()
     }
 
     async opendelete1(x){
@@ -157,7 +162,8 @@ export class ManageUsersPage implements OnInit {
      
       
       await modal3.present();
-         
+      await modal3  .onDidDismiss();
+      this.getUsers()  
     }
 
   ngOnInit() {
