@@ -13,7 +13,7 @@
           <!-- Collection of nav links, forms, and other content for toggling -->
           <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
             <div class="navbar-nav">
-              <a routerLink='/admin' class="nav-item nav-link active">Home</a>
+              <a routerLink='/admin' class="nav-item nav-link active">Audit Plan</a>
               <a routerLink='/admin/schedules' class="nav-item nav-link">Schedules</a>
              
               <a routerLink='/admin/documents' class="nav-item nav-link">Documents</a>
@@ -27,7 +27,7 @@
             </form>
             <div class="navbar-nav ml-auto">
               <a href="#" class="nav-item nav-link notifications"><i class="fa fa-bell-o"></i><span class="badge">1</span></a>
-              <a href="#" class="nav-item nav-link messages"><i class="fa fa-envelope-o"></i><span class="badge">10</span></a>
+              
               <div class="nav-item dropdown">
                 <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action"><button><img src="./assets/images/cdustp.jpg" class="avatar" alt="Avatar">{{currentuser.name}}</button></a>
                 

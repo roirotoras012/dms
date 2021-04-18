@@ -27,7 +27,7 @@
             </form>
             <div class="navbar-nav ml-auto">
               <a href="#" class="nav-item nav-link notifications"><i class="fa fa-bell-o"></i><span class="badge">1</span></a>
-              <a href="#" class="nav-item nav-link messages"><i class="fa fa-envelope-o"></i><span class="badge">10</span></a>
+              
               <div class="nav-item dropdown">
                 <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action"><button><img src="./assets/images/cdustp.jpg" class="avatar" alt="Avatar"> Clint Cardenas</button></a>
                 
@@ -118,16 +118,7 @@
       
       <div *ngIf="folder_layer.length > 0">
 
-        <div class="covid-switch">
-          <ion-segment [(ngModel)]="status">
-              <ion-segment-button class="sss" value="dpm">
-                  <ion-label>DPM</ion-label>
-              </ion-segment-button>
-              <ion-segment-button class="sss" value="evidence">
-                  <ion-label>Evidences</ion-label>
-              </ion-segment-button>
-          </ion-segment>
-      </div>
+        
         <li *ngFor="let data of folders" class="dep" >
         <button lines="none" class="contents" (click)="folderclicked(data)"  >
             
@@ -139,7 +130,16 @@
           
         </button>
         </li>
-
+        <div class="covid-switch">
+          <ion-segment [(ngModel)]="status">
+              <ion-segment-button class="sss" value="dpm">
+                  <ion-label>DPM</ion-label>
+              </ion-segment-button>
+              <ion-segment-button class="sss" value="evidence">
+                  <ion-label>Evidences</ion-label>
+              </ion-segment-button>
+          </ion-segment>
+      </div>
 
         <div [hidden]="status != 'dpm'">
 

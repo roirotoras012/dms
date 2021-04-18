@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../../components/popover/popover.component';
-import Peer from 'peerjs'
+
 import { AccPopoverComponent } from '../../components/acc-popover/acc-popover.component';
 
 @Component({
@@ -23,42 +23,7 @@ export class AuditPage implements OnInit {
   }
 
   ngOnInit() {
-    this.peer = new Peer();
     
-    setTimeout(()=>{
-      this.mypeerid = this.peer.id;
-
-    },1000)
-    // console.log(this.peer.id) 
-    this.peer.on('connection', function(conn){
-      conn.on('data', function(data){
-        console.log(data)
-      });
-      
-    });
-
-
-    setTimeout(() => {
-      let video = this.myVideo.nativeElement
-      var n = <any>navigator;
-      n.getUserMedia = n.getUserMedia || n.webkitGetUserMedia || n.mozGetUserMedia;
-  
-      this.peer.on('call',function(call){
-        n.getUserMedia({video: true, audio: true},function(stream){
-            call.answer(stream);
-            call.on('stream', function(remotestream){
-           
-             video.srcObject = remotestream
-             video.play();
-            }, function(err){
-  
-              console.log('Failed to get stream', err);
-             })
-  
-        })
-  
-      })
-    }, 1000);
   }
 
   connect(){

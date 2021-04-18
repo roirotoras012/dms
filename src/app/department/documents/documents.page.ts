@@ -91,7 +91,7 @@ async doc_popover(x, ev){
   })
 
    await popover.present()
-   popover.onDidDismiss().then(()=>{
+   popover.onWillDismiss().then(()=>{
     if(this.currentuser.user_level == 'head'){
 
       this.getdpmdocs(dir)
@@ -162,6 +162,8 @@ getdocs(x){
 
 
 }
+
+
 selectedFile(event){
   this.file_upload = event.target.files[0];
  
@@ -203,6 +205,56 @@ async add_doc(){
  
  
 }
+
+async add_folder(){
+  let dir = 'uploads/'+this.currentuser.usertype_title
+  
+  
+  for(let i = 0; i < this.folder_layer.length; i++){
+        dir = dir +'/'+this.folder_layer[i]
+    
+       }
+ 
+ 
+   let data= {
+        dir : dir     
+
+   }
+
+
+   
+
+
+
+
+
+   const modal = await this.modalCtrl.create({
+     component: AddFolderComponent,
+     componentProps: {
+      data: data
+       
+
+
+     }
+   
+
+   });
+   
+   await modal.present();
+   await modal.onWillDismiss().then(()=>{
+    if(this.currentuser.user_level == 'head'){
+
+      this.getdpmdocs(dir)
+  
+  }else if(this.currentuser.user_level == 'co'){
+  this.getdocs(dir)
+  }
+  this.getfolders()
+   })
+   
+  
+ 
+ }
 
 
 
@@ -260,75 +312,7 @@ getdpmdocs(x){
   }
  
 
-  async add_folder(){
-   if(this.chosen){
-    let dir = ''
-    let parent_dir = ''
-    let parent = ''
-    if(this.folder_layer.length != 0){
-  for(let i = 0; i < this.folder_layer.length; i++){
-    dir = dir +"/"+this.folder_layer[i]
-    if(i < this.folder_layer.length-1){
-    parent_dir = dir +"/"+this.folder_layer[i]
-  }
-  }
-  parent = this.folder_layer[this.folder_layer.length-1]
-}else
-{
-  parent = this.chosen
-
-}
- let chosen
- 
- if(this.chosen == null){
-   
-  chosen = "uploads/"
-  parent = "uploads"
-
-
- }
- else{
-  chosen = this.chosen
   
- }
- 
-  console.log(this.folder_layer)
-  
-  
-    let data= {
-      user_id: this.currentuser.user_id,
-      currfolder: chosen+dir,
-      department: this.chosen,
-      parent_folder: parent,
-      parent_path: chosen+dir
-
-    }
-    
-
-    
-
-
-
-
-
-    const modal = await this.modalCtrl.create({
-      component: AddFolderComponent,
-      componentProps: {
-       data: data
-        
-
-
-      }
-    
-
-    });
-    
-    await modal.present();
-    await modal.onWillDismiss();
-  
-       
-  }
-  }
   async upload(){
     const modal = await this.modalCtrl.create({
       component: UploadComponent,
@@ -494,7 +478,32 @@ root(){
 }
 
 
+getfolders(){
+   
+  let dir = 'uploads/'+this.currentuser.usertype_title
+    
+    
+    for(let i = 0; i < this.folder_layer.length; i++){
+          dir = dir +'/'+this.folder_layer[i]
+      
+         }
+   
+   
+     let data= {
+          dir : dir     
+ 
+     }
 
+  this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
+    this.folders = res
+    console.log(res)
+
+
+})
+
+
+
+ }
 
 
 folclick(x){
@@ -532,7 +541,7 @@ console.log(this.folder_layer)
 direct(x){
   this.status = 'dpm'
   this.new = false;
-  let dir = 'uploads/'+this.currentuser.usertype_title
+ 
 console.log(x)
   for(let i =0; i <this.folder_layer.length; i++){
       if(x == this.folder_layer[i] && i !=this.folder_layer.length-1){
@@ -542,7 +551,7 @@ console.log(x)
       }
    
   
-  
+      let dir = 'uploads/'+this.currentuser.usertype_title
       for(let i = 0; i < this.folder_layer.length; i++){
             dir = dir +'/'+this.folder_layer[i]
         
@@ -558,7 +567,11 @@ console.log(x)
     
            })
 
-  }
+  } let dir = 'uploads/'+this.currentuser.usertype_title
+  for(let i = 0; i < this.folder_layer.length; i++){
+        dir = dir +'/'+this.folder_layer[i]
+    
+       }
 
   if(this.currentuser.user_level == 'head'){
 
@@ -567,7 +580,7 @@ console.log(x)
 }else if(this.currentuser.user_level == 'co'){
 this.getdocs(dir)
 }
-
+this.getfolders()
 
 }
 

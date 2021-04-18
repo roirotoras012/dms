@@ -21,8 +21,9 @@ export class ProfilePage implements OnInit {
 
   constructor(private userservice: UserServiceService,private popover: PopoverController, private http: HttpClient, private storage: Storage,private router: Router) { 
 
-    this.getuserinfo();
+    
   }
+  
 
   ngOnInit() {
   }
@@ -42,6 +43,7 @@ export class ProfilePage implements OnInit {
     return await popover.present()
   }
   ionViewWillEnter(){
+    this.getuserinfo();
     this.storage.get(TOKEN_KEY).then((res)=>{
 
 
@@ -122,7 +124,7 @@ export class ProfilePage implements OnInit {
 
       if(res.usertype == "admin"){
        
-        this.router.navigate(['/admin/schedule'])
+        this.router.navigate(['/admin/schedules'])
 
 
       }
@@ -133,7 +135,7 @@ export class ProfilePage implements OnInit {
 
       }else{
      
-        this.router.navigate(['/department/documents'])
+        this.router.navigate(['/department/schedule'])
         
       }
       

@@ -40,7 +40,7 @@ get(server){
 
 }
 post(server,data){
-  return this.http.get(server,data)
+  return this.http.post(server,data)
 
 
 }

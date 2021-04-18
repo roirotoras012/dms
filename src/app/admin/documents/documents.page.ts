@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, ModalController, AlertController } from '@ionic/angular';
 import { PopoverComponent } from '../../components/popover/popover.component';
+import { AddFolderComponent } from '../../components/add-folder/add-folder.component';
 import { DocpopoverComponent } from '../../components/docpopover/docpopover.component';
 import { AccPopoverComponent } from '../../components/acc-popover/acc-popover.component';
 import { HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
@@ -8,7 +9,10 @@ import { ToastController, NavParams } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UserServiceService } from '../../services/user-service.service';
 import { AppComponent } from '../../app.component';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { CalendarComponent } from 'ionic2-calendar/';
+import { ViewChild, Inject, LOCALE_ID } from '@angular/core'
+import { formatDate } from '@angular/common';
+
 declare var myFunction1;
 
 @Component({
@@ -22,21 +26,294 @@ export class DocumentsPage implements OnInit {
  fileinput: any;
  datauser: any = [];
  currentuser: any = [];
-  constructor(private component: AppComponent,private popover: PopoverController, private http: HttpClient,public toastController: ToastController, private router: Router, private userservice: UserServiceService) {
-    this.getuserinfo();
-    
+ folder_layer: any = []
+ new: boolean = false
+ folders: any = []
+ touchtime = 0;
+ x1: any ;
+ docs: any = []
+
+ event: any = [];
+ eventSource = [];
+
+ event1 = {
+   schedule_id : '',
+   title: '',
+   desc: '',
+   patient: '',
+   client: '',
+   startTime: null,
+   endTime: null,
+   allDay: true
+ };
+ viewTitle: string;
+ calendar = {
+   mode: 'month',
+   currentDate: new Date(),
+ };
+
+ @ViewChild(CalendarComponent) myCal: CalendarComponent;
+  constructor(private alertCtrl: AlertController,private modalCtrl: ModalController,private component: AppComponent,private popover: PopoverController, private http: HttpClient,public toastController: ToastController, private router: Router, private userservice: UserServiceService) {
+  
    }
+
+
+   next() {
+    this.myCal.slideNext();
+  }
+ 
+  back() {
+    this.myCal.slidePrev();
+  }
+  onViewTitleChanged(title) {
+    this.viewTitle = title;
+  }
+   async onEventSelected(event) {
+    console.log(event)
+ 
+    
+   
+  }
+  
+
+  
+  removeEvents() {
+    this.eventSource = [];
+  }
+
+
+  onTimeSelected(ev) {    
+    
+  }
+
+  async deleteconfirm(event){
+    let ev = event
+    const alert = await this.alertCtrl.create({
+      header: 'Are you sure you want to delete this shedule?',
+      message: ev.title+'<br>'+ev.description,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            // this.deletesched(ev);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+     
+
+
+  }
+
+
+
 
   ngOnInit() {
    
   }
   ionViewWillEnter(){
-    this.getdoc();
-    
+    this.getuserinfo()
+  
    
-    
-
+  
   }
+
+  newclicked(){
+
+   
+    if(this.new == false){
+      this.new = true
+  
+  
+    }
+    else{
+  
+      this.new = false
+    }
+  
+    
+  
+  
+  }
+  folderclicked(x){
+    if (this.touchtime == 0) {
+      this.x1 = x
+     
+      this.touchtime = new Date().getTime();
+      
+    } else {
+      // compare first click to this click and see if they occurred within double click threshold
+      if (new Date().getTime() - this.touchtime < 300) {
+        // double click occurred
+        if(this.x1 == x){
+          this.folclick(x)
+          
+        
+        }
+        this.touchtime = 0;
+      } else {
+        // not a double click so set as a new first click
+        
+        this.touchtime = new Date().getTime();
+       
+      }
+    }
+  
+  
+  
+  
+  
+  }
+  folclick(x){
+  
+    this.folder_layer.push(x)
+    let dir = 'uploads/'+this.currentuser.usertype_title
+    
+    
+    for(let i = 0; i < this.folder_layer.length; i++){
+          dir = dir +'/'+this.folder_layer[i]
+      
+         }
+          console.log(dir)
+  
+         this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
+                this.folders = res
+                console.log(res)
+  
+  
+         })
+        this.getfolders();
+        this.getdoc()
+
+  console.log(this.folder_layer)
+  
+  
+  }
+  
+
+  async add_folder(){
+    let dir = 'uploads/'+this.currentuser.usertype_title
+    
+    
+    for(let i = 0; i < this.folder_layer.length; i++){
+          dir = dir +'/'+this.folder_layer[i]
+      
+         }
+   
+   
+     let data= {
+          dir : dir     
+ 
+     }
+
+ 
+     
+ 
+ 
+ 
+ 
+ 
+     const modal = await this.modalCtrl.create({
+       component: AddFolderComponent,
+       componentProps: {
+        data: data
+         
+ 
+ 
+       }
+     
+ 
+     });
+     
+     await modal.present();
+     await modal.onWillDismiss();
+     this.getfolders()
+        
+   
+   }
+
+ getfolders(){
+   
+  let dir = 'uploads/'+this.currentuser.usertype_title
+    
+    
+    for(let i = 0; i < this.folder_layer.length; i++){
+          dir = dir +'/'+this.folder_layer[i]
+      
+         }
+   
+   
+     let data= {
+          dir : dir     
+ 
+     }
+
+  this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
+    this.folders = res
+    console.log(res)
+
+
+})
+
+
+
+ }
+
+   async add_doc(){
+    let dir = 'uploads/'+this.currentuser.usertype_title
+    
+    
+    for(let i = 0; i < this.folder_layer.length; i++){
+          dir = dir +'/'+this.folder_layer[i]
+      
+         }
+    console.log(this.file_upload);
+    const toast = await this.toastController.create({
+      message: 'Successfully Uploaded the file',
+      duration: 2000
+    });
+    const toast2 = await this.toastController.create({
+      message: 'filename already exist',
+      duration: 2000
+    });
+    
+    
+    const formData: FormData = new FormData();
+    formData.append('document', this.file_upload, this.file_upload.name)
+    formData.append('directory', dir)
+    
+    formData.append('user', this.currentuser.user_id)
+    this.http.post("https://localhost/dms/upload_controller/do_upload",formData).subscribe((response: any) => {
+     if(response == 'success'){
+      toast.present();
+
+     }
+     else if(response == 'filename already exist'){
+
+      toast2.present();
+     }
+     
+      
+      this.fileinput = null
+      this.file_upload =null
+      this.getdoc();
+    
+    }
+    )
+   
+   
+  }
+
+  
   selectedFile(event){
     this.file_upload = event.target.files[0];
    
@@ -72,13 +349,65 @@ export class DocumentsPage implements OnInit {
     
    
   }
-  async doc_popover(x, ev){
 
+  root(){ 
+    this.folder_layer = []  
+    
+    this.getfolders()
+    this.getdoc()
+
+}
+
+direct(x){
+  
+  
+  
+console.log(x)
+  for(let i =0; i <this.folder_layer.length; i++){
+      if(x == this.folder_layer[i] && i !=this.folder_layer.length-1){
+        this.folder_layer.splice(-1,1)
+
+
+      }
+   
+      let dir = 'uploads/'+this.currentuser.usertype_title
+  
+      for(let i = 0; i < this.folder_layer.length; i++){
+            dir = dir +'/'+this.folder_layer[i]
+        
+           }
+
+        
+            console.log(dir)
+    
+           this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
+                  this.folders = res
+                  console.log(res)
+                  
+    
+           })
+
+  }
+        this.getdoc()
+        this.getfolders()
+
+}
+  async doc_popover(x, ev){
+    let dir = 'uploads/'+this.currentuser.usertype_title
+  
+  
+    for(let i = 0; i < this.folder_layer.length; i++){
+          dir = dir +'/'+this.folder_layer[i]
+      
+         }
     
     const popover = await this.popover.create({
       component: DocpopoverComponent,
       componentProps: {
-        document : x
+        document : x,
+        user: this.currentuser.user_id,
+        directory: dir,
+       
         
 
 
@@ -86,7 +415,12 @@ export class DocumentsPage implements OnInit {
       event: ev
     })
   
-    return await popover.present()
+    await popover.present()
+    popover.onWillDismiss().then(()=>{
+        this.getdoc()
+
+
+    })
   }
 
 
@@ -108,12 +442,19 @@ export class DocumentsPage implements OnInit {
 
 
   async getdoc() {
+    let dir = 'uploads/'+this.currentuser.usertype_title
+    
+    
+    for(let i = 0; i < this.folder_layer.length; i++){
+          dir = dir +'/'+this.folder_layer[i]
+      
+         }
  
-    this.http.get("https://localhost/dms/admin/get_doc") 
+    this.http.get("https://localhost/dms/admin/get_doc?user_id="+this.currentuser.user_id+"&directory="+dir) 
       .subscribe(res => {
         console.log(res);
-        this.datauser = res;
-    console.log(this.datauser);
+        this.docs = res;
+    console.log(this.docs);
  
     
         }
@@ -130,6 +471,7 @@ export class DocumentsPage implements OnInit {
 
 
   }
+  
 
 
   getuserinfo(){
@@ -140,9 +482,10 @@ export class DocumentsPage implements OnInit {
         
       this.currentuser = data2[0]
    
-       
+      this.getfolders()
       
-  
+      this.getdoc();
+    
     
         }
       

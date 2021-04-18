@@ -24,14 +24,14 @@ export class AddFolderComponent implements OnInit {
 
 
  async add_folder(){
-  this.fol = this.navParams.get('data');
+  // this.fol = this.navParams.get('data');
   const formData: FormData = new FormData();
   formData.append('foldername', this.foldername)
-  formData.append('user_id', this.fol.user_id)
-  formData.append('currfolder', this.fol.currfolder)
-  formData.append('department', this.fol.department)
-  formData.append('parent_folder', this.fol.parent_folder)
-  formData.append('parent_path', this.fol.parent_path)
+  formData.append('dir', this.fol.dir)
+  // formData.append('currfolder', this.fol.currfolder)
+  // formData.append('department', this.fol.department)
+  // formData.append('parent_folder', this.fol.parent_folder)
+  // formData.append('parent_path', this.fol.parent_path)
 
   
  
