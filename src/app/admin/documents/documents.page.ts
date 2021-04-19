@@ -37,14 +37,14 @@ export class DocumentsPage implements OnInit {
  eventSource = [];
 
  event1 = {
-   schedule_id : '',
+   audit_id : '',
    title: '',
-   desc: '',
-   patient: '',
-   client: '',
+   
+   auditor: '',
+   auditee: '',
    startTime: null,
    endTime: null,
-   allDay: true
+   
  };
  viewTitle: string;
  calendar = {
@@ -53,7 +53,7 @@ export class DocumentsPage implements OnInit {
  };
 
  @ViewChild(CalendarComponent) myCal: CalendarComponent;
-  constructor(private alertCtrl: AlertController,private modalCtrl: ModalController,private component: AppComponent,private popover: PopoverController, private http: HttpClient,public toastController: ToastController, private router: Router, private userservice: UserServiceService) {
+  constructor(@Inject(LOCALE_ID) private locale: string,private alertCtrl: AlertController,private modalCtrl: ModalController,private component: AppComponent,private popover: PopoverController, private http: HttpClient,public toastController: ToastController, private router: Router, private userservice: UserServiceService) {
   
    }
 
@@ -70,7 +70,23 @@ export class DocumentsPage implements OnInit {
   }
    async onEventSelected(event) {
     console.log(event)
- 
+    let start = formatDate(event.startTime, 'medium', this.locale);
+   
+    let end = formatDate(event.endTime, 'medium', this.locale);
+   
+    const alert = await this.alertCtrl.create({
+      
+      header: event.title,
+      subHeader: event.desc,
+      message: start.slice(0,12)+'<br>'+start.slice(14,24)+' - '+end.slice(14,24)+
+      '<br>Auditor: '+event.auditor+'<br>Auditee: '+event.auditee
+      ,
+    
+      // message: 'From: ' + start + '<br><br>To: ' + end,
+      buttons: ['OK'],
+    });
+    alert.present();
+    
     
    
   }
@@ -122,7 +138,7 @@ export class DocumentsPage implements OnInit {
   }
   ionViewWillEnter(){
     this.getuserinfo()
-  
+    this.getschedule()
    
   
   }
@@ -176,7 +192,7 @@ export class DocumentsPage implements OnInit {
   folclick(x){
   
     this.folder_layer.push(x)
-    let dir = 'uploads/'+this.currentuser.usertype_title
+    let dir = 'uploads/'+this.currentuser.usertype_title+'/'+this.currentuser.username  
     
     
     for(let i = 0; i < this.folder_layer.length; i++){
@@ -201,7 +217,7 @@ export class DocumentsPage implements OnInit {
   
 
   async add_folder(){
-    let dir = 'uploads/'+this.currentuser.usertype_title
+    let dir = 'uploads/'+this.currentuser.usertype_title+'/'+this.currentuser.username
     
     
     for(let i = 0; i < this.folder_layer.length; i++){
@@ -243,7 +259,7 @@ export class DocumentsPage implements OnInit {
 
  getfolders(){
    
-  let dir = 'uploads/'+this.currentuser.usertype_title
+  let dir = 'uploads/'+this.currentuser.usertype_title+'/'+this.currentuser.username
     
     
     for(let i = 0; i < this.folder_layer.length; i++){
@@ -269,7 +285,7 @@ export class DocumentsPage implements OnInit {
  }
 
    async add_doc(){
-    let dir = 'uploads/'+this.currentuser.usertype_title
+    let dir = 'uploads/'+this.currentuser.usertype_title+'/'+this.currentuser.username
     
     
     for(let i = 0; i < this.folder_layer.length; i++){
@@ -370,7 +386,7 @@ console.log(x)
 
       }
    
-      let dir = 'uploads/'+this.currentuser.usertype_title
+      let dir = 'uploads/'+this.currentuser.usertype_title+'/'+this.currentuser.username
   
       for(let i = 0; i < this.folder_layer.length; i++){
             dir = dir +'/'+this.folder_layer[i]
@@ -393,7 +409,7 @@ console.log(x)
 
 }
   async doc_popover(x, ev){
-    let dir = 'uploads/'+this.currentuser.usertype_title
+    let dir = 'uploads/'+this.currentuser.usertype_title+'/'+this.currentuser.username
   
   
     for(let i = 0; i < this.folder_layer.length; i++){
@@ -442,7 +458,7 @@ console.log(x)
 
 
   async getdoc() {
-    let dir = 'uploads/'+this.currentuser.usertype_title
+    let dir = 'uploads/'+this.currentuser.usertype_title+'/'+this.currentuser.username
     
     
     for(let i = 0; i < this.folder_layer.length; i++){
@@ -501,5 +517,65 @@ console.log(x)
     
 
   }
+
+
+
+
+
+
+  getschedule(){
+    this.eventSource = [];
+    
+    this.userservice.get("https://localhost/dms/admin/getschedule").subscribe((sched)=>{
+     
+    console.log(sched)
+     
+    for(let data of Object.values(sched)){
+      this.event1.audit_id = data.audit_id
+      this.event1.title = data.dpm_title
+      
+      this.event1.auditee = data.usertype_title
+      this.event1.auditor = data.name
+      this.event1.startTime = new Date(data.startTime)
+      this.event1.endTime = new Date(data.endTime)
+    
+      
+      this.eventSource.push(this.event1)
+      
+      this.event1 = {
+        audit_id:'',
+        title: '',
+        
+        auditee: '',
+        auditor: '',
+        startTime: null,
+        endTime: null,
+      
+      };
+      this.myCal.loadEvents();
+  
+      
+    }
+
+
+
+
+    
+      //--- compare date interval in days ---//
+    // let asd: any = new Date
+    // let zxc= Math.floor((Date.UTC(this.eventSource[10].startTime.getFullYear(), this.eventSource[10].startTime.getMonth(), this.eventSource[10].startTime.getDate())-Date.UTC(asd.getFullYear(), asd.getMonth(), asd.getDate())) /(1000 * 60 * 60 * 24));
+    // console.log(zxc)
+     
+    
+      
+  
+    })
+  
+  
+  
+  }
+
+  
+ 
 
 }

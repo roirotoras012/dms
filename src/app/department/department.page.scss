@@ -109,6 +109,55 @@
     transition: width .5s;
 
 }
+
+:host ::ng-deep{
+
+    .swiper-slide{
+          font-size: 25px;
+
+    }
+    .event-detail-container{
+
+       overflow: auto !important;
+
+    }
+
+
+
+
+
+}
+.newbut1{
+    font-size: 15px;
+    border: solid;
+    border-width: 1px;
+   
+    border-color: #555;
+    padding: 10px;
+    width: 70px;
+    text-align: justify;
+        
+
+
+
+ }
+
+.contents{
+    border: solid black;
+    border-width: 1px;
+    border-radius: 7px;
+    width: 240px;
+    height: 90px;
+    color: #555;
+    border-color:#a0a5b1;
+    white-space: nowrap;
+    text-align: left;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    padding: 10px;
+    
+    
+ }
 .navbar-nav .nav-item:hover::after {
     width: 100%;
     //transition: width .3s;

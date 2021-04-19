@@ -46,7 +46,7 @@ export class DeleteModalComponent implements OnInit {
 
 
 
-      this.http.post("https://localhost/dms/admin/removeuser", JSON.stringify(this.postData )) 
+      this.http.post("https://localhost/dms/admin/removeuser", JSON.stringify(this.postData)) 
         .subscribe(res => {
          
           console.log(res);
