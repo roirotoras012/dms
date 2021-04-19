@@ -144,7 +144,7 @@ export class AdminPage implements OnInit {
       formData.append('link', this.link)
         this.userservice.post("https://localhost/dms/admin/addaudit", formData).subscribe((res)=>{
   
-  
+          this.getaudit()
               console.log(res)
               this.startTime =null
               this.endTime=null
@@ -154,13 +154,14 @@ export class AdminPage implements OnInit {
               this.link=''
         })
 
-
+       
 
 
      }
-     this.getaudit()
+ 
     
-  
+    
+    
 }
 
 getaudit(){
@@ -184,7 +185,7 @@ getaudit(){
 
 
 }
-get sortData() {
+get sortData(){
   return this.audit.sort((a, b) => {
     return <any>new Date(a.startTime) - <any>new Date(b.startTime);
   });

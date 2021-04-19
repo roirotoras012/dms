@@ -129,7 +129,7 @@
                   </calendar></div>
                   <div><h5>Folders</h5></div>
 
-                 
+                  <div *ngIf="folders.length == 0">EMPTY</div>
                   <li style="color: #555;" *ngFor="let data of folders" class="dep">
                     <!-- <button><i class="far fa-folder fa-5x"></i>{{data.department_name}}</button> -->
           
@@ -175,6 +175,7 @@
                     
                   </button>
                   </li>
+                  
 
 
                   
@@ -224,10 +225,11 @@
                 </div>
                 <div style="margin-top: 50px;">
                   <div style="margin-bottom: 50px;"><h5>Documents</h5></div>
+                  <div *ngIf="docs.length == 0">EMPTY</div>
                 <li *ngFor="let data of docs" class="dep"  style="display: block;">
                   <button lines="none" class="contents1" (click)="doc_popover(data.doc_id,$event )"  >
                       
-                   
+                        <div *ngIf="docs.length == 0">EMPTY</div>
                    
                     <i style="vertical-align: middle;"  class="fas fa-file-alt fa-2x"></i>
                       <strong style="font-size: 15px; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data.filename}}</strong>
@@ -235,6 +237,7 @@
                     
                   </button>
                   </li>
+                
                 </div>
               </div>  
             </div>  
