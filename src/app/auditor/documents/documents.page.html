@@ -14,7 +14,7 @@
           <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
             <div class="navbar-nav">
               <a routerLink='/auditor' class="nav-item nav-link active">Home</a>
-              <a routerLink='/auditor/schedule' class="nav-item nav-link">Schedules</a>
+           
              
               <a routerLink='/auditor/documents' class="nav-item nav-link">Documents</a>
               <a routerLink='/auditor/audit' class="nav-item nav-link">Audit</a>
@@ -45,121 +45,292 @@
  
   
 
-  
-  <div class="w3-container">
-  
-  
-  
-  
-  
- 
-  <div style="margin-bottom: 100px;" class="w3-center">
-    <div class="zxczxczxc"> 
-    <div class="qwer">
-      <h6>Home > Documents</h6>
-     </div>
+  <div class="w3-container" style="padding-left: 170px; padding-right: 150px;">
+              
+                
+                  
+            
+            
+            
+            
+           
+            
+           
 
-     <div class="hr">
-       <hr>
-      </div>
- 
-
-     <div class="buttons">
-     <button class="button button2">New Document +</button>
-     <input [(ngModel)]="fileinput" (change)="selectedFile($event)" type="file" name="file" size="4" style="background-color:#fff; margin-left: 50px; margin-top: 10px; margin-bottom: 10px;" required="required" />
-     <button (click)="onClick()" class="button button3">Upload Document <i class="fas fa-file-upload"></i></button>
-   
-   </div> 
-  </div>
-
-  <div class="doc">
-    <h1>Document Directory</h1>
-    <div>
-    <div class="qweqwe" style="float:left;">
-      <label style="display: block;" for="fname">Keywords</label>
+    <div class="w3-center">
       
-      <input class="keyword" style="border: 1px solid #ccc;box-sizing: border-box; font-size: 16px;font-family:Arial, FontAwesome" type="text" id="fname" name="firstname"  placeholder="   &#xF002;" >
+  
+      <div style="float: right;">
+      <button  (click)="newclicked()" class="newbut"><i class="fas fa-plus"></i> New</button>
+      <div *ngIf="new">
+      <button  (click)="add_folder()" style="display: block; margin-top: 10px;" class="newbut1"><i class="fas fa-plus" ></i> Folder</button>
+      <input [(ngModel)]="fileinput" (change)="selectedFile($event)" type="file" name="file" size="4" style="background-color:#fff; margin-left: 50px; margin-top: 10px; margin-bottom: 10px;" required="required" />
+      <button    (click)="add_doc()" style="display: block; margin-top: 10px;" class="newbut1 btn-success"><i class="fas fa-plus"></i> File Upload</button>
     </div>
-   
-    <div class="qweqwe" style="float:left">
-      <label style="display: block;" for="fname">Type</label>
-      <select class="filtercss" id="country" name="country">
-        <option value="australia">Australia</option>
-        <option value="canada">Canada</option>
-        <option value="usa">USA</option>
-      </select>
-    </div>
-    <div class="qweqwe" style="float:left">
-      <label style="display: block;" for="fname">Department</label>
-      <select class="filtercss" id="country" name="country">
-        <option value="australia">Australia</option>
-        <option value="canada">Canada</option>
-        <option value="usa">USA</option>
-      </select>
-    </div>
-    <div class="qweqwe" style="float:left">
-      <label style="display: block;" for="fname">Date Range</label>
-      <select class="filtercss" id="country" name="country">
-        <option value="australia">Australia</option>
-        <option value="canada">Canada</option>
-        <option value="usa">USA</option>
-      </select>
-      
-    </div>
-
-    <div class="qweqwe" style="float:left">
-      <button class="filter">Filter <i class="fas fa-search"></i></button>
-     </div>
-    </div>
-    
-  </div>  
   
   </div>
- 
-  
-  <hr >
- 
-  
-
-  
-
+      <div class="w3-container1" style="overflow-x:auto; text-align: left;">
        
-  <div class="w3-center">
-    <div class="w3-container1" style="overflow-x:auto;">
+
+
+
+
+        
+        <div  class="direction" *ngIf="folder_layer.length > 0">
+          <div>
+          <!-- <button (click)="back()">back</button> -->
+          </div>
+          
+          <div  style="display: inline;" ><button class="hove" (click)="root()">{{currentuser.usertype_title}}</button></div>
+       
+        
+       
+          <div  *ngFor="let data of folder_layer" style="display: inline;">
+            <i class="fas fa-chevron-right"  style="padding-left: 10px;padding-right: 10px;color:#a0a5b1;"></i><button class="hove" (click)="direct(data)">{{data}}</button>
+  
+          </div>
+          <!-- <h1><button (click)="back()">Documents</button> > {{chosen}}</h1> -->
+          <!-- <div>
+          <button (click)="add_folder()" class="button button2">Add Folder</button>
+          <button (click)="upload()" class="button button3">Upload Document <i class="fas fa-file-upload"></i></button>
+        </div> -->
+        </div>
+
+
+        
+        <ul class="">
+     
+          
+          <div class="direction" *ngIf="folder_layer.length == 0" style="font-size: 20px;">{{currentuser.usertype_title}}</div>
+
+
+          <div style="width: 50vh; margin: 20px;  margin-left: auto; float: right; border: solid black; border-width: 1px; padding: 10px; border-radius: 5px; background-color: #fff;">
       
-    
-      <table class="w3-table w3-bordered">
-        <tr>
-          <th class="tname">Name</th>
-          <th>Type</th>
-          <th>Department</th>
-          <th>Last Modified</th>
-          <th><i class="fas fa-comment-alt"></i></th>
-          <th><i class="fas fa-eye"></i></th>
-        </tr>
-        <tr *ngFor="let data of datauser">
-          <td>{{data.filename}}</td>
-          <td>{{data.file_type}}</td>
-          <td></td>
-          <td>{{data.date_uploaded}}</td>
-          <td></td>
-          <td></td>
-          <td class="dot1"><button (click)="doc_popover(data.doc_id,$event )"><i class="fas fa-ellipsis-v"></i></button></td>
-        </tr>
+            <button fill="clear" (click)="back()">
+              <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+            </button>
+            <button style="float: right;" fill="clear" (click)="next()">
+              <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+            </button>
+            <h2 style="text-align: center;">{{ viewTitle }}</h2>
+           
+           
+            
+            <calendar
+            [eventSource]="eventSource"
+            [calendarMode]="calendar.mode"
+            [currentDate]="calendar.currentDate"
+            (onEventSelected)="onEventSelected($event)"
+            (onTitleChanged)="onViewTitleChanged($event)"
+            (onTimeSelected)="onTimeSelected($event)"
+            
+          >
+          </calendar></div>
+          <div><h5>Folders</h5></div>
+
+          <div *ngIf="folders.length == 0">EMPTY</div>
+          <li style="color: #555;" *ngFor="let data of folders" class="dep">
+            <!-- <button><i class="far fa-folder fa-5x"></i>{{data.department_name}}</button> -->
+  
        
-      </table>
+            <button lines="none" class="contents" *ngIf="folder_layer.length == 0 && data != 'Working DPM'" (click)="folderclicked(data)"  style="margin-top: 35px;"  >
+            
+              <!-- (contextmenu)="onRightClick($event, data.department_name)" -->
+              
+              <i style="vertical-align: middle;" class="fas fa-folder fa-2x"></i>
+                <strong style="font-size: 15px;  vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data}}</strong>
+                
+            
+            </button>
+         
+          
+          
+            
+          </li>
+        
+          
+        </ul>
+        
+        <div *ngIf="folder_layer.length > 0">
+  
+          <!-- <div class="covid-switch">
+            <ion-segment [(ngModel)]="status">
+                <ion-segment-button class="sss" value="dpm">
+                    <ion-label>DPM</ion-label>
+                </ion-segment-button>
+                <ion-segment-button class="sss" value="evidence">
+                    <ion-label>Evidences</ion-label>
+                </ion-segment-button>
+            </ion-segment>
+        </div> -->
+          <li *ngFor="let data of folders" class="dep" >
+          <button lines="none" class="contents" (click)="folderclicked(data)"  >
+              
+           
+           
+            <i style="vertical-align: middle;" class="fas fa-folder fa-2x"></i>
+              <strong style="font-size: 15px; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data}}</strong>
+           
+            
+          </button>
+          </li>
+          
+
+
+          
+
+  
+<!--           
+          <div [hidden]="status != 'dpm'">
+  
+            <li *ngFor="let data of main" class="dep"  style="display: block;">
+              <button lines="none" class="contents1" (click)="doc_popover(data.doc_id,$event )"  >
+                  
+               
+               
+                <i style="vertical-align: middle;"  class="fas fa-file-alt fa-2x"></i>
+                  <strong style="font-size: 15px; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data.filename}}</strong>
+               
+                
+              </button>
+              </li>
+  
+  
+          
+  
+  
+  
+  
+  
+  
+  
+  
+          </div>
+  
+          <div [hidden]="status != 'evidence'">
+  
+            <li *ngFor="let data of evidences" class="dep"  style="display: block;" >
+              <button lines="none" class="contents1" (click)="doc_popover(data.doc_id,$event )"  >
+                  
+               
+               
+                <i style="vertical-align: middle;"  class="fas fa-file-alt fa-2x"></i>
+                  <strong style="font-size: 15px; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data.filename}}</strong>
+               
+                
+              </button>
+              </li>
+          </div> -->
+        </div>
+        <div style="margin-top: 50px;">
+          <div style="margin-bottom: 50px;"><h5>Documents</h5></div>
+          <div *ngIf="docs.length == 0">EMPTY</div>
+        <li *ngFor="let data of docs" class="dep"  style="display: block;">
+          <button lines="none" class="contents1" (click)="doc_popover(data.doc_id,$event )"  >
+              
+                <div *ngIf="docs.length == 0">EMPTY</div>
+           
+            <i style="vertical-align: middle;"  class="fas fa-file-alt fa-2x"></i>
+              <strong style="font-size: 15px; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data.filename}}</strong>
+           
+            
+          </button>
+          </li>
+        
+        </div>
+      </div>  
     </div>  
-  </div>   
   
-  
-
- 
     
   
-
-  </div>
- 
+    <!-- <div class="doc">
+      <h1>Document Directory</h1>
+      <div>
+      <div class="qweqwe" style="float:left;">
+        <label style="display: block;" for="fname">Keywords</label>
+        
+        <input class="keyword" style="border: 1px solid #ccc;box-sizing: border-box; font-size: 16px;font-family:Arial, FontAwesome" type="text" id="fname" name="firstname"  placeholder="   &#xF002;" >
+      </div>
+     
+      <div class="qweqwe" style="float:left">
+        <label style="display: block;" for="fname">Type</label>
+        <select class="filtercss" id="country" name="country">
+          <option value="australia">Australia</option>
+          <option value="canada">Canada</option>
+          <option value="usa">USA</option>
+        </select>
+      </div>
+      <div class="qweqwe" style="float:left">
+        <label style="display: block;" for="fname">Department</label>
+        <select class="filtercss" id="country" name="country">
+          <option value="australia">Australia</option>
+          <option value="canada">Canada</option>
+          <option value="usa">USA</option>
+        </select>
+      </div>
+      <div class="qweqwe" style="float:left">
+        <label style="display: block;" for="fname">Date Range</label>
+        <select class="filtercss" id="country" name="country">
+          <option value="australia">Australia</option>
+          <option value="canada">Canada</option>
+          <option value="usa">USA</option>
+        </select>
+        
+      </div>
   
+      <div class="qweqwe" style="float:left">
+        <button class="filter">Filter <i class="fas fa-search"></i></button>
+       </div>
+      </div>
+      
+    </div>   -->
+  
+    </div>
+   
+    
+    <hr >
+   
+    
+  
+    
+  
+         
+    <!-- <div class="w3-center">
+      <div class="w3-container1" style="overflow-x:auto;">
+        
+      
+        <table class="w3-table w3-bordered">
+          <tr>
+            <th class="tname">Name</th>
+            <th>Type</th>
+            <th>Department</th>
+            <th>Last Modified</th>
+            <th><i class="fas fa-comment-alt"></i></th>
+            <th><i class="fas fa-eye"></i></th>
+          </tr>
+          <tr *ngFor="let data of datauser">
+            <td>{{data.filename}}</td>
+            <td>{{data.file_type}}</td>
+            <td></td>
+            <td>{{data.date_uploaded}}</td>
+            <td></td>
+            <td></td>
+            <td class="dot1"><button (click)="doc_popover(data.doc_id,$event )"><i class="fas fa-ellipsis-v"></i></button></td>
+          </tr>
+         
+        </table>
+      </div>  
+    
+    
+    
+  
+   
+      
+    
+  
+    </div> -->
+   
+    
   
  
   

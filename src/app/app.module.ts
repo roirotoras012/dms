@@ -8,7 +8,7 @@ import { HttpClient, HttpClientModule, HttpHeaders, HttpRequest } from '@angular
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DocumentsPipe } from './documents.pipe';
-import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
+;
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
@@ -16,8 +16,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
   declarations: [AppComponent, DocumentsPipe],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy},{provide : LocationStrategy , useClass: HashLocationStrategy},
-  PreviewAnyFile],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy},{provide : LocationStrategy , useClass: HashLocationStrategy}],
   
   bootstrap: [AppComponent],
 })

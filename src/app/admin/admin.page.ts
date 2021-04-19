@@ -32,7 +32,12 @@ export class AdminPage implements OnInit {
  auditee: any = []
  link: any;
  auditeechoice: any;
+ postData : any = []
+ checked_users: any = []
   audit: any = [] 
+  isIndeterminate:boolean;
+  masterCheck:boolean;
+  checkedUsers: any = [];
   minDate: string= new Date().toISOString()
   maxDate: string= new Date().toISOString()
   constructor(private platform: Platform,@Inject(LOCALE_ID) private locale: string,private alert: AlertController,private userservice: UserServiceService,private popover: PopoverController, private http: HttpClient,private storage: Storage) { 
@@ -115,10 +120,19 @@ export class AdminPage implements OnInit {
   
   }
   showdate(){
+
     
+ 
+
+
+
+  
   }
 
-  submit(){
+
+
+
+  submit(audit_plan_id){
     let start = formatDate(this.startTime, 'medium', this.locale);
     let end = formatDate(this.endTime, 'medium', this.locale);
 
@@ -136,6 +150,7 @@ export class AdminPage implements OnInit {
      for(let i=0; i < this.selected_dpm.length; i++){
 
       const formData: FormData = new FormData();
+      formData.append('audit_plan_id', audit_plan_id)
       formData.append('startTime', this.startTime.slice(0,16))
       formData.append('endTime', this.endTime.slice(0,16))
       formData.append('dpm', this.selected_dpm[i].dpm_id)
@@ -163,6 +178,140 @@ export class AdminPage implements OnInit {
     
     
 }
+// async presentToast() {
+//   const toast = await this.toastController.create({
+//     message: 'User has been successfully deleted',
+//     duration: 2000
+//   });
+//   toast.present();
+// }
+
+// async deleteUser() {
+  
+//     this.checked_users = this.navParams.get('checked_users');
+    
+//     this.checked_users.map(obj => {
+//       this.postData.push(obj.user_id);
+//     });
+    
+//     if(this.checked_users.length > 0 ){
+//       this.presentToast();
+      
+
+//     }
+
+
+
+//     this.http.post("https://localhost/dms/admin/removeuser", JSON.stringify(this.postData )) 
+//       .subscribe(res => {
+       
+//         console.log(res);
+//         this.modalCtrl.dismiss();
+        
+        
+      
+      
+//   }, err => {
+//     console.log(err);
+//   });
+
+
+
+
+
+    
+
+
+//   }
+async delete() {
+  this.postData =  []
+  this.checkedUsers = []
+      this.audit.map(obj => {
+        if (obj.isChecked) {
+          this.checkedUsers.push(obj);
+          
+        };
+      });
+  
+  this.checkedUsers.map(obj => {
+    this.postData.push(obj.audit_id);
+  });
+  
+console.log(this.postData)
+
+
+  this.http.post("https://localhost/dms/admin/removeaudit", JSON.stringify(this.postData)) 
+    .subscribe(res => {
+     
+      console.log(res);
+   
+      
+      this.getaudit()
+    
+    
+}, err => {
+  console.log(err);
+});
+
+
+
+
+
+  
+
+
+}
+checkMaster() {
+  setTimeout(()=>{
+    this.audit.forEach(obj => {
+      obj.isChecked = this.masterCheck;
+    });
+  });
+}
+
+mark(id){
+
+  const formData: FormData = new FormData();
+      formData.append('audit_plan_id', id)
+      
+        this.userservice.post("https://localhost/dms/admin/mark", formData).subscribe((res)=>{
+
+          this.getauditplan()
+              
+        })
+
+
+
+}
+
+
+checkEvent() {
+  const totalItems = this.audit.length;
+  let checked = 0;
+  this.audit.map(obj => {
+    if (obj.isChecked) {checked++
+      
+    
+    };
+  });
+  if (checked > 0 && checked < totalItems) {
+    //If even one item is checked but not all
+    this.isIndeterminate = true;
+    this.masterCheck = false;
+  } else if (checked == totalItems) {
+    //If all are checked
+    this.masterCheck = true;
+    this.isIndeterminate = false;
+    
+  } else {
+    //If none is checked
+    this.isIndeterminate = false;
+    this.masterCheck = false;
+  }
+}
+
+
+
 
 getaudit(){
 
@@ -172,8 +321,10 @@ getaudit(){
       console.log(this.audit)
    
       for(let i=0 ; i < this.audit.length; i++){
-          let starTime = new Date(this.audit[i].startTime).toString().slice(0,21)
+          let starTime = new Date(this.audit[i].startTime).toString().slice(0,21) 
+          starTime = formatDate(starTime, 'medium', this.locale);
           let endTime= new Date(this.audit[i].endTime).toString().slice(0,21)
+          endTime = formatDate(endTime, 'medium', this.locale);
           this.audit[i].startTime = starTime
           this.audit[i].endTime = endTime
 
@@ -261,6 +412,27 @@ const alert = await this.alert.create({
 alert.present();
 }
 
+async markalert(id){
+  console.log()
+const alert = await this.alert.create({
+ 
+  header: "",
+  subHeader: "",
+  message: "Are you sure?",
+  buttons: ['Cancel', {
+
+    text: 'Mark as Done',
+    handler: ()=>{
+      
+      this.mark(id)
+
+    }
+
+  }],
+});
+alert.present();
+}
+
 
   async _popOver(ev:any){
     const popover = await this.popover.create({
@@ -302,6 +474,15 @@ alert.present();
    
 
   }
+
+
+
+
+
+
+
+
+  
 }
 
 

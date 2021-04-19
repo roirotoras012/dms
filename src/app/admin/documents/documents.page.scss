@@ -147,6 +147,20 @@ body {
     
     
 }
+
+:host ::ng-deep{
+
+    .swiper-slide{
+          font-size: 25px;
+
+    }
+  
+
+
+
+
+
+}
 .table-wrapper {
     min-width: 100px;
     background: #fff;

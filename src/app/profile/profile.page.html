@@ -15,7 +15,7 @@
             <div class="navbar-nav">
               <a *ngIf="currentuser.usertype_title != 'admin'" (click)="gotohome()" class="nav-item nav-link active"><button>Home</button></a>
               <a *ngIf="currentuser.usertype_title == 'admin'" (click)="gotohome()" class="nav-item nav-link active"><button>Audit Plan</button></a>
-              <a *ngIf="currentuser.usertype_title != 'admin'" (click)="gotoschedules()" class="nav-item nav-link"><button>Schedules</button></a>
+             
              
               <a (click)="gotodocuments()" class="nav-item nav-link"><button>Documents</button></a>
               <a *ngIf="admin" routerLink='/admin/manage-users' class="nav-item nav-link">Manage Users</a>

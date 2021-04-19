@@ -3,9 +3,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <ion-grid>
-    <ion-row>
-      <ion-col>
+ 
         <nav class="navbar navbar-expand-xl navbar-light bg-light">
           <a routerLink='/department' class="navbar-brand"><i class='fa fa-file'></i>USTED<b>  System</b></a>
           <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -15,7 +13,7 @@
           <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start" style="margin-left: 50px;">
             <div class="navbar-nav">
               <a routerLink='/department' class="nav-item nav-link active">Home</a>
-              <a routerLink='/department/schedule' class="nav-item nav-link">Schedules</a>
+            
               
               <a routerLink='/department/documents' class="nav-item nav-link">Documents</a>
               <a routerLink='/department/audit' class="nav-item nav-link">Audit</a>
@@ -36,20 +34,72 @@
             </div>
           </div>
         </nav>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+ 
 
 
 
 <ion-content>
-<div class= "ion-padding">
+  <div class="w3-container" style="padding-left: 170px; padding-right: 150px;">
+              
+          <div class="w3-center">
+            <div style="width: 50vh; margin: 20px;  margin-left: auto; float: right; border: solid black; border-width: 1px; padding: 10px; border-radius: 5px; background-color: #fff;">
+              <button fill="clear" (click)="back()" style="float: left; font-size: 25px;">
+                <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+              </button>
+              <button style="float: right;font-size: 25px;" fill="clear" (click)="next()">
+                <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+              </button>
+              
+              <h2 style="text-align: center;">{{ viewTitle }}</h2>
+             
+             
+              
+              <calendar 
+            
+              [eventSource]="eventSource"
+              [calendarMode]="calendar.mode"
+              [currentDate]="calendar.currentDate"
+              (onEventSelected)="onEventSelected($event)"
+              (onTitleChanged)="onViewTitleChanged($event)"
+              (onTimeSelected)="onTimeSelected($event)"
+              
+            >
+            </calendar></div>  
+    
+            
+            <div><h5>FOLDERS READY TO BE SHARED (click to share)</h5></div>
 
 
-  <div [froalaEditor] class="editor" id="froala-editor"></div>
-</div>
-
-
+      
+           
+            
+            <li style="color: #555; display: inline; float: left;" *ngFor="let data of dpmfolders; let i = index" class="dep">
+              <div *ngIf="data.isShared == 0">
+              <div style="font-size: 15px;">AUDITOR: <b>{{data.name}}</b></div>
+            
+              <!-- <button><i class="far fa-folder fa-5x"></i>{{data.department_name}}</button> -->
+    
+         
+              <button lines="none" class="contents"  style="margin: 5px;" (click)="sharealert(data)" [disabled]="data.clicked" >
+              
+                <!-- (contextmenu)="onRightClick($event, data.department_name)" -->
+                
+                <i style="vertical-align: middle;" class="fas fa-folder fa-2x"></i>
+                  <strong style="font-size: 15px;  vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data.dpm_title}}</strong>
+                  
+                 
+              </button>
+           
+            
+            </div>
+            </li>
+            
+       
+    
+    
+    
+    
+    </div></div>
 </ion-content>
 
 

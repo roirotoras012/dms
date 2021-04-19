@@ -46,7 +46,7 @@
   
 
   
-            <div class="w3-container" style="padding-left: 170px; padding-right: 100px;">
+            <div class="w3-container" style="padding-left: 170px; padding-right: 150px;">
               
                 
                   
@@ -82,7 +82,7 @@
                   <!-- <button (click)="back()">back</button> -->
                   </div>
                   
-                  <div  style="display: inline;" ><button class="hove" (click)="root()">{{currentuser.usertype_title}}</button></div>
+                  <div  style="display: inline;" ><button class="hove" (click)="root()">{{currentuser.username}}</button></div>
                
                 
                
@@ -102,7 +102,7 @@
                 <ul class="">
              
                   
-                  <div class="direction" *ngIf="folder_layer.length == 0" style="font-size: 20px;">{{currentuser.usertype_title}}</div>
+                  <div class="direction" *ngIf="folder_layer.length == 0" style="font-size: 20px;">{{currentuser.username}}</div>
 
 
                   <div style="width: 50vh; margin: 20px;  margin-left: auto; float: right; border: solid black; border-width: 1px; padding: 10px; border-radius: 5px; background-color: #fff;">
@@ -133,7 +133,6 @@
                   <li style="color: #555;" *ngFor="let data of folders" class="dep">
                     <!-- <button><i class="far fa-folder fa-5x"></i>{{data.department_name}}</button> -->
           
-               
                     <button lines="none" class="contents" *ngIf="folder_layer.length == 0" (click)="folderclicked(data)"  style="margin-top: 35px;"  >
                     
                       <!-- (contextmenu)="onRightClick($event, data.department_name)" -->
@@ -143,7 +142,7 @@
                         
                     
                     </button>
-                 
+            
                   
                   
                     

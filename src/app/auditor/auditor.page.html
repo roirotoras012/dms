@@ -3,9 +3,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <ion-grid>
-    <ion-row>
-      <ion-col>
+ 
         <nav class="navbar navbar-expand-xl navbar-light bg-light">
           <a routerLink='/auditor' class="navbar-brand"><i class='fa fa-file'></i>USTED<b>  System</b></a>
           <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -15,7 +13,7 @@
           <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
             <div class="navbar-nav">
               <a routerLink='/auditor' class="nav-item nav-link active">Home</a>
-              <a routerLink='/auditor/schedule' class="nav-item nav-link">Schedules</a>
+         
              
               <a routerLink='/auditor/documents' class="nav-item nav-link">Documents</a>
               <a routerLink='/auditor/audit' class="nav-item nav-link">Audit</a>
@@ -36,18 +34,76 @@
             </div>
           </div>
         </nav>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  
 
 
 
 <ion-content>
-<div class= "ion-padding">
+  <div class="w3-container" style="padding-left: 170px; padding-right: 150px;">
+    <div class="w3-center">
+    
 
+      <h4>AUDIT PLAN</h4>
+<div *ngFor="let auditplan of auditplan">
 
-  <div [froalaEditor] class="editor" id="froala-editor"></div>
+     <div *ngIf="auditplan.done == 0" style="border: solid black; margin: 10px; padding: 10px; border-width: 1px; border-radius: 5px;">
+       
+  
+ 
+<div style="border: solid black; border-width: 1px; margin: 10px;">
+ <table class="table table-striped table-hover" id="myTable" style="font-size: 15px;">
+   <thead>
+     <tr  style="text-align: center;">
+       
+       <th style="width: auto;">Start Time</th>
+       <th style="width: auto;" >End Time</th>
+       
+       <th style="width: auto;">Process/Area</th>
+       <th style="width: auto;">Auditor</th>
+      
+   
+       <th  style="width: auto;">Auditee</th>
+     
+     </tr>
+   </thead>
+   <tbody>
+     <tr *ngFor="let data1 of sortData">
+       <ng-container *ngIf="data1.auditplan == auditplan.audit_plan_id">
+      
+       <td>{{data1.startTime.slice(0,18)}} {{data1.startTime.slice(-2)}}</td>
+       <td>{{data1.endTime.slice(0,18)}} {{data1.endTime.slice(-2)}}</td>
+      
+       <td>{{data1.dpm_title}}</td>
+       <td>{{data1.name}}</td>
+       
+ 
+       <td>{{data1.usertype_title}}</td>
+       
+     </ng-container>
+     </tr>
+   
+    
+     
+     
+   </tbody>
+ </table>
+
 </div>
+
+
+     </div>
+
+     
+
+   </div>
+  
+ 
+ 
+ 
+ </div>  
+ </div>  
+
+
 
 
 </ion-content>

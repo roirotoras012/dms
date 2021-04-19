@@ -1,0 +1,16 @@
+
+
+<form action="https://localhost/dms/admin/download_doc" method="get">
+ 
+  
+  <input  type="hidden" id="doc_id" name="doc_id" value="{{doc}}">
+  <button class="dropdown-item" type="submit" value="Submit">Export</button>
+</form>
+<div>
+ 
+  <button (click)="view()" class="dropdown-item">View (PDF only)</button>
+  <button (click)="deletedoc()" class="dropdown-item">Delete Document</button>
+
+  
+  
+</div>

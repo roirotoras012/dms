@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
+
 import { HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../components/popover/popover.component';
@@ -15,7 +15,7 @@ const TOKEN_KEY = 'auth-token'
 export class UserServiceService {
   user: any;
 
-  constructor(public previewAnyFile: PreviewAnyFile, private popover: PopoverController, private http: HttpClient,private storage: Storage) 
+  constructor( private popover: PopoverController, private http: HttpClient,private storage: Storage) 
   { 
    
   }

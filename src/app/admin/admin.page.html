@@ -39,24 +39,27 @@
 
 
 <ion-content>
-  <div class="w3-container" style="padding-left: 170px; padding-right: 100px;">
+  <div class="w3-container" style="padding-left: 170px; padding-right: 150px;">
        <div class="w3-center">
         <button (click)="alert1()" style="display: block; margin-top: 10px; text-align: center;" class="newbut1 btn-success">Generate Audit Plan</button>
    
 
-
-        <div *ngFor="let data of auditplan" style="border: solid black; margin: 10px; padding: 10px; border-width: 1px; border-radius: 5px;">
+<div *ngFor="let auditplan of auditplan">
+        <div *ngIf="auditplan.done == 0" style="border: solid black; margin: 10px; padding: 10px; border-width: 1px; border-radius: 5px;">
+          <div >
+            <button (click)="markalert(auditplan.audit_plan_id)" style="display: inline; margin: 10px; text-align: center; float: right; border-radius: 0px !important; height: 50px;" class="newbut1 btn-success">Mark as done</button>
+          </div>
           <div style="width: 500px; margin: auto;">
               
             
         <ion-item>
           <div *ngIf="startTime == null"><h5><i class="far fa-clock"></i> Select Start Time </h5></div>
-        <ion-datetime style="margin: auto;" displayFormat = "MMM DD YYYY HH:mm" [(ngModel)]="startTime" (ionChange)="showdate()" [min]="minDate" [max]="maxDate"></ion-datetime>
+        <ion-datetime style="margin: auto;" displayFormat = "MMM DD YYYY hh:mm A" [(ngModel)]="startTime" (ionChange)="showdate()" [min]="minDate" [max]="maxDate"></ion-datetime>
       </ion-item>
 
       <ion-item>
         <div *ngIf="endTime == null"><h5><i class="far fa-clock"></i> Select End Time </h5></div>
-      <ion-datetime style="margin: auto;" displayFormat = "MMM DD YYYY HH:mm" [(ngModel)]="endTime" (ionChange)="showdate()" [min]="minDate" [max]="maxDate"></ion-datetime>
+      <ion-datetime style="margin: auto;" displayFormat = "MMM DD YYYY hh:mm A" [(ngModel)]="endTime" (ionChange)="showdate()" [min]="minDate" [max]="maxDate"></ion-datetime>
     </ion-item>
 
 
@@ -99,7 +102,10 @@
       <input type="text" class="form-control" [(ngModel)]="link" required>
     </div>
     <div >
-      <button (click)="submit()" style="display: block; margin-top: 10px; text-align: center; " class="newbut1 btn-success">Submit</button>
+      <button (click)="submit(auditplan.audit_plan_id)" style="display: inline; margin-top: 10px; text-align: center; " class="newbut1 btn-success">Submit</button>
+    </div>
+    <div >
+      <button (click)="delete()" style="display: inline; margin-top: 10px; text-align: center; " class="newbut1 btn-danger">Delete</button>
     </div>
     
     </div>
@@ -126,22 +132,23 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of sortData">
+        <tr *ngFor="let data1 of sortData">
+          <ng-container *ngIf="data1.auditplan == auditplan.audit_plan_id">
           <td>
             <ion-checkbox slot="start" 
-    [(ngModel)]="data.isChecked" 
+    [(ngModel)]="data1.isChecked" 
     (ionChange)="checkEvent()"></ion-checkbox>
           </td>
-          <td>{{data.startTime}}</td>
-          <td>{{data.endTime}}</td>
+          <td>{{data1.startTime.slice(0,18)}} {{data1.startTime.slice(-2)}}</td>
+          <td>{{data1.endTime.slice(0,18)}} {{data1.endTime.slice(-2)}}</td>
          
-          <td>{{data.dpm_title}}</td>
-          <td>{{data.name}}</td>
+          <td>{{data1.dpm_title}}</td>
+          <td>{{data1.name}}</td>
           
     
-          <td>{{data.usertype_title}}</td>
+          <td>{{data1.usertype_title}}</td>
           
-          
+        </ng-container>
         </tr>
       
        
@@ -157,7 +164,7 @@
    
         
  
-    
+      </div>
      
     
     

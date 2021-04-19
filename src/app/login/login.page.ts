@@ -30,7 +30,7 @@ export class LoginPage implements OnInit {
 
         }
         else if(res.usertype == "auditor"){
-          this.router.navigate(['','auditor'])
+          this.router.navigate(['auditor','documents'])
 
         }
        else{
@@ -97,7 +97,7 @@ export class LoginPage implements OnInit {
 
                   }
                   else if(res.usertype == "auditor"){
-                    this.router.navigate(['','auditor'])
+                    this.router.navigate(['auditor','documents'])
 
                   }
                   else{

@@ -3,9 +3,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <ion-grid>
-    <ion-row>
-      <ion-col>
+ 
         <nav class="navbar navbar-expand-xl navbar-light bg-light">
           <a routerLink='/department' class="navbar-brand"><i class='fa fa-file'></i>USTED<b>  System</b></a>
           <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -36,20 +34,14 @@
             </div>
           </div>
         </nav>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+
+        <iframe width="1500vh" height="100%" [src]="pdfSrc">
 
 
-
-<ion-content>
-<div class= "ion-padding">
+        </iframe>
 
 
-  <div [froalaEditor] class="editor" id="froala-editor"></div>
-</div>
+     
 
-
-</ion-content>
 
 

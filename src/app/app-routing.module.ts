@@ -42,6 +42,14 @@ const routes: Routes = [
     path: 'view-branch',
     loadChildren: () => import('./components/view-branch/view-branch.module').then( m => m.ViewBranchPageModule)
   },
+  {
+    path: 'pdfviewer',
+    loadChildren: () => import('./components/pdfviewer/pdfviewer.module').then( m => m.PdfviewerPageModule)
+  },
+  {
+    path: 'viewmodal',
+    loadChildren: () => import('./components/viewmodal/viewmodal.module').then( m => m.ViewmodalPageModule)
+  },
 
 
   
