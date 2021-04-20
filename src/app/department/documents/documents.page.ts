@@ -136,8 +136,7 @@ getdocs(x){
   this.evidences= []
   this.userservice.get("https://localhost/dms/admin/getdocs?user_id="+this.currentuser.user_id+"&directory="+x).subscribe((res)=>{
       this.documents = res
-      console.log(res)
-        console.log(this.documents)
+     
       for(let i = 0; i < this.documents.length; i++){
         if(this.documents[i].doc_type == 'dpm' ){
             this.main.push(this.documents[i])
@@ -188,7 +187,7 @@ async add_doc(){
   formData.append('doc_type', this.status)
   formData.append('user', this.currentuser.user_id)
   this.http.post("https://localhost/dms/upload_controller/do_upload",formData).subscribe((response: any) => {
-    console.log(response  );
+    
     toast.present();
     
     this.fileinput = null
@@ -283,7 +282,7 @@ getdpmdocs(x){
 
   })
 
-    console.log(this.main)
+  
 
 
 }
@@ -350,7 +349,7 @@ getdpmdocs(x){
 }
 
 getdpms(){
-  console.log(this.currentuser)
+ 
   this.userservice.get("https://localhost/dms/admin/getdpms?usertype="+this.currentuser.usertype).subscribe((res)=>{
 
           this.dpm = res
@@ -496,7 +495,7 @@ getfolders(){
 
   this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
     this.folders = res
-    console.log(res)
+  
 
 
 })
@@ -533,7 +532,6 @@ folclick(x){
       }
      
 
-console.log(this.folder_layer)
 
 
 }

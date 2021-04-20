@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastController, NavParams } from '@ionic/angular';
 import { HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import { Router } from '@angular/router';
-import { PopoverController, ModalController } from '@ionic/angular';
+import { PopoverController, ModalController, AlertController } from '@ionic/angular';
 import { UserServiceService } from '../../services/user-service.service';
 import { AddBranchPage } from '../add-branch/add-branch.page';
 import { ViewBranchPage } from '../view-branch/view-branch.page';
@@ -23,7 +23,7 @@ export class Docpopover2Component implements OnInit {
  user_id: any;
  directory: any ;
   status: any;
-  constructor(private modalCtrl: ModalController,private user: UserServiceService,private popover: PopoverController,private http: HttpClient, public toastController: ToastController, private router: Router, private navParams: NavParams) {
+  constructor(private alert: AlertController,private modalCtrl: ModalController,private user: UserServiceService,private popover: PopoverController,private http: HttpClient, public toastController: ToastController, private router: Router, private navParams: NavParams) {
 
 
     this.document_id = this.navParams.get('document');
@@ -105,6 +105,51 @@ export class Docpopover2Component implements OnInit {
 
 
   }
+  async delalert(){
+    console.log()
+  const alert = await this.alert.create({
+   
+    header: "",
+    subHeader: "",
+    message: "Are you sure?",
+    buttons: ['Cancel', {
+  
+      text: 'Delete',
+      handler: ()=>{
+        
+        this.deletedoc()
+        alert.dismiss()
+      }
+  
+    }],
+  });
+  await alert.present();
+  alert.onWillDismiss().then(()=>{
+      this.popover.dismiss()
+
+
+  })
+  
+  }
+
+  deletedoc(){
+
+
+    const formData: FormData = new FormData();
+    formData.append('doc_id', this.doc)
+    
+
+    this.http.post("https://localhost/dms/admin/deletedoc", formData).subscribe((response: any) => {
+      console.log(response);
+    
+      
+      
+     
+    }
+    )
+
+  
+}
 
 
   getdocument(){

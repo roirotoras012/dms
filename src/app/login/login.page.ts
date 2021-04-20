@@ -71,7 +71,7 @@ export class LoginPage implements OnInit {
  
     
     this.http.post("https://localhost/dms/admin/login",formData).subscribe((response: any) => {
-      console.log(response[0].usertype)
+  
       if(response == "error"){
         toast.present();
       }

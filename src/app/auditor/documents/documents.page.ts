@@ -175,7 +175,7 @@ export class DocumentsPage implements OnInit {
           dir = dir +'/'+this.folder_layer[i]
       
          }
-          console.log(dir)
+          
   
          this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
                 this.folders = res
@@ -186,8 +186,7 @@ export class DocumentsPage implements OnInit {
         this.getfolders();
         this.getdoc()
 
-  console.log(this.folder_layer)
-  
+ 
   
   }
   
@@ -251,7 +250,7 @@ export class DocumentsPage implements OnInit {
 
   this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
     this.folders = res
-    console.log(res)
+  
 
 
 })
@@ -312,7 +311,7 @@ export class DocumentsPage implements OnInit {
   }
 
   async onClick(){
-    console.log(this.file_upload);
+    
     const toast = await this.toastController.create({
       message: 'Successfully Uploaded the file',
       duration: 2000
@@ -370,7 +369,7 @@ console.log(x)
            }
 
         
-            console.log(dir)
+          
     
            this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
                   this.folders = res
@@ -444,9 +443,9 @@ console.log(x)
  
     this.http.get("https://localhost/dms/admin/get_doc?user_id="+this.currentuser.user_id+"&directory="+dir) 
       .subscribe(res => {
-        console.log(res);
+       
         this.docs = res;
-    console.log(this.docs);
+ 
  
     
         }
@@ -508,7 +507,7 @@ console.log(x)
     
     this.userservice.get("https://localhost/dms/admin/getauditorsched?usertype_id="+this.currentuser.user_id).subscribe((sched)=>{
      
-    console.log(sched)
+   
     
      
     for(let data of Object.values(sched)){
@@ -564,7 +563,7 @@ console.log(x)
   
   }
   async onEventSelected(event) {
-    console.log(event)
+  
     let start = formatDate(event.startTime, 'medium', this.locale);
    
     let end = formatDate(event.endTime, 'medium', this.locale);

@@ -180,7 +180,7 @@ export class ManageUsersPage implements OnInit {
  
     this.http.get("https://localhost/dms/admin/getuser") 
       .subscribe(res => {
-        console.log(res);
+      
         this.datauser = res;
     console.log(this.datauser);
  

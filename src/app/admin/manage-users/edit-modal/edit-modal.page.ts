@@ -43,7 +43,7 @@ this.getusertype()
 
     this.user.get("https://localhost/dms/admin/getusertype").subscribe((res)=>{
     this.usertypes = res
-      console.log(this.usertypes)
+     
 
 
     })
@@ -115,7 +115,7 @@ this.getusertype()
       this.http.post("https://localhost/dms/admin/edit_user", formData) 
         .subscribe(res => {
          
-          console.log(res);
+        
           if(res == "username is already taken"){
            
             usernametaken.present()

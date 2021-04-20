@@ -70,7 +70,7 @@ export class DepartmentPage implements OnInit {
       .subscribe(data2 => {
         
       this.currentuser = data2[0]
-          console.log(this.currentuser)
+      
           this.getschedule()
     
         }
@@ -94,7 +94,7 @@ export class DepartmentPage implements OnInit {
    
     formData.append('audit', audit.audit_id)
     this.http.post("https://localhost/dms/admin/share",formData).subscribe((response: any) => {
-    console.log(response);
+  
  
     
     this.getschedule()
@@ -109,7 +109,7 @@ export class DepartmentPage implements OnInit {
 
   async sharealert(audit){
    
-    console.log()
+
   const alert = await this.alertCtrl.create({
    
     header: "",
@@ -157,7 +157,7 @@ export class DepartmentPage implements OnInit {
     this.viewTitle = title;
   }
    async onEventSelected(event) {
-    console.log(event)
+   
     let start = formatDate(event.startTime, 'medium', this.locale);
    
     let end = formatDate(event.endTime, 'medium', this.locale);
@@ -216,7 +216,7 @@ export class DepartmentPage implements OnInit {
     
     this.userservice.get("https://localhost/dms/admin/getauditeesched?usertype_id="+this.currentuser.usertype).subscribe((sched)=>{
      
-    console.log(sched)
+ 
     
      
     for(let data of Object.values(sched)){
@@ -290,8 +290,7 @@ export class DepartmentPage implements OnInit {
            
       } 
  
-      console.log(this.dpmfolders)
-
+    
 
 
   }

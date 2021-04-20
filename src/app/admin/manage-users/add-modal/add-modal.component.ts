@@ -53,7 +53,7 @@ export class AddModalComponent implements OnInit {
 
       this.user.get("https://localhost/dms/admin/getusertype").subscribe((res)=>{
       this.usertypes = res
-        console.log(this.usertypes)
+     
 
 
       })
@@ -94,7 +94,7 @@ export class AddModalComponent implements OnInit {
       this.http.post("https://localhost/dms/admin/add_account", formData) 
         .subscribe(res => {
          
-          console.log(res);
+      
 
           if(res == "username is already taken"){
            

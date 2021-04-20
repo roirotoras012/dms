@@ -22,7 +22,7 @@ export class Delete1ModalComponent implements OnInit {
 
   async deleteUser() {
     this.tobedeleted = this.navParams.get('tobedeleted');
-    console.log(this.tobedeleted)
+
     
 
 

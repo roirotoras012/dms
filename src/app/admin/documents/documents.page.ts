@@ -69,7 +69,7 @@ export class DocumentsPage implements OnInit {
     this.viewTitle = title;
   }
    async onEventSelected(event) {
-    console.log(event)
+
     let start = formatDate(event.startTime, 'medium', this.locale);
    
     let end = formatDate(event.endTime, 'medium', this.locale);
@@ -199,7 +199,7 @@ export class DocumentsPage implements OnInit {
           dir = dir +'/'+this.folder_layer[i]
       
          }
-          console.log(dir)
+         
   
          this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
                 this.folders = res
@@ -210,7 +210,7 @@ export class DocumentsPage implements OnInit {
         this.getfolders();
         this.getdoc()
 
-  console.log(this.folder_layer)
+ 
   
   
   }
@@ -275,7 +275,7 @@ export class DocumentsPage implements OnInit {
 
   this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
     this.folders = res
-    console.log(res)
+
 
 
 })
@@ -394,11 +394,10 @@ console.log(x)
            }
 
         
-            console.log(dir)
-    
+         
            this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
                   this.folders = res
-                  console.log(res)
+                
                   
     
            })
@@ -470,7 +469,7 @@ console.log(x)
       .subscribe(res => {
         console.log(res);
         this.docs = res;
-    console.log(this.docs);
+ 
  
     
         }
@@ -531,28 +530,33 @@ console.log(x)
     console.log(sched)
      
     for(let data of Object.values(sched)){
-      this.event1.audit_id = data.audit_id
-      this.event1.title = data.dpm_title
-      
-      this.event1.auditee = data.usertype_title
-      this.event1.auditor = data.name
-      this.event1.startTime = new Date(data.startTime)
-      this.event1.endTime = new Date(data.endTime)
-    
-      
-      this.eventSource.push(this.event1)
-      
-      this.event1 = {
-        audit_id:'',
-        title: '',
+
+      if(data.done == 0){
+        this.event1.audit_id = data.audit_id
+        this.event1.title = data.dpm_title
         
-        auditee: '',
-        auditor: '',
-        startTime: null,
-        endTime: null,
+        this.event1.auditee = data.usertype_title
+        this.event1.auditor = data.name
+        this.event1.startTime = new Date(data.startTime)
+        this.event1.endTime = new Date(data.endTime)
       
-      };
-      this.myCal.loadEvents();
+        
+        this.eventSource.push(this.event1)
+        
+        this.event1 = {
+          audit_id:'',
+          title: '',
+          
+          auditee: '',
+          auditor: '',
+          startTime: null,
+          endTime: null,
+        
+        };
+        this.myCal.loadEvents();
+
+      }
+     
   
       
     }

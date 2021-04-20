@@ -84,7 +84,7 @@ export class AuditPage implements OnInit {
     this.viewTitle = title;
   }
    async onEventSelected(event) {
-    console.log(event)
+  
     let start = formatDate(event.startTime, 'medium', this.locale);
    
     let end = formatDate(event.endTime, 'medium', this.locale);
@@ -214,18 +214,18 @@ export class AuditPage implements OnInit {
           dir = dir +'/'+this.folder_layer[i]
       
          }
-          console.log(dir)
+         
   
          this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
                 this.folders = res
-                console.log(res)
+               
   
   
          })
         this.getfolders();
         this.getdoc()
 
-  console.log(this.folder_layer)
+  
   
   
   }
@@ -290,7 +290,7 @@ export class AuditPage implements OnInit {
 
   this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
     this.folders = res
-    console.log(res)
+ 
 
 
 })
@@ -307,7 +307,7 @@ export class AuditPage implements OnInit {
           dir = dir +'/'+this.folder_layer[i]
       
          }
-    console.log(this.file_upload);
+   
     const toast = await this.toastController.create({
       message: 'Successfully Uploaded the file',
       duration: 2000
@@ -351,7 +351,7 @@ export class AuditPage implements OnInit {
   }
 
   async onClick(){
-    console.log(this.file_upload);
+   
     const toast = await this.toastController.create({
       message: 'Successfully Uploaded the file',
       duration: 2000
@@ -360,7 +360,7 @@ export class AuditPage implements OnInit {
     const formData: FormData = new FormData();
     formData.append('document', this.file_upload, this.file_upload.name)
     this.http.post("https://localhost/dms/upload_controller/do_upload",formData).subscribe((response: any) => {
-      console.log(response  );
+ 
       toast.present();
       
       this.fileinput = null
@@ -409,7 +409,7 @@ console.log(x)
            }
 
         
-            console.log(dir)
+         
     
            this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
                   this.folders = res
@@ -485,9 +485,9 @@ console.log(x)
  
     this.http.get("https://localhost/dms/admin/get_doc?user_id="+this.currentuser.user_id+"&directory="+dir) 
       .subscribe(res => {
-        console.log(res);
+      
         this.docs = res;
-    console.log(this.docs);
+
     for(let i = 0; i < this.docs.length; i++){
       if(this.docs[i].doc_type == 'dpm' ){
           this.main.push(this.docs[i])
@@ -503,7 +503,7 @@ console.log(x)
 
 
     }
-    console.log(this.main)
+   
         }
       
       , err => {

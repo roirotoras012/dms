@@ -49,7 +49,7 @@ export class DeleteModalComponent implements OnInit {
       this.http.post("https://localhost/dms/admin/removeuser", JSON.stringify(this.postData)) 
         .subscribe(res => {
          
-          console.log(res);
+        
           this.modalCtrl.dismiss();
           
           

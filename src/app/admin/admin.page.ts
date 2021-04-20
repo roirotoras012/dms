@@ -138,15 +138,9 @@ export class AdminPage implements OnInit {
 
 
     let dpm = []
-      console.log(this.startTime)
-      console.log(end)
-
-      console.log(this.auditeechoice)
-
-      console.log(this.selected_dpm)
-      console.log(this.auditor)
+   
   
-    console.log(dpm)
+  
      for(let i=0; i < this.selected_dpm.length; i++){
 
       const formData: FormData = new FormData();
@@ -237,13 +231,13 @@ async delete() {
     this.postData.push(obj.audit_id);
   });
   
-console.log(this.postData)
+
 
 
   this.http.post("https://localhost/dms/admin/removeaudit", JSON.stringify(this.postData)) 
     .subscribe(res => {
      
-      console.log(res);
+     
    
       
       this.getaudit()
@@ -318,7 +312,7 @@ getaudit(){
   this.userservice.get("https://localhost/dms/admin/getaudit").subscribe((res)=>{
 
       this.audit = res
-      console.log(this.audit)
+     
    
       for(let i=0 ; i < this.audit.length; i++){
           let starTime = new Date(this.audit[i].startTime).toString().slice(0,21) 
@@ -349,7 +343,7 @@ get sortData(){
       .subscribe(data2 => {
         
       this.currentuser = data2[0]
-        console.log(this.currentuser)
+       
      
     
         }
@@ -383,7 +377,7 @@ getauditplan(){
       this.userservice.get("https://localhost/dms/admin/generate").subscribe((res)=>{
 
         this.auditplan = res
-        console.log(this.auditplan  )
+      
 
 
       })
