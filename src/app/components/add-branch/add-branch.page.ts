@@ -65,6 +65,51 @@ async alert1(data){
   });
   alert.present();
 }
+async alert2(data){
+  console.log(data)
+const alert = await this.alert.create({
+ 
+  header: "",
+  subHeader: "",
+  message: "Are you sure?",
+  buttons: ['Cancel', {
+
+    text: 'Remove',
+    handler: ()=>{
+      
+      this.delete(data)
+      this.getbranch()
+    }
+
+  }],
+});
+alert.present();
+}
+
+delete(branch_id){
+
+  const formData: FormData = new FormData();
+  formData.append('branch_document_id', branch_id)
+  
+
+  this.http.post("https://localhost/dms/admin/deletebranch", formData).subscribe((response: any) => {
+    
+      console.log(response)
+    
+    
+   
+  }
+  )
+
+
+
+}
+
+
+
+
+
+
  async main(x){
     console.log(x)
 
