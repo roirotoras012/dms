@@ -359,12 +359,37 @@ get sortData(){
   
     
 
+
+
+
   }
+
+
+
+
 getauditplan(){
   this.userservice.get("https://localhost/dms/admin/generate1").subscribe((res)=>{
-
+    console.log(res)
       this.auditplan = res
+let count  =0 
+  for(let i = 0; i<this.auditplan.length; i++){
+      if(this.auditplan[i].done == 0){
+          count ++
+      
+      }
 
+    
+   
+
+  } 
+
+  if(count == 0){
+
+
+    this.generate()
+  }
+
+     
     
 
   }
@@ -373,14 +398,18 @@ getauditplan(){
 }
 
   generate(){
+    
+        this.userservice.get("https://localhost/dms/admin/generate").subscribe((res)=>{
 
-      this.userservice.get("https://localhost/dms/admin/generate").subscribe((res)=>{
+          this.auditplan = res
+          this.getauditplan()
+  
+  
+        })
 
-        this.auditplan = res
+
       
-
-
-      })
+ 
 
 
 }

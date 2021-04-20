@@ -109,6 +109,12 @@
 		margin-left: 30px;
 	}
 }
+
+ion-content{
+
+    --background: url('/assets/images/background-home.jpg')no-repeat center center / cover;
+    
+}
 @media (max-width: 1199px){
 	.form-inline {
 		display: block;
@@ -157,6 +163,7 @@
 
 
 }
+
 input{
 
     font-size : 15px

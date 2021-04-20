@@ -3,8 +3,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-  
-          <nav class="navbar navbar-expand-xl navbar-light bg-light">
+    <ion-content>
+          <nav class="navbar navbar-expand-xl navbar-light bg-light" >
             <a routerLink='/admin' class="navbar-brand"><i class='fa fa-file'></i>USTED<b>  System</b></a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
               <span class="navbar-toggler-icon"></span>
@@ -18,17 +18,12 @@
                 <a routerLink='/admin/documents' class="nav-item nav-link">Documents</a>
                 <a routerLink='/admin/manage-users' class="nav-item nav-link">Manage Users</a>
               </div>
-              <form class="navbar-form form-inline">
-                <div class="input-group search-box">								
-                  <input type="text" id="search" class="form-control" placeholder="Search">
-                  
-                </div>
-              </form>
+             
               <div class="navbar-nav ml-auto">
-                <a href="#" class="nav-item nav-link notifications"><i class="fa fa-bell-o"></i><span class="badge">1</span></a>
                 
-                <div class="nav-item dropdown">
-                  <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action"><button><img src="./assets/images/cdustp.jpg" class="avatar" alt="Avatar">{{account_info.name}}</button></a>
+                
+                <div class="nav-item dropdown">                                                                                                                                       
+                  <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action"><button><i class="fas fa-user-alt" style="vertical-align: middle;font-size: 25px;"></i>  {{account_info.name}}</button></a>
                     
                 </div>
               </div>
@@ -38,16 +33,16 @@
 
 
 
-<ion-content>
+
   <div class="w3-container" style="padding-left: 170px; padding-right: 150px;">
-       <div class="w3-center">
-        <button (click)="alert1()" style="display: block; margin-top: 10px; text-align: center;" class="newbut1 btn-success">Generate Audit Plan</button>
+       <div class="w3-center"  >
+        <!-- <button (click)="alert1()" style="display: block; margin-top: 10px; text-align: center;" class="newbut1 btn-muted">Generate Audit Plan</button> -->
    
 
-<div *ngFor="let auditplan of auditplan">
-        <div *ngIf="auditplan.done == 0" style="border: solid black; margin: 10px; padding: 10px; border-width: 1px; border-radius: 5px;">
+<div *ngFor="let auditplan of auditplan" style="margin-top: 100px;">
+        <div *ngIf="auditplan.done == 0" style="border: solid black; margin: 10px; padding: 10px; border-width: 1px; border-radius: 5px; background: white;">
           <div >
-            <button (click)="markalert(auditplan.audit_plan_id)" style="display: inline; margin: 10px; text-align: center; float: right; border-radius: 0px !important; height: 50px;" class="newbut1 btn-success">Mark as done</button>
+            <button (click)="markalert(auditplan.audit_plan_id)" style="display: inline; margin: 10px; text-align: center; float: right; border-radius: 0px !important; height: 50px;" class="newbut1 btn-info">Mark as done</button>
           </div>
           <div style="width: 500px; margin: auto;">
               
@@ -102,7 +97,7 @@
       <input type="text" class="form-control" [(ngModel)]="link" required>
     </div>
     <div >
-      <button (click)="submit(auditplan.audit_plan_id)" style="display: inline; margin-top: 10px; text-align: center; " class="newbut1 btn-success">Submit</button>
+      <button (click)="submit(auditplan.audit_plan_id)" style="display: inline; margin-top: 10px; text-align: center; " class="newbut1 btn-info">Submit</button>
     </div>
     <div >
       <button (click)="delete()" style="display: inline; margin-top: 10px; text-align: center; " class="newbut1 btn-danger">Delete</button>
@@ -111,7 +106,7 @@
     </div>
     
 <div style="border: solid black; border-width: 1px; margin: 10px;">
-    <table class="table table-striped table-hover" id="myTable" style="font-size: 15px;">
+    <table class="table table-hover" id="myTable" style="font-size: 15px;">
       <thead>
         <tr  style="text-align: center;">
           <th>
@@ -173,7 +168,7 @@
     </div>  
   
   
-    
-</ion-content>
+  </ion-content>
+
 
 

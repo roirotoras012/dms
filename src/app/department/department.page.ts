@@ -95,14 +95,21 @@ export class DepartmentPage implements OnInit {
     formData.append('audit', audit.audit_id)
     this.http.post("https://localhost/dms/admin/share",formData).subscribe((response: any) => {
   
- 
+    for(let i =0 ; i < this.dpmfolders.length; i ++){
+        if(this.dpmfolders[i].audit_id == audit.audit_id){
+           this.dpmfolders[i].isShared = 1;
+            
+        }
+
+
+    }
+      
     
-    this.getschedule()
  
   })
 
 
-  this.getschedule()
+ 
 
   }
 
@@ -121,13 +128,17 @@ export class DepartmentPage implements OnInit {
       handler: ()=>{
         
         this.share(audit)
-  
+       
       }
       
   
     }],
   });
   alert.present();
+  alert.onWillDismiss().then(()=>{
+  
+
+  })
   }
 
   async _popOver(ev:any){
@@ -213,7 +224,7 @@ export class DepartmentPage implements OnInit {
 
   getschedule(){
     this.eventSource = [];
-    
+ 
     this.userservice.get("https://localhost/dms/admin/getauditeesched?usertype_id="+this.currentuser.usertype).subscribe((sched)=>{
      
  

@@ -7,6 +7,7 @@ import { UserServiceService } from '../../services/user-service.service';
 import { AddBranchPage } from '../add-branch/add-branch.page';
 import { ViewBranchPage } from '../view-branch/view-branch.page';
 import { ArgumentType } from '@angular/compiler/src/core';
+import { ViewmodalPage } from '../viewmodal/viewmodal.page';
 
 var doc1;
 @Component({
@@ -15,6 +16,8 @@ var doc1;
   styleUrls: ['./docpopover.component.scss'],
 })
 export class DocpopoverComponent implements OnInit {
+  currentdoc: any = []
+
   currentuser: any
   doc: any;
   url: string;
@@ -30,12 +33,52 @@ export class DocpopoverComponent implements OnInit {
     this.directory = this.navParams.get('directory');
     this.status = this.navParams.get('status');
     this.getuserinfo()
-
+    this.getdocument()
    }
 
+   async view(){
+    
+  
+    const modal = await this.modalCtrl.create({
+      component: ViewmodalPage,
+      componentProps:{
+        file: 'http://localhost/dms/'+this.currentdoc.directory+'/'+this.currentdoc.filename
+
+      },
+      cssClass: 'viewmodal'
+      
+    
+
+    });
+    
+    await modal.present();
+    await modal.onDidDismiss().then(()=>{
+        this.popover.dismiss()
 
 
 
+    })
+   
+       
+    
+  
+
+
+}
+
+getdocument(){
+  this.user.get("https://localhost/dms/admin/getdocument?doc_id="+this.document_id).subscribe((res)=>{
+
+          this.currentdoc = res[0]
+          console.log(this.currentdoc)
+
+
+
+  })
+
+
+
+}
 
   ngOnInit() {
     this.doc = this.navParams.get('document');
