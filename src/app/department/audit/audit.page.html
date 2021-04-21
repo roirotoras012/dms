@@ -4,36 +4,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   
-        <nav class="navbar navbar-expand-xl navbar-light bg-light">
-          <a routerLink='/department' class="navbar-brand"><i class='fa fa-file'></i>USTED<b>  System</b></a>
-          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <!-- Collection of nav links, forms, and other content for toggling -->
-          <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start" style="margin-left: 50px;">
-            <div class="navbar-nav">
-              <a routerLink='/department' class="nav-item nav-link active">Home</a>
-          
-              
-              <a routerLink='/department/documents' class="nav-item nav-link">Documents</a>
-              <a routerLink='/department/audit' class="nav-item nav-link">Audit</a>
-            </div>
-            <form class="navbar-form form-inline">
-              <div class="input-group search-box">								
-                <input type="text" id="search" class="form-control" placeholder="Search">
-                
-              </div>
-            </form>
-            <div class="navbar-nav ml-auto">
-              <a href="#" class="nav-item nav-link notifications"><i class="fa fa-bell-o"></i><span class="badge">1</span></a>
-              
-              <div class="nav-item dropdown">
-                <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action"><button><img src="./assets/images/cdustp.jpg" class="avatar" alt="Avatar"> Clint Cardenas</button></a>
-                  
-              </div>
-            </div>
-          </div>
-        </nav>
+  <nav class="navbar navbar-expand-xl navbar-light bg-light" >
+    <a routerLink='/admin' class="navbar-brand"><i class='fa fa-file'></i>USTED<b>  System</b></a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Collection of nav links, forms, and other content for toggling -->
+    <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+      <div class="navbar-nav">
+        <a routerLink='/admin' class="nav-item nav-link active">Audit Plan</a>
+        <!-- <a routerLink='/admin/schedules' class="nav-item nav-link">Schedules</a> -->
+       
+        <a routerLink='/admin/documents' class="nav-item nav-link">Documents</a>
+        <a routerLink='/admin/manage-users' class="nav-item nav-link">Manage Users</a>
+      </div>
+     
+      <div class="navbar-nav ml-auto">
+        
+        
+        <div class="nav-item dropdown">                                                                                                                                       
+          <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action"><button><i class="fas fa-user-alt" style="vertical-align: middle;font-size: 25px;"></i>  {{account_info.name}}</button></a>
+            
+        </div>
+      </div>
+    </div>
+  </nav>
   
 
 
