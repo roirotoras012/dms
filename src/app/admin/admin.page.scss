@@ -20,7 +20,7 @@
 	margin-right: 10px;
 }
 .navbar .navbar-brand {
-	color: #555;
+	color: white;
 	padding-left: 0;
 	padding-right: 50px;
     padding-top: 15px;
@@ -112,7 +112,8 @@
 
 ion-content{
 
-    --background: url('/assets/images/background-home.jpg')no-repeat center center / cover;
+    --background: url('/assets/images/background-home.jpg') 0 0/100% auto no-repeat !important;
+
     
 }
 @media (max-width: 1199px){
@@ -125,7 +126,11 @@ ion-content{
 	}
 }
 
+.nav-item{
 
+
+    color: white !important;
+}
 
 .navbar-nav .nav-item::after{
     content: '';

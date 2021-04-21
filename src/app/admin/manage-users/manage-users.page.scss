@@ -25,6 +25,10 @@
     //transition: width .3s;
 }
 
+.nav-item .nav-link{
+
+    color: white !important;
+}
 .nav-link img {
 	border-radius: 50%;
 	width: 36px;
@@ -34,7 +38,7 @@
 	margin-right: 10px;
 }
 .navbar .navbar-brand {
-	color: #555;
+	color: white;
 	padding-left: 0;
 	padding-right: 50px;
     padding-top: 15px;
