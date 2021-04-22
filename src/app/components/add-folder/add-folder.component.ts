@@ -4,6 +4,8 @@ import { ToastController, NavParams } from '@ionic/angular';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { environment } from '../../../environments/environment';
+const API_URL = environment.API_URL
 @Component({
   selector: 'app-add-folder',
   templateUrl: './add-folder.component.html',
@@ -38,7 +40,7 @@ export class AddFolderComponent implements OnInit {
     
  
   
-  this.http.post("https://localhost/dms/admin/addfolder", formData) 
+  this.http.post(API_URL+"admin/addfolder", formData) 
   .subscribe(res => {
     console.log(res)
    if(res == "success"){

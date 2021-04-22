@@ -2,14 +2,19 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Platform } from '@ionic/angular';
 
 import { HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
-import { PopoverController, AlertController } from '@ionic/angular';
+import { PopoverController, AlertController, ModalController } from '@ionic/angular';
 import { PopoverComponent } from '../components/popover/popover.component';
 import { AccPopoverComponent } from '../components/acc-popover/acc-popover.component';
+import { HistorymodalPage } from '../components/historymodal/historymodal.page';
+
 import { Storage } from '@ionic/Storage'
 import { UserServiceService } from '../services/user-service.service';
 import { ArgumentType } from '@angular/compiler/src/core';
 import { formatDate } from '@angular/common';
 import { Inject, LOCALE_ID } from '@angular/core'
+import { environment } from '../../environments/environment';
+
+
 
 const TOKEN_KEY = 'auth-token'
 
@@ -19,6 +24,8 @@ const TOKEN_KEY = 'auth-token'
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
+  auditchecked:any;
+  dpm2: any = []
   selected_dpm: any
   auditor: any
   auditplan: any = []
@@ -38,9 +45,16 @@ export class AdminPage implements OnInit {
   isIndeterminate:boolean;
   masterCheck:boolean;
   checkedUsers: any = [];
+  currentauditplan: any;
+  auditcount: any;
+ 
+  private API_URL: any= environment.API_URL
+
   minDate: string= new Date().toISOString()
   maxDate: string= new Date().toISOString()
-  constructor(private platform: Platform,@Inject(LOCALE_ID) private locale: string,private alert: AlertController,private userservice: UserServiceService,private popover: PopoverController, private http: HttpClient,private storage: Storage) { 
+ 
+ 
+  constructor(private modalCtrl: ModalController,private platform: Platform,@Inject(LOCALE_ID) private locale: string,private alert: AlertController,private userservice: UserServiceService,private popover: PopoverController, private http: HttpClient,private storage: Storage) { 
     this.account();
 
     this.platform.ready().then(()=>{
@@ -82,7 +96,7 @@ export class AdminPage implements OnInit {
   }
 
   getauditors(){
-    this.userservice.get("https://localhost/dms/admin/getauditor").subscribe((res)=>{
+    this.userservice.get(this.API_URL+"admin/getauditor").subscribe((res)=>{
   
       this.auditors = res 
   
@@ -93,7 +107,7 @@ export class AdminPage implements OnInit {
   }
 
   getauditee(){
-    this.userservice.get("https://localhost/dms/admin/getauditee").subscribe((res)=>{
+    this.userservice.get(this.API_URL+"admin/getauditee").subscribe((res)=>{
   
       this.auditee = res
      
@@ -108,10 +122,10 @@ export class AdminPage implements OnInit {
   
   getdpm(){
 
-    this.userservice.get("https://localhost/dms/admin/getdpm").subscribe((res)=>{
+    this.userservice.get(this.API_URL+"admin/getdpm").subscribe((res)=>{
   
             this.dpm = res
-        
+
        
     })
   
@@ -151,7 +165,7 @@ export class AdminPage implements OnInit {
       formData.append('auditor', this.auditor)
       formData.append('auditee', this.auditeechoice)
       formData.append('link', this.link)
-        this.userservice.post("https://localhost/dms/admin/addaudit", formData).subscribe((res)=>{
+        this.userservice.post(this.API_URL+"admin/addaudit", formData).subscribe((res)=>{
   
           this.getaudit()
               console.log(res)
@@ -220,32 +234,38 @@ export class AdminPage implements OnInit {
 async delete() {
   this.postData =  []
   this.checkedUsers = []
-      this.audit.map(obj => {
-        if (obj.isChecked) {
-          this.checkedUsers.push(obj);
-          
-        };
-      });
-  
-  this.checkedUsers.map(obj => {
-    this.postData.push(obj.audit_id);
-  });
-  
 
+  if(this.checkedUsers){
+    this.audit.map(obj => {
+      if (obj.isChecked) {
+        this.checkedUsers.push(obj);
+        
+      };
+    });
 
-
-  this.http.post("https://localhost/dms/admin/removeaudit", JSON.stringify(this.postData)) 
-    .subscribe(res => {
-     
-     
-   
-      
-      this.getaudit()
-    
-    
-}, err => {
-  console.log(err);
+this.checkedUsers.map(obj => {
+  this.postData.push(obj.audit_id);
 });
+
+
+
+
+this.http.post(this.API_URL+"admin/removeaudit", JSON.stringify(this.postData)) 
+  .subscribe(res => {
+   
+   
+ 
+    
+    this.getaudit()
+  
+  
+}, err => {
+console.log(err);
+});
+
+
+  }
+    
 
 
 
@@ -268,9 +288,11 @@ mark(id){
   const formData: FormData = new FormData();
       formData.append('audit_plan_id', id)
       
-        this.userservice.post("https://localhost/dms/admin/mark", formData).subscribe((res)=>{
+        this.userservice.post(this.API_URL+"admin/mark", formData).subscribe((res)=>{
 
-          this.getauditplan()
+
+          this.generate()
+       
               
         })
 
@@ -308,11 +330,19 @@ checkEvent() {
 
 
 getaudit(){
-
-  this.userservice.get("https://localhost/dms/admin/getaudit").subscribe((res)=>{
+this.auditchecked = 0
+this.auditcount = 0
+  this.userservice.get(this.API_URL+"admin/getaudit").subscribe((res)=>{
 
       this.audit = res
-     
+      for(let i =0; this.auditplan.length > i ; i ++){
+        if(this.auditplan[i].done == 0){
+            this.currentauditplan = this.auditplan[i].audit_plan_id
+                    
+
+        }
+
+      }
    
       for(let i=0 ; i < this.audit.length; i++){
           let starTime = new Date(this.audit[i].startTime).toString().slice(0,21) 
@@ -322,14 +352,28 @@ getaudit(){
           this.audit[i].startTime = starTime
           this.audit[i].endTime = endTime
 
-      }
+          if(this.audit[i].done == 1 && this.currentauditplan == this.audit[i].auditplan){
+            this.auditchecked ++
 
+          }
+          if(this.audit[i].auditplan == this.currentauditplan){
+            this.auditcount ++
+
+          }
+         
+
+      }
+        
+     
 
   })
 
-
+  console.log(this.auditchecked , this.auditcount)
 
 }
+
+
+
 get sortData(){
   return this.audit.sort((a, b) => {
     return <any>new Date(a.startTime) - <any>new Date(b.startTime);
@@ -339,7 +383,7 @@ get sortData(){
   getuserinfo(){
   
     this.userservice.userinfo().then((data)=>{
-      this.http.get("https://localhost/dms/admin/account_info?user_id="+data.user_id)
+      this.http.get(this.API_URL+"admin/account_info?user_id="+data.user_id)
       .subscribe(data2 => {
         
       this.currentuser = data2[0]
@@ -364,11 +408,32 @@ get sortData(){
 
   }
 
+  async audithistory(){
+
+
+      const modal = await this.modalCtrl.create({
+        component: HistorymodalPage,
+       cssClass:"historymodal"
+      
+
+      });
+      
+      await modal.present();
+      await modal.onDidDismiss();
+     
+         
+      
+    
+
+
+
+  }
+
 
 
 
 getauditplan(){
-  this.userservice.get("https://localhost/dms/admin/generate1").subscribe((res)=>{
+  this.userservice.get(this.API_URL+"admin/generate1").subscribe((res)=>{
     console.log(res)
       this.auditplan = res
 let count  =0 
@@ -399,7 +464,7 @@ let count  =0
 
   generate(){
     
-        this.userservice.get("https://localhost/dms/admin/generate").subscribe((res)=>{
+        this.userservice.get(this.API_URL+"admin/generate").subscribe((res)=>{
 
           this.auditplan = res
           this.getauditplan()
@@ -414,6 +479,22 @@ let count  =0
 
 }
 
+
+auditeechange(){
+  this.dpm2 = []
+    console.log(this.auditeechoice)
+
+  for(let i =0; i < this.dpm.length; i ++){
+      if(this.auditeechoice == this.dpm[i].usertype){
+
+        this.dpm2.push(this.dpm[i])
+      }
+
+
+  }
+
+
+}
 async alert1(){
   console.log()
 const alert = await this.alert.create({
@@ -454,6 +535,13 @@ const alert = await this.alert.create({
   }],
 });
 alert.present();
+alert.onDidDismiss().then(()=>{
+  this.getauditplan()
+  this.getaudit()
+ 
+
+
+})
 }
 
 
@@ -478,7 +566,7 @@ alert.present();
   account(){
 
       this.storage.get(TOKEN_KEY).then((res)=>{
-      this.http.get("https://localhost/dms/admin/account_info?user_id="+res.user_id)
+      this.http.get(this.API_URL+"admin/account_info?user_id="+res.user_id)
       .subscribe(data => {
         
       this.account_info = data[0];

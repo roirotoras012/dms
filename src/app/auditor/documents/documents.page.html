@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
  
+<ion-content>
   <nav class="navbar navbar-expand-xl navbar-light bg-light">
     <a routerLink='/auditor' class="navbar-brand"><i class='fa fa-file'></i>USTED<b>  System</b></a>
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -19,25 +20,18 @@
         <a routerLink='/auditor/documents' class="nav-item nav-link">Documents</a>
         <a routerLink='/auditor/audit' class="nav-item nav-link">Audit</a>
       </div>
-      <form class="navbar-form form-inline">
-        <div class="input-group search-box">								
-          <input type="text" id="search" class="form-control" placeholder="Search">
-
-        </div>
-      </form>
       <div class="navbar-nav ml-auto">
-        <a href="#" class="nav-item nav-link notifications"><i class="fa fa-bell-o"></i><span class="badge">1</span></a>
-
-        <div class="nav-item dropdown">
-          <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action"><button><img src="./assets/images/cdustp.jpg" class="avatar" alt="Avatar"> Clint Cardenas</button></a>
-
+                
+                
+        <div class="nav-item dropdown">                                                                                                                                       
+          <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action" style="color: white;"><button><i class="fas fa-user-alt" style="vertical-align: middle;font-size: 25px;"></i>  {{currentuser.name}}</button></a>
+            
         </div>
       </div>
     </div>
   </nav>
      
 
-<ion-content>
 
  
   
@@ -57,7 +51,7 @@
             
            
 
-    <div class="w3-center">
+    <div class="w3-center" style="background: white; border-radius: 5px;padding: 10px;min-height: 800px;">
       
   
       <div style="float: right;">
@@ -104,7 +98,7 @@
           <div class="direction" *ngIf="folder_layer.length == 0" style="font-size: 20px;">{{currentuser.usertype_title}}</div>
 
 
-          <div style="width: 50vh; margin: 20px;  margin-left: auto; float: right; border: solid black; border-width: 1px; padding: 10px; border-radius: 5px; background-color: #fff;">
+          <div style="width: 35%; margin: 20px;  margin-left: auto; float: right; border: solid black; border-width: 1px; padding: 10px; border-radius: 5px; background-color: #fff;">
       
             <button fill="clear" (click)="back()">
               <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
@@ -231,7 +225,7 @@
                 <div *ngIf="docs.length == 0">EMPTY</div>
            
             <i style="vertical-align: middle;"  class="fas fa-file-alt fa-2x"></i>
-              <strong style="font-size: 15px; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data.filename}}</strong>
+              <strong style="font-size: 15px; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data.filename}}<sup style="float: right; padding: 5px;">modified: {{data.date_uploaded}}</sup></strong>
            
             
           </button>

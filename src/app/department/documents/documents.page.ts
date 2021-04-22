@@ -13,7 +13,8 @@ import { ToastController, NavParams } from '@ionic/angular';
 
 import { DocpopoverComponent } from '../../components/docpopover/docpopover.component';
 
-
+import { environment } from '../../../environments/environment';
+const API_URL = environment.API_URL
 
 
 
@@ -134,7 +135,7 @@ newclicked(){
 getdocs(x){
   this.main = []
   this.evidences= []
-  this.userservice.get("https://localhost/dms/admin/getdocs?user_id="+this.currentuser.user_id+"&directory="+x).subscribe((res)=>{
+  this.userservice.get(API_URL+"admin/getdocs?user_id="+this.currentuser.user_id+"&directory="+x).subscribe((res)=>{
       this.documents = res
      
       for(let i = 0; i < this.documents.length; i++){
@@ -186,7 +187,7 @@ async add_doc(){
   formData.append('directory', dir)
   formData.append('doc_type', this.status)
   formData.append('user', this.currentuser.user_id)
-  this.http.post("https://localhost/dms/upload_controller/do_upload",formData).subscribe((response: any) => {
+  this.http.post(API_URL+"upload_controller/do_upload",formData).subscribe((response: any) => {
     
     toast.present();
     
@@ -260,7 +261,7 @@ async add_folder(){
 getdpmdocs(x){
   this.main = []
   this.evidences= []
-  this.userservice.get("https://localhost/dms/admin/getdpmdocs?user_id="+this.currentuser.user_id+"&directory="+x).subscribe((res)=>{
+  this.userservice.get(API_URL+"admin/getdpmdocs?user_id="+this.currentuser.user_id+"&directory="+x).subscribe((res)=>{
 
     this.documents = res
   console.log(this.documents)
@@ -330,7 +331,7 @@ getdpmdocs(x){
   getuserinfo(){
   
     this.userservice.userinfo().then((data)=>{
-      this.http.get("https://localhost/dms/admin/account_info?user_id="+data.user_id)
+      this.http.get(API_URL+"admin/account_info?user_id="+data.user_id)
       .subscribe(data2 => {
         
       this.currentuser = data2[0]
@@ -350,7 +351,7 @@ getdpmdocs(x){
 
 getdpms(){
  
-  this.userservice.get("https://localhost/dms/admin/getdpms?usertype="+this.currentuser.usertype).subscribe((res)=>{
+  this.userservice.get(API_URL+"admin/getdpms?usertype="+this.currentuser.usertype).subscribe((res)=>{
 
           this.dpm = res
       
@@ -493,7 +494,7 @@ getfolders(){
  
      }
 
-  this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
+  this.userservice.get(API_URL+"admin/getfolders?directory="+dir).subscribe((res)=>{
     this.folders = res
   
 
@@ -517,7 +518,7 @@ folclick(x){
        }
         console.log(dir)
 
-       this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
+       this.userservice.get(API_URL+"admin/getfolders?directory="+dir).subscribe((res)=>{
               this.folders = res
               console.log(res)
 
@@ -558,7 +559,7 @@ console.log(x)
         
             console.log(dir)
     
-           this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
+           this.userservice.get(API_URL+"admin/getfolders?directory="+dir).subscribe((res)=>{
                   this.folders = res
                   console.log(res)
     

@@ -8,6 +8,8 @@ import { AddBranchPage } from '../add-branch/add-branch.page';
 import { ViewBranchPage } from '../view-branch/view-branch.page';
 import { ArgumentType } from '@angular/compiler/src/core';
 import { ViewmodalPage } from '../viewmodal/viewmodal.page';
+import { environment } from '../../../environments/environment';
+const API_URL = environment.API_URL
 
 var doc1;
 @Component({
@@ -17,7 +19,7 @@ var doc1;
 })
 export class DocpopoverComponent implements OnInit {
   currentdoc: any = []
-
+  API_URL = API_URL
   currentuser: any
   doc: any;
   url: string;
@@ -42,7 +44,7 @@ export class DocpopoverComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: ViewmodalPage,
       componentProps:{
-        file: 'http://localhost/dms/'+this.currentdoc.directory+'/'+this.currentdoc.filename
+        file: API_URL+this.currentdoc.directory+'/'+this.currentdoc.filename
 
       },
       cssClass: 'viewmodal'
@@ -67,7 +69,7 @@ export class DocpopoverComponent implements OnInit {
 }
 
 getdocument(){
-  this.user.get("https://localhost/dms/admin/getdocument?doc_id="+this.document_id).subscribe((res)=>{
+  this.user.get(API_URL+"admin/getdocument?doc_id="+this.document_id).subscribe((res)=>{
 
           this.currentdoc = res[0]
           console.log(this.currentdoc)
@@ -99,7 +101,7 @@ getdocument(){
     
     const formData: FormData = new FormData();
     formData.append('doc_id', this.doc)
-    this.http.get("https://localhost/dms/admin/download_doc?doc_id="+this.doc).subscribe((response: any) => {
+    this.http.get(API_URL+"admin/download_doc?doc_id="+this.doc).subscribe((response: any) => {
       console.log(response);
     
       
@@ -164,7 +166,7 @@ getdocument(){
   getuserinfo(){
   
     this.user.userinfo().then((data)=>{
-      this.http.get("https://localhost/dms/admin/account_info?user_id="+data.user_id)
+      this.http.get(API_URL+"admin/account_info?user_id="+data.user_id)
       .subscribe(data2 => {
         
       this.currentuser = data2[0]
@@ -219,7 +221,7 @@ getdocument(){
     formData.append('doc_id', this.doc)
     
     formData.append('usertype_title', this.currentuser.usertype_title)
-    this.http.post("https://localhost/dms/admin/deletedoc", formData).subscribe((response: any) => {
+    this.http.post(API_URL+"admin/deletedoc", formData).subscribe((response: any) => {
       console.log(response);
     
       

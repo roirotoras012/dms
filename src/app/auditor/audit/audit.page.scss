@@ -883,5 +883,17 @@ table.table .avatar {
    
 
  }
+ .nav-item,.nav-link, .navbar-brand{
 
+    color: white !important;
+}
+.navbar {
+
+    background: #526181 !important;
+}
+ion-content{
+
+    --background: url('./../../../assets/images/background-home.png') 0 0/100% auto no-repeat !important;
+
+}
  

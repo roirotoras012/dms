@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
+import {NgxDocViewerModule } from 'ngx-doc-viewer'
 import { ViewmodalPageRoutingModule } from './viewmodal-routing.module';
 
 import { ViewmodalPage } from './viewmodal.page';
@@ -13,7 +13,8 @@ import { ViewmodalPage } from './viewmodal.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ViewmodalPageRoutingModule
+    ViewmodalPageRoutingModule,
+    NgxDocViewerModule
   ],
   declarations: [ViewmodalPage]
 })

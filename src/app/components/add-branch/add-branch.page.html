@@ -8,6 +8,7 @@
       </div>
      
       <li *ngFor="let data of branches" class="dep"  style="display: block; border: solid black; border-width: 1px; margin-bottom: 5px; padding-bottom: 5px;" >
+        <label style="float: right; padding: 5px">Modified: {{data.branch_document_date_uploaded}}</label>
         <input (change)="selectedFile1($event)" type="file" name="file"  style="background-color:#fff; margin-left: 50px; margin-top: 10px; margin-bottom: 10px;" required="required" />
         <input type="submit" class="btn btn-success" (click)="update(data)" value="Update" style="margin-left: 50px;">
         
@@ -15,12 +16,12 @@
         <input type="submit" class="btn btn-success" (click)="alert2(data.branch_document_id)" value="remove" style="margin-left: 5px;">
         <button lines="none" class="contents1"  >
             
-         
+        
          
           <i style="vertical-align: middle;"  class="fas fa-file-alt fa-2x"></i>
             <strong style="font-size: 15px; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data.branch_document_filename}}</strong>
-         
-            <form ngNoForm action="https://localhost/dms/admin/download_docB" method="get">
+            
+            <form ngNoForm action="{{API_URL}}admin/download_docB" method="get">
  
   
               <input  type="hidden" id="doc_id" name="doc_id" value="{{data.branch_document_id}}">

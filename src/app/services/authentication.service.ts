@@ -59,7 +59,11 @@ export class AuthenticationService {
       this.DepartmentalState.next(false);
       this.AuditorState.next(false);
       
-    });
+    }).then(()=>{
+      this.router.navigate(['login'])
+
+
+    })
     
   }
   isAuthenticated(){

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PopoverController, AlertController, ModalController } from '@ionic/angular';
 import { PopoverComponent } from '../components/popover/popover.component';
 import { AccPopoverComponent } from '../components/acc-popover/acc-popover.component';
-
+import { environment } from '../../environments/environment';
+const API_URL = environment.API_URL
 
 
 
@@ -55,7 +56,7 @@ export class DepartmentPage implements OnInit {
   }
 
   getauditors(){
-    this.userservice.get("https://localhost/dms/admin/getauditor").subscribe((res)=>{
+    this.userservice.get(API_URL+"admin/getauditor").subscribe((res)=>{
   
       this.auditors = res 
   
@@ -66,7 +67,7 @@ export class DepartmentPage implements OnInit {
   getuserinfo(){
   
     this.userservice.userinfo().then((data)=>{
-      this.http.get("https://localhost/dms/admin/account_info?user_id="+data.user_id)
+      this.http.get(API_URL+"admin/account_info?user_id="+data.user_id)
       .subscribe(data2 => {
         
       this.currentuser = data2[0]
@@ -93,7 +94,7 @@ export class DepartmentPage implements OnInit {
      const formData: FormData = new FormData();
    
     formData.append('audit', audit.audit_id)
-    this.http.post("https://localhost/dms/admin/share",formData).subscribe((response: any) => {
+    this.http.post(API_URL+"admin/share",formData).subscribe((response: any) => {
   
     for(let i =0 ; i < this.dpmfolders.length; i ++){
         if(this.dpmfolders[i].audit_id == audit.audit_id){
@@ -225,7 +226,7 @@ export class DepartmentPage implements OnInit {
   getschedule(){
     this.eventSource = [];
  
-    this.userservice.get("https://localhost/dms/admin/getauditeesched?usertype_id="+this.currentuser.usertype).subscribe((sched)=>{
+    this.userservice.get(API_URL+"admin/getauditeesched?usertype_id="+this.currentuser.usertype).subscribe((sched)=>{
      
  
     

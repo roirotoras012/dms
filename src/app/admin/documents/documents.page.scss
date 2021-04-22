@@ -20,7 +20,7 @@
 	margin-right: 10px;
 }
 .navbar .navbar-brand {
-	color: #555;
+	color: white;
 	padding-left: 0;
 	padding-right: 50px;
     padding-top: 15px;
@@ -147,6 +147,7 @@ body {
     
     
 }
+
 
 :host ::ng-deep{
 
@@ -891,5 +892,35 @@ table.table .avatar {
    
 
  }
+ .nav-item,.nav-link, .navbar-brand{
 
- 
+    color: white !important;
+}
+.nav-item,.nav-link, .navbar-brand{
+
+    color: white !important;
+}
+.navbar {
+
+    background: #526181 !important;
+}
+ion-content{
+
+    --background: url('./../../../assets/images/background-home.png') 0 0/100% auto no-repeat !important;
+
+    
+}label {
+    font-size: 15px
+
+
+}
+input{
+
+    font-size : 15px
+}
+
+
+select {
+
+    height: 30px !important;
+}

@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-
+  <ion-content>
         <nav class="navbar navbar-expand-xl navbar-light bg-light">
           <a routerLink='/admin' class="navbar-brand"><i class='fa fa-file'></i>USTED<b>  System</b></a>
           <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -18,18 +18,12 @@
               <a routerLink='/admin/documents' class="nav-item nav-link">Documents</a>
               <a routerLink='/admin/manage-users' class="nav-item nav-link">Manage Users</a>
             </div>
-            <form class="navbar-form form-inline">
-              <div class="input-group search-box">								
-                <input type="text" id="search" class="form-control" placeholder="Search">
-                
-              </div>
-            </form>
             <div class="navbar-nav ml-auto">
-              <a href="#" class="nav-item nav-link notifications"><i class="fa fa-bell-o"></i><span class="badge">1</span></a>
                 
-              <div class="nav-item dropdown">
-                <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action"><button><img src="./assets/images/cdustp.jpg" class="avatar" alt="Avatar">{{currentuser.name}}</button></a>
                 
+              <div class="nav-item dropdown">                                                                                                                                       
+                <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action" style="color: white;"><button><i class="fas fa-user-alt" style="vertical-align: middle;font-size: 25px;"></i>  {{currentuser.name}}</button></a>
+                  
               </div>
             </div>
           </div>
@@ -38,10 +32,10 @@
   
 
 
-  <ion-content>
+
   <div>
   <div class="table-responsive">
-    <div class="table-wrapper">
+    <div class="table-wrapper" style="min-height: 800px;">
       <div class="table-title">
         <div class="row">
           <div class="col-xs-6">

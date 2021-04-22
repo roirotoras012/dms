@@ -35,14 +35,15 @@
 
 
   <div class="w3-container" style="padding-left: 170px; padding-right: 150px;">
+    <button (click)="audithistory()" style="display: inline; margin: 10px; text-align: center; float: left; border-radius: 0px !important; height: 50px; background: #526181 !important; color: white;width: auto; margin: 20px;" class="newbut1 btn">Audit Plan History</button>
        <div class="w3-center"  >
         <!-- <button (click)="alert1()" style="display: block; margin-top: 10px; text-align: center;" class="newbut1 btn-muted">Generate Audit Plan</button> -->
-   
+      
 
-<div *ngFor="let auditplan of auditplan" style="margin-top: 100px;">
-        <div *ngIf="auditplan.done == 0" style="border: solid black; margin: 10px; padding: 10px; border-width: 1px; border-radius: 5px; background: white;">
-          <div >
-            <button (click)="markalert(auditplan.audit_plan_id)" style="display: inline; margin: 10px; text-align: center; float: right; border-radius: 0px !important; height: 50px; background: #526181 !important; color: white;" class="newbut1 btn">Mark as done</button>
+<div *ngFor="let auditplan of auditplan"> 
+        <div *ngIf="auditplan.done == 0" style="border: solid black; margin: 10px; padding: 10px; border-width: 1px; border-radius: 5px; background: white; min-height: 800px;">
+          <div> 
+            <button *ngIf="auditcount == auditchecked && auditcount>0" (click)="markalert(auditplan.audit_plan_id)" style="display: inline; margin: 10px; text-align: center; float: right; border-radius: 0px !important; height: 50px; background: #526181 !important; color: white;" class="newbut1 btn">Mark as done</button>
           </div>
           <div style="width: 500px; margin: auto;">
               
@@ -58,23 +59,14 @@
     </ion-item>
 
 
-    <ion-item>
-      <label *ngIf="selected_dpm == null" for="auditee"><h4>DPM</h4></label>
-        <ionic-selectable
-        [(ngModel)]= "selected_dpm"
-        [items]="dpm"
-        [isMultiple]="true"
-        itemValueField="dpm_id"
-        itemTextField="dpm_title"
-        [canSearch]="true">
-       
+    
+    <label for="auditee"><h4>Auditee:</h4></label>
+    <select style="font-size: 18px;" name="auditee" id="auditee" [(ngModel)]="auditeechoice" (change)="auditeechange()"  class="form-control">
+      <option></option>
+      <option *ngFor="let data of auditee" value={{data.usertype_id}}>{{data.usertype_title}}</option>
+     
       
-    
-    
-       
-        </ionic-selectable>
-    
-      </ion-item>
+    </select>
       
     <label for="auditor"><h4>Auditor:</h4></label>
     <select style="font-size: 18px;" name="auditor" id="auditor" [(ngModel)]="auditor" class="form-control">
@@ -84,14 +76,25 @@
       
     </select>
     
-  
-    <label for="auditee"><h4>Auditee:</h4></label>
-    <select style="font-size: 18px;" name="auditee" id="auditee" [(ngModel)]="auditeechoice"   class="form-control">
-      <option></option>
-      <option *ngFor="let data of auditee" value={{data.usertype_id}}>{{data.usertype_title}}</option>
-     
+ 
+
+    <ion-item>
+      <label *ngIf="selected_dpm == null" for="auditee"><h4>DPM</h4></label>
+        <ionic-selectable
+        [(ngModel)]= "selected_dpm"
+        [items]="dpm2"
+        [isMultiple]="true"
+        itemValueField="dpm_id"
+        itemTextField="dpm_title"
+        [canSearch]="true">
       
-    </select>
+      
+    
+    
+      
+        </ionic-selectable>
+    
+      </ion-item>
     <div class="form-group">
       <label for="link"><h4>Meeting Link:</h4></label>
       <input type="text" class="form-control" [(ngModel)]="link" required>
@@ -127,15 +130,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data1 of sortData">
+        <tr *ngFor="let data1 of sortData" [ngClass]="{'my_class': data1.done == 1}">
           <ng-container *ngIf="data1.auditplan == auditplan.audit_plan_id">
-          <td>
+          <td > 
             <ion-checkbox slot="start" 
     [(ngModel)]="data1.isChecked" 
     (ionChange)="checkEvent()"></ion-checkbox>
           </td>
-          <td>{{data1.startTime.slice(0,18)}} {{data1.startTime.slice(-2)}}</td>
-          <td>{{data1.endTime.slice(0,18)}} {{data1.endTime.slice(-2)}}</td>
+          <td>{{data1.startTime}}</td>
+          <td>{{data1.endTime}}</td>
          
           <td>{{data1.dpm_title}}</td>
           <td>{{data1.name}}</td>

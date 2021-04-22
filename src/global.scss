@@ -39,3 +39,39 @@
     padding: 25px;
    
 }
+.historymodal{
+    --width: 60%;  
+    --height: 100%;
+ 
+    padding: 25px;
+
+}
+nav{
+    
+    
+    transition: all 0.5s;
+    z-index: 997;
+
+    box-shadow: 0px 2px 15px white !important;
+  
+
+}
+.fas.fa-folder.fa-2x{
+    color: #F8D775 !important;
+    font-size: 45px;
+
+    
+}
+.navbar-nav .nav-item::after{
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: white !important;
+    transition: width .5s;
+
+}
+.navbar-nav .nav-item:hover::after {
+    width: 100%;
+    //transition: width .3s;
+}

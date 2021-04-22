@@ -5,7 +5,8 @@ import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { ToastController, NavParams } from '@ionic/angular';
 import { UserServiceService } from '../../../services/user-service.service'
- 
+import { environment } from '../../../../environments/environment';
+const API_URL = environment.API_URL
 @Component({
   selector: 'app-add-modal',
   templateUrl: './add-modal.component.html',
@@ -51,7 +52,7 @@ export class AddModalComponent implements OnInit {
 
   getusertype(){
 
-      this.user.get("https://localhost/dms/admin/getusertype").subscribe((res)=>{
+      this.user.get(API_URL+"admin/getusertype").subscribe((res)=>{
       this.usertypes = res
      
 
@@ -91,7 +92,7 @@ export class AddModalComponent implements OnInit {
     message: 'Username is already taken',
     duration: 2000
   });
-      this.http.post("https://localhost/dms/admin/add_account", formData) 
+      this.http.post(API_URL+"admin/add_account", formData) 
         .subscribe(res => {
          
       

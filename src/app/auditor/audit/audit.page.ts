@@ -14,6 +14,8 @@ import { AppComponent } from '../../app.component';
 import { CalendarComponent } from 'ionic2-calendar/';
 import { ViewChild, Inject, LOCALE_ID } from '@angular/core'
 import { formatDate } from '@angular/common';
+import { environment } from '../../../environments/environment';
+const API_URL = environment.API_URL
 @Component({
   selector: 'app-audit',
   templateUrl: './audit.page.html',
@@ -216,7 +218,7 @@ export class AuditPage implements OnInit {
          }
          
   
-         this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
+         this.userservice.get(API_URL+"admin/getfolders?directory="+dir).subscribe((res)=>{
                 this.folders = res
                
   
@@ -288,9 +290,9 @@ export class AuditPage implements OnInit {
  
      }
 
-  this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
+  this.userservice.get(API_URL+"admin/getfolders?directory="+dir).subscribe((res)=>{
     this.folders = res
- 
+  
 
 
 })
@@ -323,7 +325,7 @@ export class AuditPage implements OnInit {
     formData.append('directory', dir)
     
     formData.append('user', this.currentuser.user_id)
-    this.http.post("https://localhost/dms/upload_controller/do_upload",formData).subscribe((response: any) => {
+    this.http.post(API_URL+"upload_controller/do_upload",formData).subscribe((response: any) => {
      if(response == 'success'){
       toast.present();
 
@@ -359,7 +361,7 @@ export class AuditPage implements OnInit {
     
     const formData: FormData = new FormData();
     formData.append('document', this.file_upload, this.file_upload.name)
-    this.http.post("https://localhost/dms/upload_controller/do_upload",formData).subscribe((response: any) => {
+    this.http.post(API_URL+"upload_controller/do_upload",formData).subscribe((response: any) => {
  
       toast.present();
       
@@ -411,7 +413,7 @@ console.log(x)
         
          
     
-           this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
+           this.userservice.get(API_URL+"admin/getfolders?directory="+dir).subscribe((res)=>{
                   this.folders = res
                   console.log(res)
                   
@@ -433,7 +435,7 @@ console.log(x)
          }
     
     const popover = await this.popover.create({
-      component: DocpopoverComponent,
+      component: Docpopover2Component,
       componentProps: {
         document : x,
         user: this.currentuser.user_id,
@@ -483,7 +485,7 @@ console.log(x)
       
          }
  
-    this.http.get("https://localhost/dms/admin/get_doc?user_id="+this.currentuser.user_id+"&directory="+dir) 
+    this.http.get(API_URL+"admin/get_doc?user_id="+this.currentuser.user_id+"&directory="+dir) 
       .subscribe(res => {
       
         this.docs = res;
@@ -524,7 +526,7 @@ console.log(x)
   getuserinfo(){
   
     this.userservice.userinfo().then((data)=>{
-      this.http.get("https://localhost/dms/admin/account_info?user_id="+data.user_id)
+      this.http.get(API_URL+"admin/account_info?user_id="+data.user_id)
       .subscribe(data2 => {
         
       this.currentuser = data2[0]

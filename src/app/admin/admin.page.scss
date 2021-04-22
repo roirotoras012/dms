@@ -112,7 +112,7 @@
 
 ion-content{
 
-    --background: url('/assets/images/background-home.jpg') 0 0/100% auto no-repeat !important;
+    --background: url('./../../assets/images/background-home.png') 0 0/100% auto no-repeat !important;
 
     
 }
@@ -132,12 +132,18 @@ ion-content{
     color: white !important;
 }
 
+.my_class{
+
+    background: #526181;
+    color: white
+}
+
 .navbar-nav .nav-item::after{
     content: '';
     display: block;
     width: 0;
     height: 2px;
-    background: rgba(17, 112, 190, 0.932);
+    background: white;
     transition: width .5s;
 
 }

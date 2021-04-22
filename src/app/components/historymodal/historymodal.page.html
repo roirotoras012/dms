@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="padding: 10px;">Audit Plan History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+
+  <div class="w3-container">
+    <div class="w3-center">
+<div *ngFor="let auditplan of sortData1"  style="margin-bottom: 50px;">
+
+<div style="border: solid black; border-width: 1px; margin: 10px; min-height: 400px;">
+  <label style="font-size: 15px; padding: 5px;">Date: {{auditplan.date_generated}}</label>
+    <table class="table table-hover" id="myTable" style="font-size: 15px;">
+      <thead>
+        <tr  style="text-align: center;">
+        
+          <th style="width: auto;">Start Time</th>
+          <th style="width: auto;" >End Time</th>
+          
+          <th style="width: auto;">Process/Area</th>
+          <th style="width: auto;">Auditor</th>
+         
+      
+          <th  style="width: auto;">Auditee</th>
+        
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data1 of sortData" >
+          <ng-container *ngIf="auditplan.audit_plan_id == data1.auditplan">
+       
+          <td>{{data1.startTime}}</td>
+          <td>{{data1.endTime}}</td>
+         
+          <td>{{data1.dpm_title}}</td>
+          <td>{{data1.name}}</td>
+          
+    
+          <td>{{data1.usertype_title}}</td>
+          
+        </ng-container>
+        </tr>
+      
+       
+        
+        
+      </tbody>
+    </table>
+
+  </div>
+
+
+
+
+</div>
+
+
+</div>
+
+  </div>
+
+
+
+
+
+
+
+</ion-content>

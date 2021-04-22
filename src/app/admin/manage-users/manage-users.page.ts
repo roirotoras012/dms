@@ -10,6 +10,8 @@ import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../../components/popover/popover.component';
 import { AccPopoverComponent } from '../../components/acc-popover/acc-popover.component';
 import { UserServiceService } from '../../services/user-service.service';
+import { environment } from '../../../environments/environment';
+
 declare var myFunction;
 
 @Component({
@@ -25,6 +27,7 @@ export class ManageUsersPage implements OnInit {
   checkedUsers: any = [];
   sortDirection = 0 
   sortKey = null
+  private API_URL: any= environment.API_URL
   constructor(private userservice: UserServiceService,private modalCtrl: ModalController, private http: HttpClient, private router: Router, private popover: PopoverController) { 
 
     
@@ -178,7 +181,7 @@ export class ManageUsersPage implements OnInit {
 
   async getUsers() {
  
-    this.http.get("https://localhost/dms/admin/getuser") 
+    this.http.get(this.API_URL+"admin/getuser") 
       .subscribe(res => {
       
         this.datauser = res;
@@ -251,7 +254,7 @@ export class ManageUsersPage implements OnInit {
   getuserinfo(){
   
     this.userservice.userinfo().then((data)=>{
-      this.http.get("https://localhost/dms/admin/account_info?user_id="+data.user_id)
+      this.http.get(this.API_URL+"admin/account_info?user_id="+data.user_id)
       .subscribe(data2 => {
         
       this.currentuser = data2[0]

@@ -3,6 +3,8 @@ import { ToastController, NavParams } from '@ionic/angular';
 import { HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
+const API_URL = environment.API_URL
 
 @Component({
   selector: 'app-delete1-modal',
@@ -26,7 +28,7 @@ export class Delete1ModalComponent implements OnInit {
     
 
 
-    this.http.post("https://localhost/dms/admin/removeuser1", JSON.stringify(this.tobedeleted )) 
+    this.http.post(API_URL+"admin/removeuser1", JSON.stringify(this.tobedeleted )) 
       .subscribe(res => {
        
         console.log(res);

@@ -5,6 +5,8 @@ import { ToastController, NavParams } from '@ionic/angular';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { UserServiceService } from '../../../services/user-service.service'
+import { environment } from '../../../../environments/environment';
+const API_URL = environment.API_URL
  
 @Component({
   selector: 'app-edit-modal',
@@ -41,7 +43,7 @@ this.getusertype()
   
   getusertype(){
 
-    this.user.get("https://localhost/dms/admin/getusertype").subscribe((res)=>{
+    this.user.get(API_URL+"admin/getusertype").subscribe((res)=>{
     this.usertypes = res
      
 
@@ -53,7 +55,7 @@ this.getusertype()
 
   async getUser() {
  
-    // this.http.get("https://localhost/dms/admin/getuser") 
+    // this.http.get(API_URL+"admin/getuser") 
     //   .subscribe(res => {
     //     console.log(res);
     //     this.datauser = res;
@@ -112,7 +114,7 @@ this.getusertype()
     message: 'Username is already taken',
     duration: 2000
   });
-      this.http.post("https://localhost/dms/admin/edit_user", formData) 
+      this.http.post(API_URL+"admin/edit_user", formData) 
         .subscribe(res => {
          
         

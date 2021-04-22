@@ -1,6 +1,6 @@
 
 
-<form action="https://localhost/dms/admin/download_doc" method="get">
+<form action='{{API_URL}}admin/download_doc' method="get">
  
   
   <input  type="hidden" id="doc_id" name="doc_id" value="{{doc}}">
@@ -10,7 +10,7 @@
  
   <button (click)="view()" class="dropdown-item">View (PDF only)</button>
   <button (click)="delalert()" class="dropdown-item">Delete Document</button>
-  <button (click)="addbranch()" class="dropdown-item">View Versions</button>
+
   
   
 </div>

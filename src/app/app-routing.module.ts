@@ -50,6 +50,10 @@ const routes: Routes = [
     path: 'viewmodal',
     loadChildren: () => import('./components/viewmodal/viewmodal.module').then( m => m.ViewmodalPageModule)
   },
+  {
+    path: 'historymodal',
+    loadChildren: () => import('./components/historymodal/historymodal.module').then( m => m.HistorymodalPageModule)
+  },
 
 
   

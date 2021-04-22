@@ -8,17 +8,17 @@ import { UserServiceService } from '../../services/user-service.service';
 import { AddBranchPage } from '../add-branch/add-branch.page';
 import { ViewBranchPage } from '../view-branch/view-branch.page';
 import { ViewmodalPage } from '../viewmodal/viewmodal.page';
-
 import { environment } from '../../../environments/environment';
 const API_URL = environment.API_URL
 var doc1;
 @Component({
-  selector: 'app-docpopover2',
-  templateUrl: './docpopover2.component.html',
-  styleUrls: ['./docpopover2.component.scss'],
+  selector: 'app-docpopover3',
+  templateUrl: './docpopover3.component.html',
+  styleUrls: ['./docpopover3.component.scss'],
 })
-export class Docpopover2Component implements OnInit {
-    currentdoc: any = []
+export class Docpopover3Component implements OnInit {
+API_URL = API_URL
+  currentdoc: any = []
   doc: any;
   url: string;
  document_id: any;

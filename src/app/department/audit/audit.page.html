@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  
+  <ion-content >
   <nav class="navbar navbar-expand-xl navbar-light bg-light">
     <a routerLink='/department' class="navbar-brand"><i class='fa fa-file'></i>USTED<b>  System</b></a>
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -18,18 +18,12 @@
         <a routerLink='/department/documents' class="nav-item nav-link">Documents</a>
         <a routerLink='/department/audit' class="nav-item nav-link">Audit</a>
       </div>
-      <form class="navbar-form form-inline">
-        <div class="input-group search-box">								
-          <input type="text" id="search" class="form-control" placeholder="Search">
-
-        </div>
-      </form>
       <div class="navbar-nav ml-auto">
-        <a href="#" class="nav-item nav-link notifications"><i class="fa fa-bell-o"></i><span class="badge">1</span></a>
-
-        <div class="nav-item dropdown">
-          <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action"><button><img src="./assets/images/cdustp.jpg" class="avatar" alt="Avatar"> Clint Cardenas</button></a>
-
+                
+                
+        <div class="nav-item dropdown">                                                                                                                                       
+          <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action" style="color: white;"><button><i class="fas fa-user-alt" style="vertical-align: middle;font-size: 25px;"></i>  {{currentuser.name}}</button></a>
+            
         </div>
       </div>
     </div>
@@ -37,7 +31,7 @@
 
 
 
-        <ion-content >
+   
 
  
 
@@ -62,7 +56,7 @@
             
         
           
-            <div class="w3-container1" style="overflow-x:auto; text-align: left;">
+            <div class="w3-container1" style="overflow-x:auto; text-align: left; background: white; min-height: 800px; border-radius: 5px; padding: 10px;" >
              
 
 
@@ -101,7 +95,7 @@
                 <div *ngIf="folder_layer.length == 0" style="display: inline;" ><button class="hove" >Working DPM</button></div>
                 <div ><h5>Folders</h5></div>
 
-                <div *ngIf="folders.length == 0">EMPTY</div>
+                <div *ngIf="folders.length > 1">EMPTY</div>
                 <li style="color: #555;" *ngFor="let data of dpmfolders" class="dep">
                   <!-- <button><i class="far fa-folder fa-5x"></i>{{data.department_name}}</button> -->
         

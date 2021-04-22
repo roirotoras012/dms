@@ -16,6 +16,8 @@ import { UserServiceService } from '../services/user-service.service';
 import { ArgumentType } from '@angular/compiler/src/core';
 import { formatDate } from '@angular/common';
 import { Inject, LOCALE_ID } from '@angular/core'
+import { environment } from '../../environments/environment';
+const API_URL = environment.API_URL;
 @Component({
   selector: 'app-auditor',
   templateUrl: './auditor.page.html',
@@ -84,7 +86,7 @@ export class AuditorPage implements OnInit {
   }
 
   getauditors(){
-    this.userservice.get("https://localhost/dms/admin/getauditor").subscribe((res)=>{
+    this.userservice.get(API_URL+"admin/getauditor").subscribe((res)=>{
   
       this.auditors = res 
   
@@ -95,7 +97,7 @@ export class AuditorPage implements OnInit {
   }
 
   getauditee(){
-    this.userservice.get("https://localhost/dms/admin/getauditee").subscribe((res)=>{
+    this.userservice.get(API_URL+"admin/getauditee").subscribe((res)=>{
   
       this.auditee = res
      
@@ -110,7 +112,7 @@ export class AuditorPage implements OnInit {
   
   getdpm(){
 
-    this.userservice.get("https://localhost/dms/admin/getdpm").subscribe((res)=>{
+    this.userservice.get(API_URL+"admin/getdpm").subscribe((res)=>{
   
             this.dpm = res
         
@@ -151,7 +153,7 @@ export class AuditorPage implements OnInit {
       formData.append('auditor', this.auditor)
       formData.append('auditee', this.auditeechoice)
       formData.append('link', this.link)
-        this.userservice.post("https://localhost/dms/admin/addaudit", formData).subscribe((res)=>{
+        this.userservice.post(API_URL+"admin/addaudit", formData).subscribe((res)=>{
   
           this.getaudit()
               console.log(res)
@@ -196,7 +198,7 @@ export class AuditorPage implements OnInit {
 
 
 
-//     this.http.post("https://localhost/dms/admin/removeuser", JSON.stringify(this.postData )) 
+//     this.http.post(API_URL+" admin/removeuser", JSON.stringify(this.postData )) 
 //       .subscribe(res => {
        
 //         console.log(res);
@@ -233,7 +235,7 @@ async delete() {
   
 
 
-  this.http.post("https://localhost/dms/admin/removeaudit", JSON.stringify(this.postData)) 
+  this.http.post(API_URL+"admin/removeaudit", JSON.stringify(this.postData)) 
     .subscribe(res => {
      
   
@@ -265,11 +267,11 @@ checkMaster() {
 mark(id){
 
   const formData: FormData = new FormData();
-      formData.append('audit_plan_id', id)
+      formData.append('audit_id', id)
       
-        this.userservice.post("https://localhost/dms/admin/mark", formData).subscribe((res)=>{
+        this.userservice.post(API_URL+"admin/markaudit", formData).subscribe((res)=>{
 
-          this.getauditplan()
+
               
         })
 
@@ -308,7 +310,7 @@ checkEvent() {
 
 getaudit(){
 
-  this.userservice.get("https://localhost/dms/admin/getaudit").subscribe((res)=>{
+  this.userservice.get(API_URL+"admin/getaudit").subscribe((res)=>{
 
       this.audit = res
      
@@ -338,7 +340,7 @@ get sortData(){
   getuserinfo(){
   
     this.userservice.userinfo().then((data)=>{
-      this.http.get("https://localhost/dms/admin/account_info?user_id="+data.user_id)
+      this.http.get(API_URL+"admin/account_info?user_id="+data.user_id)
       .subscribe(data2 => {
         
       this.currentuser = data2[0]
@@ -360,7 +362,7 @@ get sortData(){
 
   }
 getauditplan(){
-  this.userservice.get("https://localhost/dms/admin/generate1").subscribe((res)=>{
+  this.userservice.get(API_URL+"admin/generate1").subscribe((res)=>{
 
       this.auditplan = res
 
@@ -373,7 +375,7 @@ getauditplan(){
 
   generate(){
 
-      this.userservice.get("https://localhost/dms/admin/generate").subscribe((res)=>{
+      this.userservice.get(API_URL+"admin/generate").subscribe((res)=>{
 
         this.auditplan = res
       
@@ -406,7 +408,8 @@ alert.present();
 }
 
 async markalert(id){
-  console.log()
+
+  console.log(id)
 const alert = await this.alert.create({
  
   header: "",
@@ -424,6 +427,11 @@ const alert = await this.alert.create({
   }],
 });
 alert.present();
+alert.onDidDismiss().then(()=>{
+
+    this.getaudit();
+
+})
 }
 
 

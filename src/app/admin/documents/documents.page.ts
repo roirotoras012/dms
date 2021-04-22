@@ -3,6 +3,8 @@ import { PopoverController, ModalController, AlertController } from '@ionic/angu
 import { PopoverComponent } from '../../components/popover/popover.component';
 import { AddFolderComponent } from '../../components/add-folder/add-folder.component';
 import { DocpopoverComponent } from '../../components/docpopover/docpopover.component';
+import { Docpopover2Component } from '../../components/docpopover2/docpopover2.component';
+import { Docpopover3Component } from '../../components/docpopover3/docpopover3.component';
 import { AccPopoverComponent } from '../../components/acc-popover/acc-popover.component';
 import { HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import { ToastController, NavParams } from '@ionic/angular';
@@ -12,8 +14,10 @@ import { AppComponent } from '../../app.component';
 import { CalendarComponent } from 'ionic2-calendar/';
 import { ViewChild, Inject, LOCALE_ID } from '@angular/core'
 import { formatDate } from '@angular/common';
+import { environment } from '../../../environments/environment';
 
 declare var myFunction1;
+
 
 @Component({
   selector: 'app-documents',
@@ -21,18 +25,28 @@ declare var myFunction1;
   styleUrls: ['./documents.page.scss'],
 })
 export class DocumentsPage implements OnInit {
+  main: any = []
+  evidences: any = []
+  auditorpicked: any = []
+  status2: any = 'dpm'
+  status: any = 'mydoc'
+  auditor: any
+  auditors: any = []
  username: string;
  file_upload: File;
  fileinput: any;
  datauser: any = [];
  currentuser: any = [];
  folder_layer: any = []
+ folder_layer1: any = []
  new: boolean = false
  folders: any = []
+ folders1: any = []
  touchtime = 0;
  x1: any ;
  docs: any = []
-
+ docs1: any = []
+private API_URL: any= environment.API_URL
  event: any = [];
  eventSource = [];
 
@@ -54,7 +68,7 @@ export class DocumentsPage implements OnInit {
 
  @ViewChild(CalendarComponent) myCal: CalendarComponent;
   constructor(@Inject(LOCALE_ID) private locale: string,private alertCtrl: AlertController,private modalCtrl: ModalController,private component: AppComponent,private popover: PopoverController, private http: HttpClient,public toastController: ToastController, private router: Router, private userservice: UserServiceService) {
-  
+
    }
 
 
@@ -140,6 +154,7 @@ export class DocumentsPage implements OnInit {
     this.getuserinfo()
     this.getschedule()
    
+   
   
   }
 
@@ -201,7 +216,7 @@ export class DocumentsPage implements OnInit {
          }
          
   
-         this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
+         this.userservice.get(this.API_URL+"admin/getfolders?directory="+dir).subscribe((res)=>{
                 this.folders = res
                 console.log(res)
   
@@ -209,6 +224,62 @@ export class DocumentsPage implements OnInit {
          })
         this.getfolders();
         this.getdoc()
+
+ 
+  
+  
+  }
+
+  folderclicked1(x){
+    if (this.touchtime == 0) {
+      this.x1 = x
+     
+      this.touchtime = new Date().getTime();
+      
+    } else {
+      // compare first click to this click and see if they occurred within double click threshold
+      if (new Date().getTime() - this.touchtime < 300) {
+        // double click occurred
+        if(this.x1 == x){
+          this.folclick1(x)
+          
+        
+        }
+        this.touchtime = 0;
+      } else {
+        // not a double click so set as a new first click
+        
+        this.touchtime = new Date().getTime();
+       
+      }
+    }
+  
+  
+  
+  
+  
+  }
+  folclick1(x){
+  
+    this.folder_layer1.push(x)
+
+    let dir = 'uploads/'+this.auditorpicked.usertype_title+'/'+this.auditorpicked.username  
+    
+    
+    for(let i = 0; i < this.folder_layer1.length; i++){
+          dir = dir +'/'+this.folder_layer1[i]
+      
+         }
+         
+  
+         this.userservice.get(this.API_URL+"admin/getfolders?directory="+dir).subscribe((res)=>{
+                this.folders1 = res
+                console.log(res)
+  
+  
+         })
+        this.getfolders1();
+        this.getdoc1()
 
  
   
@@ -273,7 +344,7 @@ export class DocumentsPage implements OnInit {
  
      }
 
-  this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
+  this.userservice.get(this.API_URL+"admin/getfolders?directory="+dir).subscribe((res)=>{
     this.folders = res
 
 
@@ -308,7 +379,7 @@ export class DocumentsPage implements OnInit {
     formData.append('directory', dir)
     
     formData.append('user', this.currentuser.user_id)
-    this.http.post("https://localhost/dms/upload_controller/do_upload",formData).subscribe((response: any) => {
+    this.http.post(this.API_URL+"upload_controller/do_upload",formData).subscribe((response: any) => {
      if(response == 'success'){
       toast.present();
 
@@ -344,7 +415,7 @@ export class DocumentsPage implements OnInit {
     
     const formData: FormData = new FormData();
     formData.append('document', this.file_upload, this.file_upload.name)
-    this.http.post("https://localhost/dms/upload_controller/do_upload",formData).subscribe((response: any) => {
+    this.http.post(this.API_URL+"upload_controller/do_upload",formData).subscribe((response: any) => {
       console.log(response  );
       toast.present();
       
@@ -374,6 +445,14 @@ export class DocumentsPage implements OnInit {
 
 }
 
+root1(){ 
+  this.folder_layer1 = []  
+  
+  this.getfolders1()
+  this.getdoc1()
+
+}
+
 direct(x){
   
   
@@ -395,7 +474,7 @@ console.log(x)
 
         
          
-           this.userservice.get("https://localhost/dms/admin/getfolders?directory="+dir).subscribe((res)=>{
+           this.userservice.get(this.API_URL+"admin/getfolders?directory="+dir).subscribe((res)=>{
                   this.folders = res
                 
                   
@@ -407,20 +486,55 @@ console.log(x)
         this.getfolders()
 
 }
-  async doc_popover(x, ev){
-    let dir = 'uploads/'+this.currentuser.usertype_title+'/'+this.currentuser.username
+
+
+direct1(x){
   
   
-    for(let i = 0; i < this.folder_layer.length; i++){
-          dir = dir +'/'+this.folder_layer[i]
+  
+  console.log(x)
+    for(let i =0; i <this.folder_layer1.length; i++){
+        if(x == this.folder_layer1[i] && i !=this.folder_layer1.length-1){
+          this.folder_layer1.splice(-1,1)
+  
+  
+        }
+     
+        let dir = 'uploads/'+this.auditorpicked.usertype_title+'/'+this.auditorpicked.username
+    
+        for(let i = 0; i < this.folder_layer1.length; i++){
+              dir = dir +'/'+this.folder_layer1[i]
+          
+             }
+  
+          
+           
+             this.userservice.get(this.API_URL+"admin/getfolders?directory="+dir).subscribe((res)=>{
+                    this.folders1 = res
+                  
+                    
+      
+             })
+  
+    }
+          this.getdoc1()
+          this.getfolders1()
+  
+  }
+  async doc_popover3(x, ev){
+    let dir = 'uploads/'+this.auditorpicked.usertype_title+'/'+this.auditorpicked.username
+  
+  
+    for(let i = 0; i < this.folder_layer1.length; i++){
+          dir = dir +'/'+this.folder_layer1[i]
       
          }
     
     const popover = await this.popover.create({
-      component: DocpopoverComponent,
+      component: Docpopover3Component,
       componentProps: {
         document : x,
-        user: this.currentuser.user_id,
+        user: this.auditorpicked.user_id,
         directory: dir,
        
         
@@ -432,12 +546,11 @@ console.log(x)
   
     await popover.present()
     popover.onWillDismiss().then(()=>{
-        this.getdoc()
+        this.getdoc1()
 
 
     })
   }
-
 
   async _popOver(ev:any){
     const popover = await this.popover.create({
@@ -464,13 +577,63 @@ console.log(x)
           dir = dir +'/'+this.folder_layer[i]
       
          }
+         console.log(dir)
  
-    this.http.get("https://localhost/dms/admin/get_doc?user_id="+this.currentuser.user_id+"&directory="+dir) 
+    this.http.get(this.API_URL+"admin/get_doc?user_id="+this.currentuser.user_id+"&directory="+dir) 
       .subscribe(res => {
         console.log(res);
         this.docs = res;
  
  
+    
+        }
+      
+      , err => {
+        console.log(err);
+      });
+
+
+  
+
+
+     
+
+
+  }
+
+  async getdoc1() {
+    this.main = []
+    this.evidences= []
+    let dir = 'uploads/'+this.auditorpicked.usertype_title+'/'+this.auditorpicked.username
+    
+    
+    for(let i = 0; i < this.folder_layer1.length; i++){
+          dir = dir +'/'+this.folder_layer1[i]
+      
+         }
+         console.log(dir)
+ 
+    this.http.get(this.API_URL+"admin/get_doc?user_id="+this.auditorpicked.user_id+"&directory="+dir) 
+      .subscribe(res => {
+        console.log(res);
+        this.docs1 = res;
+ 
+        
+    for(let i = 0; i < this.docs1.length; i++){
+      if(this.docs1[i].doc_type == 'dpm' ){
+          this.main.push(this.docs1[i])
+
+            console.log(this.main)
+      }
+      else if (this.docs1[i].doc_type == 'evidence'){
+
+        this.evidences.push(this.docs1[i])
+      }
+
+
+
+
+    }
     
         }
       
@@ -492,7 +655,7 @@ console.log(x)
   getuserinfo(){
   
     this.userservice.userinfo().then((data)=>{
-      this.http.get("https://localhost/dms/admin/account_info?user_id="+data.user_id)
+      this.http.get(this.API_URL+"admin/account_info?user_id="+data.user_id)
       .subscribe(data2 => {
         
       this.currentuser = data2[0]
@@ -500,7 +663,15 @@ console.log(x)
       this.getfolders()
       
       this.getdoc();
-    
+
+      if(this.auditor){
+        this.getfolders1()
+      
+        this.getdoc1();
+     
+       
+      }
+      this.getauditors()
     
         }
       
@@ -525,7 +696,7 @@ console.log(x)
   getschedule(){
     this.eventSource = [];
     
-    this.userservice.get("https://localhost/dms/admin/getschedule").subscribe((sched)=>{
+    this.userservice.get(this.API_URL+"admin/getschedule").subscribe((sched)=>{
      
     console.log(sched)
      
@@ -578,6 +749,68 @@ console.log(x)
   
   
   }
+
+  getauditors(){
+    this.userservice.get(this.API_URL+"admin/getauditor").subscribe((res)=>{
+
+          this.auditors = res
+          console.log(res)
+
+    })
+
+
+  }
+
+  auditorchange(){
+
+    
+  
+    for(let i = 0; i < this.auditors.length ; i++){
+
+          if(this.auditor == this.auditors[i].user_id){
+
+           this.auditorpicked = this.auditors[i]
+           console.log(this.auditorpicked)
+          }
+
+    }
+
+    this.getfolders1()
+    this.getdoc1()
+    this.root1()
+
+  }
+
+  getfolders1(){
+   
+    let dir = 'uploads/'+this.auditorpicked.usertype_title+'/'+this.auditorpicked.username
+      
+    
+      for(let i = 0; i < this.folder_layer1.length; i++){
+            dir = dir +'/'+this.folder_layer1[i]
+        
+           }
+     
+     
+       let data= {
+            dir : dir     
+   
+       }
+  
+    this.userservice.get(this.API_URL+"admin/getfolders?directory="+dir).subscribe((res)=>{
+      this.folders1 = res
+  
+  
+  
+  })
+  
+  
+  
+   }
+
+
+
+  
 
   
  

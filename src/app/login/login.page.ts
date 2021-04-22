@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
 import { ToastController, NavParams } from '@ionic/angular';
+import { environment } from '../../environments/environment';
+const API_URL = environment.API_URL
 const TOKEN_KEY = 'auth-token'
 
 @Component({
@@ -20,7 +22,7 @@ export class LoginPage implements OnInit {
 
  
   constructor(private toastController: ToastController,private platform: Platform,private router: Router,public api: ApiServiceService, private http: HttpClient,private storage: Storage,private authService: AuthenticationService) { 
-
+     
       console.log(authService.isnotAuthenticated())
       this.storage.get(TOKEN_KEY).then((res)=>{
         if(res){
@@ -70,7 +72,7 @@ export class LoginPage implements OnInit {
     formData.append('password', this.password)
  
     
-    this.http.post("https://localhost/dms/admin/login",formData).subscribe((response: any) => {
+    this.http.post(API_URL+"admin/login",formData).subscribe((response: any) => {
   
       if(response == "error"){
         toast.present();

@@ -4,13 +4,15 @@ import { UserServiceService } from '../../services/user-service.service';
 import { ToastController, NavParams } from '@ionic/angular';
 import { HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
-
+import { environment } from '../../../environments/environment';
+const API_URL = environment.API_URL
 @Component({
   selector: 'app-add-branch',
   templateUrl: './add-branch.page.html',
   styleUrls: ['./add-branch.page.scss'],
 })
 export class AddBranchPage implements OnInit {
+  API_URL= API_URL
   document_id: any;
   user_id: any;
   directory: any;
@@ -92,9 +94,19 @@ delete(branch_id){
   formData.append('branch_document_id', branch_id)
   
 
-  this.http.post("https://localhost/dms/admin/deletebranch", formData).subscribe((response: any) => {
+  this.http.post(API_URL+"admin/deletebranch", formData).subscribe((response: any) => {
     
       console.log(response)
+      if(response == 'success'){
+
+        for(let i =0 ; i < this.branches.length ; i++){
+
+          if(this.branches[i].branch_document_id == branch_id){
+            this.branches.splice(i , 1)
+          }
+        }
+
+      }
     
     
    
@@ -128,7 +140,7 @@ delete(branch_id){
     formData.append('branch_document_directory', x.branch_document_directory)
    
     formData.append('current_main', x.branch_document_main)
-    this.http.post("https://localhost/dms/admin/mainswap",formData).subscribe((response: any) => {
+    this.http.post(API_URL+"admin/mainswap",formData).subscribe((response: any) => {
       console.log(response);
 if(response == 'success'){  
   this.dismissModal()
@@ -157,7 +169,7 @@ if(response == 'success'){
     formData.append('document_id', this.document_id)
     formData.append('doc_type', this.status)
     formData.append('user', this.user_id)
-      this.http.post("https://localhost/dms/upload_controller/do_uploadB",formData).subscribe((response: any) => {
+      this.http.post(API_URL+"upload_controller/do_uploadB",formData).subscribe((response: any) => {
         console.log(response);
   
         if(response == 'success'){
@@ -197,7 +209,7 @@ if(response == 'success'){
 
 
   getbranch(){
-    this.http.get("https://localhost/dms/admin/getbranches?doc_id="+this.document_id).subscribe((res)=>{
+    this.http.get(API_URL+"admin/getbranches?doc_id="+this.document_id).subscribe((res)=>{
           this.branches = res
           console.log(res)
 
@@ -225,7 +237,7 @@ if(response == 'success'){
     formData.append('branch_document_user', this.user_id)
     formData.append('branch_document_main', x.branch_document_main)
     formData.append('old_file', x.branch_document_filename)
-      this.http.post("https://localhost/dms/upload_controller/do_uploadBB",formData).subscribe((response: any) => {
+      this.http.post(API_URL+"upload_controller/do_uploadBB",formData).subscribe((response: any) => {
         console.log(response);
   if(response == 'success'){
     

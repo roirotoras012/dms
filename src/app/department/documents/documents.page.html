@@ -3,7 +3,7 @@
   <title>ADMIN</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+  <ion-content >
  
   <nav class="navbar navbar-expand-xl navbar-light bg-light">
     <a routerLink='/department' class="navbar-brand"><i class='fa fa-file'></i>USTED<b>  System</b></a>
@@ -17,24 +17,18 @@
         <a routerLink='/department/documents' class="nav-item nav-link">Documents</a>
         <a routerLink='/department/audit' class="nav-item nav-link">Audit</a>
       </div>
-      <form class="navbar-form form-inline">
-        <div class="input-group search-box">								
-          <input type="text" id="search" class="form-control" placeholder="Search">
-
-        </div>
-      </form>
       <div class="navbar-nav ml-auto">
-        <a href="#" class="nav-item nav-link notifications"><i class="fa fa-bell-o"></i><span class="badge">1</span></a>
-
-        <div class="nav-item dropdown">
-          <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action"><button><img src="./assets/images/cdustp.jpg" class="avatar" alt="Avatar"> Clint Cardenas</button></a>
-
+                
+                
+        <div class="nav-item dropdown">                                                                                                                                       
+          <a (click)="acc_popover($event)"class="nav-link dropdown-toggle user-action" style="color: white;"><button><i class="fas fa-user-alt" style="vertical-align: middle;font-size: 25px;"></i>  {{currentuser.name}}</button></a>
+            
         </div>
       </div>
     </div>
   </nav>
 
-<ion-content >
+
 
  
 
@@ -54,17 +48,9 @@
  
   
  
-  <div class="w3-center">
+  <div class="w3-center" style="background: white; border-radius: 5px; padding: 10px; min-height: 800px;">
 
-    <div style="float: right;"  *ngIf="folder_layer.length > 0">
-    <button  (click)="newclicked()" class="newbut"><i class="fas fa-plus"></i> New</button>
-    <div *ngIf="new">
-    <button  (click)="add_folder()" style="display: block; margin-top: 10px;" class="newbut1"><i class="fas fa-plus" ></i> Folder</button>
-    <input [(ngModel)]="fileinput" (change)="selectedFile($event)" type="file" name="file" size="4" style="background-color:#fff; margin-left: 50px; margin-top: 10px; margin-bottom: 10px;" required="required" />
-    <button    (click)="add_doc()" style="display: block; margin-top: 10px;" class="newbut1 btn-success"><i class="fas fa-plus"></i> File Upload</button>
-  </div>
-
-</div>
+ 
     <div class="w3-container1" style="overflow-x:auto; text-align: left;">
      
       <div  class="direction" *ngIf="folder_layer.length > 0">
@@ -75,7 +61,15 @@
         <div  style="display: inline;" ><button class="hove" (click)="root()">{{currentuser.usertype_title}}</button></div>
      
       
-     
+        <div style="float: right;"  *ngIf="folder_layer.length > 0">
+          <button  (click)="newclicked()" class="newbut"><i class="fas fa-plus"></i> New</button>
+          <div *ngIf="new" style="margin-top: 20px;">
+          <button  (click)="add_folder()" style="display: block; margin-top: 10px;" class="newbut1"><i class="fas fa-plus" ></i> Folder</button>
+          <input [(ngModel)]="fileinput" (change)="selectedFile($event)" type="file" name="file" size="2" style="background-color:#fff; margin-top: 10px; margin-bottom: 10px;" required="required" />
+          <button    (click)="add_doc()" style="display: block; margin-top: 10px;" class="newbut1 btn-success"><i class="fas fa-plus"></i> File Upload</button>
+        </div>
+      
+      </div>
         <div  *ngFor="let data of folder_layer" style="display: inline;">
           <i class="fas fa-chevron-right"  style="padding-left: 10px;padding-right: 10px;color:#a0a5b1;"></i><button class="hove" (click)="direct(data)">{{data}}</button>
 
@@ -146,7 +140,7 @@
              
              
               <i style="vertical-align: middle;"  class="fas fa-file-alt fa-2x"></i>
-                <strong style="font-size: 15px; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data.filename}}</strong>
+                <strong style="font-size: 15px; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;{{data.filename}}<sup style="float: right; padding: 5px;">modified: {{data.date_uploaded}}</sup></strong>
              
               
             </button>

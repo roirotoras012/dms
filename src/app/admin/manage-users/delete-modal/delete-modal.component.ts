@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { ToastController, NavParams } from '@ionic/angular';
+import { environment } from '../../../../environments/environment';
+const API_URL = environment.API_URL
 
 @Component({
   selector: 'app-delete-modal',
@@ -46,7 +48,7 @@ export class DeleteModalComponent implements OnInit {
 
 
 
-      this.http.post("https://localhost/dms/admin/removeuser", JSON.stringify(this.postData)) 
+      this.http.post(API_URL+"admin/removeuser", JSON.stringify(this.postData)) 
         .subscribe(res => {
          
         
