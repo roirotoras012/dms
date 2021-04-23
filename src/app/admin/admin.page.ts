@@ -291,7 +291,6 @@ mark(id){
         this.userservice.post(this.API_URL+"admin/mark", formData).subscribe((res)=>{
 
 
-          this.generate()
        
               
         })
@@ -467,7 +466,7 @@ let count  =0
         this.userservice.get(this.API_URL+"admin/generate").subscribe((res)=>{
 
           this.auditplan = res
-          this.getauditplan()
+          
   
   
         })

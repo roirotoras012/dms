@@ -521,6 +521,37 @@ direct1(x){
           this.getfolders1()
   
   }
+  async doc_popover(x, ev){
+    let dir = 'uploads/'+this.currentuser.usertype_title+'/'+this.currentuser.username
+  
+  
+    for(let i = 0; i < this.folder_layer.length; i++){
+          dir = dir +'/'+this.folder_layer[i]
+      
+         }
+    
+    const popover = await this.popover.create({
+      component: Docpopover3Component,
+      componentProps: {
+        document : x,
+        user: this.currentuser.user_id,
+        directory: dir,
+       
+        
+
+
+      },
+      event: ev
+    })
+  
+    await popover.present()
+    popover.onWillDismiss().then(()=>{
+        this.getdoc1()
+
+
+    })
+  }
+
   async doc_popover3(x, ev){
     let dir = 'uploads/'+this.auditorpicked.usertype_title+'/'+this.auditorpicked.username
   
